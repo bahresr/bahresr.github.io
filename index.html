@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bahre Srebrenica — Filmmaker, Editor, and Content Creator. Cinematic, journalistic and educational AI and non-AI audiovisuals." />
+  <title>Bahre Srebrenica — Filmmaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a0f16;
+      --navy-mid: #111922;
+      --navy-light: #1a2535;
+      --slate: #2a3f52;
+      --slate-mid: #3d5a6e;
+      --slate-light: #6b8fa8;
+      --sage: #4a6b5a;
+      --sage-light: #7aaa8f;
+      --fog: #c5d5de;
+      --mist: #e8edf2;
+      --accent: #7aa8c4;
+      --accent-warm: #8fbcce;
+      --text-primary: #dde8ef;
+      --text-secondary: #8aacbf;
+      --text-muted: #456070;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Mono', monospace;
+      background: var(--navy);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 0.5px solid var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.08s ease;
+      opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 48px;
+      border-bottom: 0.5px solid rgba(122,168,196,0.08);
+      background: rgba(10,15,22,0.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 0.5px solid var(--slate-mid);
+      padding: 9px 20px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--navy);
+      border-color: var(--accent);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      padding: 0 48px 64px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: 
+        radial-gradient(ellipse at 30% 60%, rgba(42,63,82,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(74,107,90,0.15) 0%, transparent 50%),
+        linear-gradient(180deg, var(--navy) 0%, #0d1820 50%, #0a1520 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: 
+        linear-gradient(rgba(122,168,196,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(122,168,196,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: flex-end;
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 0.95;
+      color: var(--text-primary);
+      letter-spacing: -1px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 28px;
+      padding-bottom: 8px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .hero-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      text-align: right;
+      max-width: 280px;
+    }
+    .hero-cta {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--accent);
+      padding: 12px 28px;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .hero-cta:hover { background: var(--accent-warm); }
+
+    /* STRIP */
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 0.5px solid rgba(122,168,196,0.1);
+      border-bottom: 0.5px solid rgba(122,168,196,0.1);
+    }
+    .strip-item {
+      padding: 24px 32px;
+      border-right: 0.5px solid rgba(122,168,196,0.08);
+    }
+    .strip-item:last-child { border-right: none; }
+    .strip-label {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .strip-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    /* SECTIONS */
+    section { padding: 80px 48px; }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 48px;
+      border-bottom: 0.5px solid rgba(122,168,196,0.08);
+      padding-bottom: 16px;
+    }
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .section-link {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .section-link:hover { opacity: 0.6; }
+
+    /* WORK GRID */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .work-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--navy-light);
+      cursor: none;
+    }
+    .work-thumb {
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .work-card:hover .work-thumb { transform: scale(1.04); }
+    .thumb-film { background: linear-gradient(135deg, #1a2a38 0%, #0f1e2a 100%); }
+    .thumb-photo { background: linear-gradient(135deg, #1a2832 0%, #0d1a24 100%); }
+    .thumb-ai { background: linear-gradient(135deg, #1a2820 0%, #0d1a14 100%); }
+    .thumb-doc { background: linear-gradient(135deg, #22303f 0%, #141f28 100%); }
+    .thumb-comm { background: linear-gradient(135deg, #1e2d3a 0%, #111e28 100%); }
+    .thumb-short { background: linear-gradient(135deg, #1e2a30 0%, #111820 100%); }
+
+    .thumb-icon {
+      width: 40px; height: 40px;
+      border: 0.5px solid rgba(122,168,196,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(122,168,196,0.3);
+      font-size: 14px;
+    }
+    .work-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,15,22,0.7);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .work-card:hover .work-overlay { opacity: 1; }
+    .overlay-text {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .work-info {
+      padding: 16px 20px;
+      background: var(--navy-mid);
+      border-top: 0.5px solid rgba(122,168,196,0.06);
+    }
+    .work-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .work-meta {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .about-text em { color: var(--accent); font-style: italic; }
+    .about-body {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 2;
+      margin-bottom: 32px;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      border: 0.5px solid var(--slate);
+      padding: 7px 14px;
+    }
+    .about-right {}
+    .about-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--navy-light);
+      border: 0.5px solid rgba(122,168,196,0.08);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .photo-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 0.5px solid rgba(122,168,196,0.15);
+      padding: 10px 16px;
+      margin-top: 24px;
+    }
+    .award-dot {
+      width: 6px; height: 6px;
+      background: var(--sage-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .award-text {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* CONTACT */
+    #contact { background: var(--navy-mid); }
+    .contact-inner {
+      max-width: 600px;
+    }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+    .contact-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .contact-email {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--slate-mid);
+      padding-bottom: 4px;
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .contact-email:hover { border-color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 48px;
+      border-top: 0.5px solid rgba(122,168,196,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 24px 48px; }
+      .hero-content { grid-template-columns: 1fr; gap: 32px; }
+      .hero-right { align-items: flex-start; }
+      .hero-desc { text-align: left; }
+      .strip { grid-template-columns: repeat(2, 1fr); }
+      section { padding: 56px 24px; }
+      .work-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="#" class="nav-logo">Bahre Srebrenica</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Film · Documentary · AI Visuals</div>
+        <h1 class="hero-name">Bahre<br><em>Srebrenica</em></h1>
+      </div>
+      <div class="hero-right">
+        <p class="hero-desc">I create cinematic, journalistic and educational AI and non-AI audiovisuals. Want to talk about a project?</p>
+        <a href="#contact" class="hero-cta">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-item reveal">
+      <div class="strip-label">Speciality</div>
+      <div class="strip-val">Documentary & Film</div>
+    </div>
+    <div class="strip-item reveal">
+      <div class="strip-label">Also</div>
+      <div class="strip-val">AI Audiovisuals</div>
+    </div>
+    <div class="strip-item reveal">
+      <div class="strip-label">Background</div>
+      <div class="strip-val">Film · Theatre · Photo</div>
+    </div>
+    <div class="strip-item reveal">
+      <div class="strip-label">Recognition</div>
+      <div class="strip-val">Award-winning director</div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="section-header">
+      <span class="section-label">Selected work</span>
+      <a href="#" class="section-link">View all</a>
+    </div>
+    <div class="work-grid">
+      <div class="work-card reveal">
+        <div class="work-thumb thumb-film">
+          <div class="thumb-icon">▶</div>
+          <div class="work-overlay"><span class="overlay-text">View project</span></div>
+        </div>
+        <div class="work-info">
+          <div class="work-title">Documentary project</div>
+          <div class="work-meta">Film · 2024</div>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb thumb-photo">
+          <div class="thumb-icon">◻</div>
+          <div class="work-overlay"><span class="overlay-text">View project</span></div>
+        </div>
+        <div class="work-info">
+          <div class="work-title">Editorial photography</div>
+          <div class="work-meta">Photography · 2024</div>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb thumb-ai">
+          <div class="thumb-icon">▶</div>
+          <div class="work-overlay"><span class="overlay-text">View project</span></div>
+        </div>
+        <div class="work-info">
+          <div class="work-title">AI cinematic series</div>
+          <div class="work-meta">AI Visual · 2025</div>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb thumb-doc">
+          <div class="thumb-icon">▶</div>
+          <div class="work-overlay"><span class="overlay-text">View project</span></div>
+        </div>
+        <div class="work-info">
+          <div class="work-title">Commercial reel</div>
+          <div class="work-meta">Commercial · 2024</div>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb thumb-comm">
+          <div class="thumb-icon">◻</div>
+          <div class="work-overlay"><span class="overlay-text">View project</span></div>
+        </div>
+        <div class="work-info">
+          <div class="work-title">Portrait series</div>
+          <div class="work-meta">Photography · 2025</div>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb thumb-short">
+          <div class="thumb-icon">▶</div>
+          <div class="work-overlay"><span class="overlay-text">View project</span></div>
+        </div>
+        <div class="work-info">
+          <div class="work-title">Award-winning short film</div>
+          <div class="work-meta">Film · 2023</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-header">
+      <span class="section-label">About</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p class="about-text reveal">Dynamic and versatile filmmaker with a passion for <em>cinematic storytelling</em>.</p>
+        <p class="about-body reveal">Background in film, theatre, and photography. Award-winning short film director with an obsessive attention to detail — whether crafting a documentary, a commercial, or an AI-generated visual narrative.</p>
+        <div class="skills reveal">
+          <span class="skill">Cinematography</span>
+          <span class="skill">Editing</span>
+          <span class="skill">Documentary</span>
+          <span class="skill">AI Visuals</span>
+          <span class="skill">Commercial</span>
+          <span class="skill">Theatre</span>
+          <span class="skill">Photography</span>
+        </div>
+        <div class="award-badge reveal">
+          <div class="award-dot"></div>
+          <span class="award-text">Award-winning short film director</span>
+        </div>
+      </div>
+      <div class="about-right reveal">
+        <div class="about-photo-placeholder">
+          <div class="photo-label">Your photo here</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-heading reveal">Let's make something<br><em>cinematic.</em></h2>
+      <p class="contact-sub reveal">Open to film projects, commercial work, documentary collaborations, and AI visual experiments.</p>
+      <a href="mailto:hello@bahresrebrenica.com" class="contact-email reveal">hello@bahresrebrenica.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-name">© 2026 Bahre Srebrenica</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/bahresrebrenica" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
+    animRing();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
