@@ -562,18 +562,16 @@
         </div>
         </a>
       </div>
-      <div class="work-card reveal">
-        <a href="https://vimeo.com/895596736" target="_blank" rel="noopener" style="text-decoration:none;">
-        <div class="work-thumb" style="height:260px;overflow:hidden;">
-          <img src="ausarten-ritual-Film-2025.jpg" alt="Ritual documentary poster" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
-          <div class="work-overlay"><span class="overlay-text">Watch teaser</span></div>
+      <div class="work-card reveal" style="cursor:pointer;" onclick="document.getElementById('ritual-desc').style.display=document.getElementById('ritual-desc').style.display==='none'?'block':'none'">
+        <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
+          <img src="ausarten-ritual-Film-2025.jpg" alt="Ritual documentary poster" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;"/>
+          <div class="work-overlay"><span class="overlay-text">Read more</span></div>
         </div>
         <div class="work-info">
           <div class="work-title">Ritual</div>
           <div class="work-meta">Documentary · 2025 · Screened at City Kino Munich</div>
-          <div style="font-size:12px;color:var(--text-muted);line-height:1.7;margin-top:8px;">What do we do when we lose someone we love? A 22-minute documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</div>
+          <div id="ritual-desc" style="display:none;font-size:13px;color:#a8c4d4;line-height:1.8;margin-top:10px;">What do we do when we lose someone we love? A 22-minute documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation. A quiet, powerful portrait of humanity's enduring need to shape loss.<br><br><a href="https://vimeo.com/895596736" target="_blank" rel="noopener" style="color:#7aa8c4;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">Watch teaser →</a></div>
         </div>
-        </a>
       </div>
       <div class="work-card reveal">
         <div class="work-thumb thumb-doc">
@@ -669,7 +667,7 @@
       p.angle = Math.random()*Math.PI*2; p.speed = Math.random()*1+0.2;
       p.life = 0; p.maxLife = Math.random()*0.8+0.3;
       p.x = CCX; p.y = CCY; p.size = Math.random()*1.5+0.3;
-      p.color = ['#7aa8c4','#6b8fa8','#8fbcce','#7aaa8f','#3d5a6e'][Math.floor(Math.random()*5)];
+      p.color = ['#c8a84b','#d4b86a','#b8943a','#e0c878','#a07828'][Math.floor(Math.random()*5)];
     }
     camParticles.forEach(p => { resetCamParticle(p); p.life = Math.random()*p.maxLife; });
     function camRoundRect(ctx,x,y,w,h,r) {
@@ -696,19 +694,19 @@
       });
       const pulse=0.5+0.5*Math.sin(camT*0.04);
       const grad=camCtx.createRadialGradient(-9,-6,1,-4,0,14);
-      grad.addColorStop(0,'#1e3a4a'); grad.addColorStop(0.5,'#0d1820'); grad.addColorStop(1,'#050a10');
+      grad.addColorStop(0,'#3a2e0a'); grad.addColorStop(0.5,'#1e1800'); grad.addColorStop(1,'#0d0c00');
       camCtx.beginPath(); camCtx.arc(-4,0,14,0,Math.PI*2); camCtx.fillStyle=grad; camCtx.fill();
       camCtx.beginPath(); camCtx.arc(-4,0,5,0,Math.PI*2);
-      camCtx.fillStyle=`rgba(122,168,196,${0.25+pulse*0.35})`; camCtx.fill();
+      camCtx.fillStyle=`rgba(200,168,75,${0.25+pulse*0.35})`; camCtx.fill();
       camCtx.beginPath(); camCtx.arc(-4,0,2,0,Math.PI*2);
-      camCtx.fillStyle=`rgba(143,188,206,${0.7+pulse*0.2})`; camCtx.fill();
-      camCtx.fillStyle='#3d5a6e';
+      camCtx.fillStyle=`rgba(224,200,120,${0.7+pulse*0.2})`; camCtx.fill();
+      camCtx.fillStyle='#6b5a20';
       camCtx.beginPath(); camCtx.arc(52,-22,6,0,Math.PI*2); camCtx.fill();
-      camCtx.fillStyle=`rgba(122,168,196,${0.4+pulse*0.3})`;
+      camCtx.fillStyle=`rgba(200,168,75,${0.4+pulse*0.3})`;
       camCtx.beginPath(); camCtx.arc(52,-22,4,0,Math.PI*2); camCtx.fill();
       const glowGrad=camCtx.createRadialGradient(-4,0,26,-4,0,44);
-      glowGrad.addColorStop(0,`rgba(122,168,196,${0.06+pulse*0.06})`);
-      glowGrad.addColorStop(1,'rgba(122,168,196,0)');
+      glowGrad.addColorStop(0,`rgba(200,168,75,${0.1+pulse*0.1})`);
+      glowGrad.addColorStop(1,'rgba(200,168,75,0)');
       camCtx.beginPath(); camCtx.arc(-4,0,44,0,Math.PI*2); camCtx.fillStyle=glowGrad; camCtx.fill();
       camCtx.restore();
     }
