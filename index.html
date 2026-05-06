@@ -498,9 +498,11 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
+    <div style="position:relative;z-index:2;display:flex;justify-content:center;padding-top:100px;">
+      <canvas id="camCanvas" width="500" height="260" style="display:block;"></canvas>
+    </div>
     <div class="hero-content">
       <div class="hero-left">
-        <canvas id="camCanvas" width="340" height="200" style="display:block; margin-bottom: 8px;"></canvas>
         <div class="hero-eyebrow">Film · AI · Automation</div>
         <h1 class="hero-name">Bahre<br><em>Srebrenica</em></h1>
       </div>
@@ -611,9 +613,9 @@
     </div>
     <div class="about-grid">
       <div>
-        <p class="about-text reveal">Bosnian filmmaker, born in Zenica, with a passion for <em>cinematic storytelling</em> across film, documentary and AI.</p>
-        <p class="about-body reveal">Bahrudin holds two Master's degrees — in Creative Media from Malmö University, where his thesis explored the dramatization of the real in film, and in Criminology, with a focus on self-identity and aggression. He directed and wrote multiple plays and short films, including <em>Biciklo</em> (2021), listed on IMDb. He speaks six languages and has worked on projects bringing cinema to children in Colombian favelas, created the first Bosnian art forum in collaboration with the National Museum of Bosnia and Herzegovina, and founded Bus Film Lab in his hometown of Busovača. He is also co-founder of B.I.K. Films (Bosnian Independent Kino) in Berlin.</p>
-        <p class="about-body reveal" style="margin-top:16px;">Currently in development: <em>Would Be the Best to Run Now</em> — a 5-part feature documentary on the abortion of Roma girls in Bosnia. And <em>Bosnian History Narrated</em> — a 20-episode AI documentary series on Bosnian history.</p>
+        <p class="about-text reveal">Bosnian filmmaker, founder of a film production company and studio in <em>Munich, Germany</em>.</p>
+        <p class="about-body reveal">Bahrudin holds two Master's degrees — in Creative Media from Malmö University, where his thesis explored the dramatization of the real in film, and in Criminology, with a focus on self-identity and aggression. He directed and wrote multiple plays and short films, including <em>Biciklo</em> (2021), listed on IMDb. He speaks six languages, has worked on projects bringing cinema to children in Colombian favelas, created the first Bosnian art forum in collaboration with the National Museum of Bosnia and Herzegovina, and founded Bus Film Lab in Busovača. He is also co-founder of B.I.K. Films (Bosnian Independent Kino).</p>
+        <p class="about-body reveal" style="margin-top:16px;">His documentary <em>Ritual</em> has been completed and received great reviews. Currently finishing two new projects: <em>Ljubov</em> and <em>You Better Run Now</em>. Also in development: <em>Bosnian History Narrated</em> — a 20-episode AI documentary series on Bosnian history.</p>
         <div class="skills reveal">
           <span class="skill">Cinematography</span>
           <span class="skill">Editing</span>
@@ -642,8 +644,7 @@
     <div class="contact-inner">
       <h2 class="contact-heading reveal">Let's make something<br><em>cinematic.</em></h2>
       <p class="contact-sub reveal">Open to film projects, commercial work, documentary collaborations, and AI visual experiments.</p>
-      <a href="mailto:bahsre@gmail.com" class="contact-email reveal">bahsre@gmail.com</a>
-      <a href="https://wa.me/4915252614371" target="_blank" rel="noopener" class="contact-email reveal" style="margin-top: 16px;">WhatsApp +49 152 526 14371</a>
+      <a href="https://wa.me/4915252614371" target="_blank" rel="noopener" class="contact-email reveal">Contact (WhatsApp) +49 152 526 14371</a>
     </div>
   </section>
 
@@ -658,7 +659,7 @@
     const camCv = document.getElementById('camCanvas');
     const camCtx = camCv.getContext('2d');
     let camT = 0;
-    const CW = 340, CH = 200, CCX = CW/2, CCY = CH/2;
+    const CW = 500, CH = 260, CCX = CW/2, CCY = CH/2;
     const camParticles = [];
     for(let i = 0; i < 50; i++) camParticles.push({x:CCX,y:CCY,angle:0,speed:0,life:0,maxLife:0.5,size:1,color:'#7aa8c4'});
     function resetCamParticle(p) {
