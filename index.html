@@ -7,7 +7,7 @@
   <title>Bahre Srebrenica — Filmmaker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,7 +27,8 @@
       --text-primary: #dde8ef;
       --text-secondary: #8aacbf;
       --text-muted: #456070;
-      --font: 'Atkinson Hyperlegible', sans-serif;
+      --font: 'Inter', sans-serif;
+      --font-display: 'Bebas Neue', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -43,7 +44,7 @@
       letter-spacing: 0.01em;
     }
 
-    /* Custom cursor */
+    /* CURSOR */
     .cursor {
       width: 8px; height: 8px;
       background: var(--accent);
@@ -77,11 +78,11 @@
       backdrop-filter: blur(12px);
     }
     .nav-logo {
-      font-family: var(--font);
-      font-size: 17px;
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
       color: var(--text-primary);
-      letter-spacing: 0.5px;
+      letter-spacing: 2px;
       text-decoration: none;
     }
     .nav-links { display: flex; gap: 36px; align-items: center; }
@@ -154,12 +155,12 @@
       animation: fadeUp 0.8s ease 0.2s forwards;
     }
     .hero-name {
-      font-family: var(--font);
-      font-size: clamp(56px, 8vw, 96px);
-      font-weight: 700;
-      line-height: 0.95;
+      font-family: var(--font-display);
+      font-size: clamp(72px, 10vw, 120px);
+      font-weight: 400;
+      line-height: 0.9;
       color: var(--text-primary);
-      letter-spacing: -1px;
+      letter-spacing: 4px;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.4s forwards;
     }
@@ -254,11 +255,19 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
     }
+    /* WORK CARD ZOOM POP */
     .work-card {
       position: relative;
       overflow: hidden;
       background: var(--navy-light);
       cursor: none;
+      transform: scale(0.92) translateY(20px);
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+    }
+    .work-card.popped {
+      transform: scale(1) translateY(0);
+      opacity: 1;
     }
     .work-thumb {
       height: 260px;
@@ -497,23 +506,6 @@
     <a href="#contact" class="nav-cta">Get in touch</a>
   </nav>
 
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div style="position:relative;z-index:2;display:flex;justify-content:center;padding-top:100px;">
-      <canvas id="camCanvas" width="500" height="260" style="display:block;"></canvas>
-    </div>
-    <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-eyebrow">AI Audiovisual Automation in Film and Media</div>
-        <h1 class="hero-name">Bahre<br><em>Srebrenica</em></h1>
-      </div>
-      <div class="hero-right">
-        <p class="hero-desc">I create cinematic, journalistic and educational AI and non-AI audiovisuals. Want to talk about a project?</p>
-        <a href="#contact" class="hero-cta">Get in touch</a>
-      </div>
-    </div>
-  </section>
 
   <div class="strip">
     <div class="strip-item reveal">
@@ -534,76 +526,85 @@
     </div>
   </div>
 
-  <section id="work">
-    <div class="section-header">
-      <span class="section-label">Selected work</span>
-      <a href="#" class="section-link">View all</a>
+  <section id="work" style="padding:0;">
+
+    <!-- FEATURED FILM -->
+    <div style="position:relative;width:100%;height:70vh;min-height:500px;overflow:hidden;display:flex;align-items:flex-end;">
+      <img src="ritual-standing.png" alt="Ritual" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.45);"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(10,15,22,0.95) 40%, rgba(10,15,22,0.1) 100%);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,15,22,1) 0%, transparent 50%);"></div>
+      <div style="position:relative;z-index:2;padding:48px 48px 56px;max-width:560px;">
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7aa8c4;margin-bottom:12px;">Featured Film</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,88px);color:#fff;letter-spacing:3px;line-height:0.9;margin-bottom:16px;">Ritual</h2>
+        <div style="font-size:11px;letter-spacing:1px;color:#6b8fa8;margin-bottom:16px;">Documentary · 2025 · 22 min · Screened at City Kino Munich</div>
+        <p style="font-size:14px;color:#a8c4d4;line-height:1.7;margin-bottom:28px;max-width:420px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
+        <div style="display:flex;gap:12px;">
+          <a href="https://vimeo.com/895596736" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#7aa8c4;color:#0a0f16;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">▶ Watch Teaser</a>
+          <a href="https://www.instagram.com/bahre.doc/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:#dde8ef;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:0.5px solid rgba(255,255,255,0.2);">ⓘ More Info</a>
+        </div>
+      </div>
     </div>
-    <div class="work-grid">
-      <div class="work-card reveal">
-        <a href="https://vimeo.com/535385624" target="_blank" rel="noopener" style="text-decoration:none;">
-        <div class="work-thumb thumb-film">
-          <div class="thumb-icon">▶</div>
-          <div class="work-overlay"><span class="overlay-text">Watch on Vimeo</span></div>
+
+    <!-- SCROLLABLE ROW -->
+    <div style="padding:32px 48px 48px;background:var(--navy);">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;">My Work</div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#2a3f52 transparent;">
+
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="window.open('https://vimeo.com/535385624','_blank')">
+          <div class="work-thumb" style="height:260px;overflow:hidden;">
+            <img src="magnific__simple-text-on-one-past-color-biciklo__18918.jpg" alt="Biciklo" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+            <div class="work-overlay"><span class="overlay-text">Watch</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Biciklo</div>
+            <div class="work-meta">Short Film · 2021</div>
+          </div>
         </div>
-        <div class="work-info">
-          <div class="work-title">Biciklo</div>
-          <div class="work-meta">Short Film · 2021</div>
+
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="window.open('https://vimeo.com/772128030','_blank')">
+          <div class="work-thumb" style="height:260px;overflow:hidden;">
+            <img src="magnific__simple-text-on-one-past-color-directors-reel__18917.jpg" alt="Director's Reel" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+            <div class="work-overlay"><span class="overlay-text">Watch</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Director's Reel</div>
+            <div class="work-meta">Reel · 2022</div>
+          </div>
         </div>
-        </a>
-      </div>
-      <div class="work-card reveal">
-        <a href="https://vimeo.com/772128030" target="_blank" rel="noopener" style="text-decoration:none;">
-        <div class="work-thumb thumb-photo">
-          <div class="thumb-icon">▶</div>
-          <div class="work-overlay"><span class="overlay-text">Watch on Vimeo</span></div>
+
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;">
+          <div class="work-thumb" style="height:260px;overflow:hidden;">
+            <img src="magnific__simple-text-on-one-past-color-ljubov__18916.jpg" alt="Ljubov" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+            <div class="work-overlay"><span class="overlay-text">Coming Soon</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Ljubov</div>
+            <div class="work-meta">Documentary · In Development</div>
+          </div>
         </div>
-        <div class="work-info">
-          <div class="work-title">Director's Reel</div>
-          <div class="work-meta">Reel · 2022</div>
+
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;">
+          <div class="work-thumb" style="height:260px;overflow:hidden;">
+            <img src="magnific__simple-text-on-one-past-color-you-better-run-now__18915.jpg" alt="You Better Run Now" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+            <div class="work-overlay"><span class="overlay-text">Coming Soon</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">You Better Run Now</div>
+            <div class="work-meta">Documentary · In Development</div>
+          </div>
         </div>
-        </a>
-      </div>
-      <div class="work-card reveal" style="cursor:pointer;" onclick="document.getElementById('ritual-desc').style.display=document.getElementById('ritual-desc').style.display==='none'?'block':'none'">
-        <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-          <img src="ausarten-ritual-Film-2025.jpg" alt="Ritual documentary poster" style="width:100%;height:100%;object-fit:contain;background:#111;transition:transform 0.6s ease;"/>
-          <div class="work-overlay"><span class="overlay-text">Read more</span></div>
+
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;">
+          <div class="work-thumb" style="height:260px;overflow:hidden;">
+            <img src="magnific__simple-text-on-one-past-color-bosnian-history-narr__18914.jpg" alt="Bosnian History Narrated" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+            <div class="work-overlay"><span class="overlay-text">Coming Soon</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Bosnian History Narrated</div>
+            <div class="work-meta">AI Doc · 20 Episodes</div>
+          </div>
         </div>
-        <div class="work-info">
-          <div class="work-title">Ritual</div>
-          <div class="work-meta">Documentary · 2025 · Screened at City Kino Munich</div>
-          <div id="ritual-desc" style="display:none;font-size:13px;color:#a8c4d4;line-height:1.8;margin-top:10px;">What do we do when we lose someone we love? A 22-minute documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation. A quiet, powerful portrait of humanity's enduring need to shape loss.<br><br><a href="https://vimeo.com/895596736" target="_blank" rel="noopener" style="color:#7aa8c4;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">Watch teaser →</a></div>
-        </div>
-      </div>
-      <div class="work-card reveal">
-        <div class="work-thumb thumb-doc">
-          <div class="thumb-icon">▶</div>
-          <div class="work-overlay"><span class="overlay-text">Coming soon</span></div>
-        </div>
-        <div class="work-info">
-          <div class="work-title">Would Be the Best to Run Now</div>
-          <div class="work-meta">Documentary · In Development</div>
-        </div>
-      </div>
-      <div class="work-card reveal">
-        <div class="work-thumb thumb-comm">
-          <div class="thumb-icon">▶</div>
-          <div class="work-overlay"><span class="overlay-text">Coming soon</span></div>
-        </div>
-        <div class="work-info">
-          <div class="work-title">Bosnian History Narrated</div>
-          <div class="work-meta">AI Documentary · 20 Episodes · In Development</div>
-        </div>
-      </div>
-      <div class="work-card reveal">
-        <div class="work-thumb thumb-short">
-          <div class="thumb-icon">◻</div>
-          <div class="work-overlay"><span class="overlay-text">Coming soon</span></div>
-        </div>
-        <div class="work-info">
-          <div class="work-title">Photography</div>
-          <div class="work-meta">Coming soon</div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -928,6 +929,11 @@
       entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const popObserver = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('popped'), i * 100); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.work-card').forEach(el => popObserver.observe(el));
   </script>
 </body>
 </html>
