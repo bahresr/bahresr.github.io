@@ -123,15 +123,17 @@
     .hero-bg {
       position: absolute; inset: 0;
       background: 
-        radial-gradient(ellipse at 30% 60%, rgba(42,63,82,0.4) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(74,107,90,0.15) 0%, transparent 50%),
-        linear-gradient(180deg, var(--navy) 0%, #0d1820 50%, #0a1520 100%);
+        radial-gradient(ellipse at 20% 30%, rgba(10, 60, 80, 0.6) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 10%, rgba(5, 40, 60, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 0%, rgba(15, 80, 100, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(20, 55, 70, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #061520 0%, #0a1e2e 30%, #0d1820 60%, #0a0f16 100%);
     }
     .hero-grid {
       position: absolute; inset: 0;
       background-image: 
-        linear-gradient(rgba(122,168,196,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122,168,196,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(100,200,220,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,200,220,0.03) 1px, transparent 1px);
       background-size: 80px 80px;
     }
     .hero-content {
@@ -363,7 +365,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 20%;
       filter: grayscale(20%) brightness(0.9);
       transition: filter 0.4s ease;
     }
@@ -503,7 +505,7 @@
     </div>
     <div class="hero-content">
       <div class="hero-left">
-        <div class="hero-eyebrow">Film · AI · Automation</div>
+        <div class="hero-eyebrow">AI Audiovisual Automation in Film and Media</div>
         <h1 class="hero-name">Bahre<br><em>Srebrenica</em></h1>
       </div>
       <div class="hero-right">
@@ -516,7 +518,7 @@
   <div class="strip">
     <div class="strip-item reveal">
       <div class="strip-label">Speciality</div>
-      <div class="strip-val">Documentary & Film</div>
+      <div class="strip-val">AI Audiovisual Automation</div>
     </div>
     <div class="strip-item reveal">
       <div class="strip-label">Also</div>
@@ -564,7 +566,7 @@
       </div>
       <div class="work-card reveal" style="cursor:pointer;" onclick="document.getElementById('ritual-desc').style.display=document.getElementById('ritual-desc').style.display==='none'?'block':'none'">
         <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-          <img src="ausarten-ritual-Film-2025.jpg" alt="Ritual documentary poster" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;"/>
+          <img src="ausarten-ritual-Film-2025.jpg" alt="Ritual documentary poster" style="width:100%;height:100%;object-fit:contain;background:#111;transition:transform 0.6s ease;"/>
           <div class="work-overlay"><span class="overlay-text">Read more</span></div>
         </div>
         <div class="work-info">
@@ -612,9 +614,197 @@
     </div>
     <div class="about-grid">
       <div>
-        <p class="about-text reveal">Bosnian filmmaker, founder of a film production company and studio in <em>Munich, Germany</em>.</p>
-        <p class="about-body reveal">Bahrudin holds two Master's degrees — in Creative Media from Malmö University, where his thesis explored the dramatization of the real in film, and in Criminology, with a focus on self-identity and aggression. He directed and wrote multiple plays and short films, including <em>Biciklo</em> (2021), listed on IMDb. He speaks six languages, has worked on projects bringing cinema to children in Colombian favelas, created the first Bosnian art forum in collaboration with the National Museum of Bosnia and Herzegovina, and founded Bus Film Lab in Busovača. He is also co-founder of B.I.K. Films (Bosnian Independent Kino).</p>
+        <p class="about-text reveal"><em>AI Audiovisual Automation in Film and Media</em> — Bosnian film and media professional based in Munich, Germany.</p>
+        <p class="about-body reveal">In 2016, Bahrudin founded <em>filmb</em> — a freelance venture with the aim of bringing worthwhile stories to life. Since then he has directed and written multiple plays and short films, including <em>Biciklo</em> (2021, IMDb listed), worked on projects bringing cinema to children in Colombian favelas, created the first Bosnian art forum in collaboration with the National Museum of Bosnia and Herzegovina, and co-founded B.I.K. Films (Bosnian Independent Kino) and Bus Film Lab in Busovača. He speaks six languages and currently works as Audiovisual Producer and Editor at Allianz, Munich.</p>
         <p class="about-body reveal" style="margin-top:16px;">His documentary <em>Ritual</em> has been completed and received great reviews. Currently finishing two new projects: <em>Ljubov</em> and <em>You Better Run Now</em>. Also in development: <em>Bosnian History Narrated</em> — a 20-episode AI documentary series on Bosnian history.</p>
+
+        <div class="reveal" style="margin-top:32px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Education</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2024</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master of Arts in CCI — Media and Communications, Malmö University (MAU)</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master course in Documentary Film, Linköping University (LIU)</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master course in Docu-Performance, Academy of Music and Drama, Gothenburg University (GU)</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master of Science in Criminology, Malmö University (MAU)</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal" style="margin-top:32px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Videography</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2023–</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Audiovisual Producer and Editor at <em>Allianz</em>, Munich, Germany. Studio and on-location filming.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Video Producer-Editor at <em>Wedio</em>, Aarhus, Denmark. Produced and edited high-quality videos for audiovisual and digital communication projects.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022–23</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Freelance Video Editor at <em>Flexiana</em>, Barcelona, Spain. Editing and post-production for compelling visual content.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Film</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Co-founder and Co-manager of <em>BUS FILM LAB</em>, Busovača, Bosnia-Herzegovina.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer, Director and Producer of the short film <em>Biciklo</em> (Bicycle).</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Artistic Director of <em>BIH ART FORUM</em> at the Historical Museum of Bosnia and Herzegovina.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of the short film <em>Ulica Snova</em> (Dream Street).</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of the short documentary <em>The Dancer</em> in collaboration with Malmö Theatre Academy.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of the short film <em>The Boy</em>.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writing and producing projects at <em>Bridge — Association for Culture and Arts</em>, Sarajevo.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Theatre & Photography</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2017</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer and Producer of <em>Silk-man</em> at Artisten, Academy for Music and Drama, GU.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2016</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Founder and Producer at <em>filmb</em>. Worked on personal independent audiovisual projects.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Photography and Human Rights Intern at the Colombian Civic Organisation, University of South Colombia.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2014</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>TYLLFLIKT</em>, produced by WestPride and the Swedish Human Rights Federation.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>RASKRŠĆE</em>, produced by the Evangelic Union of Bosnia and Herzegovina.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>La Casa de Bernarda Alba</em> by Lorca, produced by Centro de Estudios Hispanicos.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Recognitions & Grants</div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish University Union Grant — €3,000 for postgraduate studies at MAU.</span>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;margin-top:3px;">2021</span>
+              <div>
+                <div style="font-size:13px;color:#a8c4d4;line-height:1.6;margin-bottom:6px;"><em>Biciklo</em> — International recognition:</div>
+                <div style="display:flex;flex-direction:column;gap:6px;padding-left:12px;border-left:0.5px solid var(--slate);">
+                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🎬 Official Selection — Cannes Film Awards</span>
+                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🎬 Official Selection — Madrid Indie Film Festival</span>
+                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🎬 Official Selection — Brèves Images Court Métrage, Marseille</span>
+                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🏆 Audience Award — KinoEst Fest, Italy</span>
+                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">⭐ Special Mention — Fecorno, Norte de Santander, Colombia</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Film Fund Grant — €45,000 for upcoming feature-length debut <em>Childhood Story</em>.</span>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;"><em>Ulica Snova</em> — Best Short Film at the Bosnian Art Forum, recognized for contributing to minority rights in Bosnia-Herzegovina.</span>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015–16</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish Development Agency SIDA Grant — €10,000 for building cinemas in Colombian slums, in collaboration with Colombian Civic Organisations and the University of South Colombia.</span>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">European Commission Grant — €5,000 for contributions to environmental protection in South-East Europe.</span>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Diaspora Fund in Norway Grant — Two years of covered educational expenses.</span>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2011</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Ministry of Culture and Education of Sarajevo Kanton Grant — €1,000 for exceptional student contribution to minority rights in Bosnia-Herzegovina.</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Scriptures</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+
+            <a href="https://mau.diva-portal.org/smash/record.jsf?utm_medium=iframely&pid=diva2%3A1888254&utm_source=canva&dswid=-6999" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
+                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">ARTIST'S WAY OF MAKING: art in audiovisual media productions</div>
+                <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA / MAU</div>
+              </div>
+            </a>
+
+            <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1715007&dswid=-2790" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
+                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">BOSNIAN IDENTITY AFTER THE WAR: The Importance of How the War Is Described in Media for Contemporary Bosnian Identity</div>
+                <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA</div>
+              </div>
+            </a>
+
+            <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1486640&dswid=-323" target="_blank" rel="noopener" style="text-decoration:none;">
+              <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
+                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">WHO DO YOU THINK YOU ARE? A Theoretical Exploration of Self-Identity in Predisposition to Aggressive Behaviour</div>
+                <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA</div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
         <div class="skills reveal">
           <span class="skill">Cinematography</span>
           <span class="skill">Editing</span>
