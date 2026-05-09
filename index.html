@@ -201,12 +201,12 @@
     .strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 0.5px solid rgba(122,168,196,0.1);
-      border-bottom: 0.5px solid rgba(122,168,196,0.1);
+      border-top: none;
+      border-bottom: none;
     }
     .strip-item {
       padding: 24px 32px;
-      border-right: 0.5px solid rgba(122,168,196,0.08);
+      border-right: none;
     }
     .strip-item:last-child { border-right: none; }
     .strip-label {
@@ -483,7 +483,8 @@
       .hero-content { grid-template-columns: 1fr; gap: 32px; }
       .hero-right { align-items: flex-start; }
       .hero-desc { text-align: left; }
-      .strip { grid-template-columns: repeat(2, 1fr); }
+      .strip { grid-template-columns: repeat(2, 1fr); border: none; }
+      .strip-item { border: none; }
       section { padding: 56px 24px; }
       .work-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -526,19 +527,26 @@
     </div>
   </div>
 
+  <!-- FILM POPUP MODAL -->
+  <div id="film-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#111922;border:0.5px solid #2a3f52;max-width:560px;width:100%;padding:40px;position:relative;border-radius:4px;max-height:90vh;overflow-y:auto;">
+      <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#6b8fa8;font-size:20px;cursor:pointer;">✕</button>
+      <div id="modal-tag" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7aa8c4;margin-bottom:12px;"></div>
+      <h3 id="modal-title" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:3px;line-height:0.9;margin-bottom:12px;"></h3>
+      <div id="modal-meta" style="font-size:11px;letter-spacing:1px;color:#456070;margin-bottom:20px;"></div>
+      <p id="modal-desc" style="font-size:14px;color:#a8c4d4;line-height:1.8;margin-bottom:24px;"></p>
+      <div id="modal-link"></div>
+    </div>
+  </div>
+
   <section id="work" style="padding:0;">
 
     <!-- FEATURED FILM -->
     <div style="position:relative;width:100%;min-height:70vh;overflow:hidden;display:flex;align-items:center;">
-      <!-- crying eyes centered full width -->
       <img src="tram-shot.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(0.55) saturate(0.7) contrast(1.1);"/>
-      <!-- dark vignette from all edges -->
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 35%, rgba(10,15,22,0.92) 100%);"></div>
-      <!-- bottom fade -->
       <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,15,22,1) 0%, transparent 40%);"></div>
-      <!-- top fade -->
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(10,15,22,0.7) 0%, transparent 30%);"></div>
-
       <div style="position:relative;z-index:2;padding:80px 48px;max-width:520px;">
         <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7aa8c4;margin-bottom:12px;">Featured Film</div>
         <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,88px);color:#fff;letter-spacing:3px;line-height:0.9;margin-bottom:16px;">Ritual</h2>
@@ -546,7 +554,7 @@
         <p style="font-size:14px;color:#a8c4d4;line-height:1.7;margin-bottom:28px;max-width:420px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
         <div style="display:flex;gap:12px;">
           <a href="https://vimeo.com/895596736" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#7aa8c4;color:#0a0f16;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">▶ Watch Teaser</a>
-          <a href="https://www.instagram.com/bahre.doc/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:#dde8ef;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:0.5px solid rgba(255,255,255,0.2);">ⓘ More Info</a>
+          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','')" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:#dde8ef;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:0.5px solid rgba(255,255,255,0.2);cursor:pointer;">ⓘ More Info</button>
         </div>
       </div>
     </div>
@@ -556,10 +564,10 @@
       <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;">My Work</div>
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#2a3f52 transparent;">
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="window.open('https://vimeo.com/535385624','_blank')">
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.','https://vimeo.com/535385624')">
           <div class="work-thumb" style="height:260px;overflow:hidden;">
             <img src="magnific__simple-text-on-one-past-color-biciklo__18918.jpg" alt="Biciklo" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
-            <div class="work-overlay"><span class="overlay-text">Watch</span></div>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
             <div class="work-title">Biciklo</div>
@@ -567,10 +575,10 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="window.open('https://vimeo.com/772128030','_blank')">
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Director\'s Reel','Director\'s Reel','2022','A showcase of Bahre\'s directing and editing work across film, documentary and commercial projects.','https://vimeo.com/772128030')">
           <div class="work-thumb" style="height:260px;overflow:hidden;">
             <img src="magnific__simple-text-on-one-past-color-directors-reel__18917.jpg" alt="Director's Reel" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
-            <div class="work-overlay"><span class="overlay-text">Watch</span></div>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
             <div class="work-title">Director's Reel</div>
@@ -578,10 +586,10 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;">
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Fiction Film','Ljubov','In Development','A love story between Filip and Max, where Filip loses everything but gets a chance in life thanks to Max. A heartbreaking story about dreams, inspiration, regret, drug abuse. Electric, dynamic, dance, techno. Fiction film based on real events.','')">
           <div class="work-thumb" style="height:260px;overflow:hidden;">
             <img src="magnific__simple-text-on-one-past-color-ljubov__18916.jpg" alt="Ljubov" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
-            <div class="work-overlay"><span class="overlay-text">Coming Soon</span></div>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
             <div class="work-title">Ljubov</div>
@@ -589,10 +597,10 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;">
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Documentary','You Better Run Now','In Development','A documentary about Roma girls\' abortion in Bosnia. In development, working with local Roma communities in Bosnia.','')">
           <div class="work-thumb" style="height:260px;overflow:hidden;">
             <img src="magnific__simple-text-on-one-past-color-you-better-run-now__18915.jpg" alt="You Better Run Now" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
-            <div class="work-overlay"><span class="overlay-text">Coming Soon</span></div>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
             <div class="work-title">You Better Run Now</div>
@@ -600,10 +608,10 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;">
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
           <div class="work-thumb" style="height:260px;overflow:hidden;">
             <img src="magnific__simple-text-on-one-past-color-bosnian-history-narr__18914.jpg" alt="Bosnian History Narrated" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
-            <div class="work-overlay"><span class="overlay-text">Coming Soon</span></div>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
             <div class="work-title">Bosnian History Narrated</div>
@@ -853,9 +861,7 @@
   <footer>
     <div class="footer-name">© 2026 Bahre Srebrenica</div>
     <div class="footer-links">
-      <a href="https://www.linkedin.com/in/bahresrebrenica" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://www.instagram.com/studlob/" target="_blank" rel="noopener">Studio Instagram</a>
-      <a href="https://www.instagram.com/bahre.doc/" target="_blank" rel="noopener">Documentary Instagram</a>
+      <a href="https://www.linkedin.com/in/bahre-srebrenica" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </footer>
 
@@ -930,6 +936,27 @@
   </script>
 
   <script>
+    function openModal(tag, title, meta, desc, link) {
+      document.getElementById('modal-tag').textContent = tag;
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-meta').textContent = meta;
+      document.getElementById('modal-desc').textContent = desc;
+      const linkEl = document.getElementById('modal-link');
+      if(link) {
+        linkEl.innerHTML = '<a href="'+link+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#7aa8c4;color:#0a0f16;padding:11px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">▶ Watch</a>';
+      } else {
+        linkEl.innerHTML = '<span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#456070;">In Development</span>';
+      }
+      const modal = document.getElementById('film-modal');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('film-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
