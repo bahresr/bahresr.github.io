@@ -12,21 +12,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #0a0f16;
-      --navy-mid: #111922;
-      --navy-light: #1a2535;
-      --slate: #2a3f52;
-      --slate-mid: #3d5a6e;
-      --slate-light: #6b8fa8;
-      --sage: #4a6b5a;
-      --sage-light: #7aaa8f;
-      --fog: #c5d5de;
-      --mist: #e8edf2;
-      --accent: #7aa8c4;
-      --accent-warm: #8fbcce;
-      --text-primary: #f0f4f8;
-      --text-secondary: #b8d0e0;
-      --text-muted: #7a9ab0;
+      --navy: #030d14;
+      --navy-mid: #071520;
+      --navy-light: #0d2030;
+      --slate: #0f3048;
+      --slate-mid: #1a4a6a;
+      --slate-light: #3a7a9a;
+      --sage: #0e4a5a;
+      --sage-light: #2a8a9a;
+      --fog: #8abccc;
+      --mist: #d0e8f0;
+      --accent: #3aaccf;
+      --accent-warm: #5abcdf;
+      --text-primary: #e8f4f8;
+      --text-secondary: #90c8d8;
+      --text-muted: #4a8a9a;
       --font: 'Inter', sans-serif;
       --font-display: 'Bebas Neue', sans-serif;
     }
@@ -35,7 +35,7 @@
 
     body {
       font-family: var(--font);
-      background: var(--navy);
+      background: #030d14;
       color: var(--text-primary);
       overflow-x: hidden;
       cursor: none;
@@ -73,8 +73,8 @@
       z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 24px 48px;
-      border-bottom: 0.5px solid rgba(122,168,196,0.08);
-      background: rgba(10,15,22,0.85);
+      border-bottom: 0.5px solid rgba(58,172,207,0.1);
+      background: rgba(3,13,20,0.9);
       backdrop-filter: blur(12px);
     }
     .nav-logo {
@@ -255,7 +255,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
     }
-    /* WORK CARD ZOOM POP */
     .work-card {
       position: relative;
       overflow: hidden;
@@ -264,10 +263,24 @@
       transform: scale(0.92) translateY(20px);
       opacity: 0;
       transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+      flex: 0 0 220px !important;
+      min-width: 220px !important;
     }
     .work-card.popped {
       transform: scale(1) translateY(0);
       opacity: 1;
+    }
+    .work-card .work-thumb {
+      height: 300px !important;
+    }
+    .work-card iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 140% !important;
+      height: 140% !important;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
     }
     .work-thumb {
       height: 260px;
@@ -310,8 +323,8 @@
     }
     .work-info {
       padding: 16px 20px;
-      background: var(--navy-mid);
-      border-top: 0.5px solid rgba(122,168,196,0.06);
+      background: #071520;
+      border-top: 0.5px solid rgba(58,172,207,0.08);
     }
     .work-title {
       font-family: var(--font);
@@ -403,7 +416,7 @@
     }
 
     /* CONTACT */
-    #contact { background: var(--navy-mid); }
+    #contact { background: #071520; }
     .contact-inner {
       max-width: 600px;
     }
@@ -461,6 +474,11 @@
     .footer-links a:hover { color: var(--accent); }
 
     /* ANIMATIONS */
+    @keyframes slowZoom {
+      from { transform: translate(-50%, -50%) scale(1); }
+      to { transform: translate(-50%, -50%) scale(1.08); }
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
@@ -539,19 +557,20 @@
         <p style="font-size:14px;color:#a8c4d4;line-height:1.7;margin-bottom:28px;max-width:480px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
         <div style="display:flex;gap:12px;">
           <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','https://vimeo.com/1190799491')" style="display:inline-flex;align-items:center;gap:8px;background:#7aa8c4;color:#0a0f16;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-weight:600;">▶ Watch Teaser</button>
-          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','')" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:#dde8ef;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:0.5px solid rgba(255,255,255,0.2);cursor:pointer;">ⓘ More Info</button>
+          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','https://vimeo.com/1190799491')" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:#dde8ef;padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:0.5px solid rgba(255,255,255,0.2);cursor:pointer;">ⓘ More Info</button>
         </div>
       </div>
     </div>
 
-    <!-- SCROLLABLE ROW -->
-    <div style="padding:32px 48px 48px;background:var(--navy);">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;">My Work</div>
-      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#2a3f52 transparent;">
+    <!-- IN DEVELOPMENT -->
+    <div style="padding:40px 48px 24px;background:linear-gradient(135deg, #0d1a2a 0%, #071520 60%, #030d14 100%);">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">In Development</div>
+      <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#1a4a6a transparent;">
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/1190876158?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <div class="work-card" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190876158?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -560,9 +579,9 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Fiction Film','Ljubov','In Development','A love story between Filip and Max, where Filip loses everything but gets a chance in life thanks to Max. A heartbreaking story about dreams, inspiration, regret, drug abuse. Electric, dynamic, dance, techno. Fiction film based on real events.','')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/1190876827?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <div class="work-card" onclick="openModal('Fiction Film','Ljubov','In Development','A love story between Filip and Max, where Filip loses everything but gets a chance in life thanks to Max. A heartbreaking story about dreams, inspiration, regret, drug abuse. Electric, dynamic, dance, techno. Fiction film based on real events.','')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190876827?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -571,9 +590,9 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Documentary','You Better Run Now','In Development','A documentary about Roma girls\' abortion in Bosnia. In development, working with local Roma communities in Bosnia.','')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/1190875924?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <div class="work-card" onclick="openModal('Documentary','You Better Run Now','In Development','A documentary about Roma girls\' abortion in Bosnia. In development, working with local Roma communities in Bosnia.','')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190875924?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="animation:slowZoom 20s ease-in-out infinite alternate;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -582,9 +601,29 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Director\'s Reel','Director\'s Reel','2022','A showcase of Bahre\'s directing and editing work across film, documentary and commercial projects.','https://vimeo.com/772128030')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/772128099?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:120%;height:120%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+      </div>
+    </div>
+
+    <!-- PRODUCED -->
+    <div style="padding:40px 48px 48px;background:linear-gradient(135deg, #1a0a0f 0%, #0d1520 40%, #030d14 100%);border-top:0.5px solid rgba(58,172,207,0.08);">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">Produced</div>
+      <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#1a4a6a transparent;">
+
+        <div class="work-card" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;background:#0d1520;">
+            <iframe src="https://player.vimeo.com/video/650727499?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&badge=0&autopause=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;"></iframe>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Biciklo</div>
+            <div class="work-meta">Short Film · 2021</div>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openModal('Director\'s Reel','Director\'s Reel','2022','A showcase of Bahre\'s directing and editing work across film, documentary and commercial projects.','https://vimeo.com/772128030')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/772128099?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0&color=2a8a9a" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -593,14 +632,36 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/650727499?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <div class="work-card" onclick="openModal('Short Film','Ceramic of Andalusia','Documentary Short','Joaquin Diaz makes clay with his hands from the lands of his grandfather. The clay in Andalusia is special — his work is not just a craft, it is presented in museums.','https://vimeo.com/1190878327')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190878327?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0&color=2a8a9a" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
-            <div class="work-title">Biciklo</div>
-            <div class="work-meta">Short Film · 2021</div>
+            <div class="work-title">Ceramic of Andalusia</div>
+            <div class="work-meta">Documentary Short</div>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openModal('Documentary Short','Fado — Singing Colour Hue','Documentary Short','Just like Sevdah, Bosnian music and Portuguese music share an unexpected history. Two countries on different sides of a continent expressing emotions in the same ways.','https://vimeo.com/1190878334')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190878334?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0&color=2a8a9a" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Singing Colour Hue</div>
+            <div class="work-meta">Documentary Short</div>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openModal('Documentary Short','Sebastian','Documentary Short','A story about fighter Sebastian — another story of a guy fighting his way into a better life. It\'s not just sports.','https://vimeo.com/1190878342')">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190878342?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0&color=2a8a9a" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Sebastian</div>
+            <div class="work-meta">Documentary Short</div>
           </div>
         </div>
 
@@ -614,12 +675,12 @@
     </div>
     <div class="about-grid">
       <div>
-        <p class="about-text reveal"><em>Filmmaker and AI Audiovisual Specialist</em> based in Munich, Germany.</p>
-        <p class="about-body reveal">Bahre founded <em>filmb</em> in 2016 to bring worthwhile stories to life. Since then he has directed award-winning short films, brought cinema to children in Colombian favelas, co-founded Bus Film Lab in Bosnia, and built a body of work spanning film, theatre, documentary. He speaks six languages and currently creates at Allianz, Munich.</p>
-        <p class="about-body reveal" style="margin-top:16px;">His documentary <em>Ritual</em> received great reviews after screening at City Kino Munich. Now finishing <em>Ljubov</em> and <em>You Better Run Now</em>, with <em>Bosnian History Narrated</em> — a 20-episode AI documentary series — in development.</p>
+        <p class="about-text reveal"><em>Filmmaker and AI Audiovisual Artist</em> living and working between Munich, Berlin, and Sarajevo.</p>
+        <p class="about-body reveal">Bahre founded <em>filmb</em> in 2016. Since then he has directed award-winning short films, brought cinema to children in Colombian favelas, co-founded Bus Film Lab in Bosnia, and built a body of work spanning film, theatre, documentary. He speaks six languages and currently creates at Allianz, Munich.</p>
+        <p class="about-body reveal" style="margin-top:16px;">His documentary <em>Ritual</em> received heartfelt reviews after screening at City Kino Munich.</p>
 
         <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Education</div>
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Trainings</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2024</span>
@@ -639,34 +700,29 @@
             </div>
           </div>
         </div>
+
         <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Videography</div>
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Work</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2023–</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Audiovisual Producer and Editor at <em>Allianz</em>, Munich, Germany. Studio and on-location filming.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Audiovisual Producer and Editor at <em>Allianz</em>, Munich. Studio and on-location filming.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Video Producer-Editor at <em>Wedio</em>, Aarhus, Denmark. Produced and edited high-quality videos for audiovisual and digital communication projects.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Video Producer-Editor at <em>Wedio</em>, Aarhus, Denmark.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022–23</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Freelance Video Editor at <em>Flexiana</em>, Barcelona, Spain. Editing and post-production for compelling visual content.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Film</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Co-founder and Co-manager of <em>BUS FILM LAB</em>, Busovača, Bosnia-Herzegovina.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Freelance Video Editor at <em>Flexiana</em>, Barcelona, Spain.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer, Director and Producer of the short film <em>Biciklo</em> (Bicycle).</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Co-founder of <em>BUS FILM LAB</em>, Busovača, Bosnia-Herzegovina.</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:baseline;">
+              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer, Director and Producer of <em>Biciklo</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
@@ -674,49 +730,43 @@
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of the short film <em>Ulica Snova</em> (Dream Street).</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of <em>Ulica Snova</em> (Dream Street).</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of the short documentary <em>The Dancer</em> in collaboration with Malmö Theatre Academy.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of <em>The Dancer</em> in collaboration with Malmö Theatre Academy.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of the short film <em>The Boy</em>.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of <em>The Boy</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writing and producing projects at <em>Bridge — Association for Culture and Arts</em>, Sarajevo.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writing and producing at <em>Bridge — Association for Culture and Arts</em>, Sarajevo.</span>
             </div>
-          </div>
-        </div>
-
-        <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Theatre & Photography</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2017</span>
               <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer and Producer of <em>Silk-man</em> at Artisten, Academy for Music and Drama, GU.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2016</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Founder and Producer at <em>filmb</em>. Worked on personal independent audiovisual projects.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Founder and Producer at <em>filmb</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Photography and Human Rights Intern at the Colombian Civic Organisation, University of South Colombia.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Photography and Human Rights Intern, Colombian Civic Organisation, University of South Colombia.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2014</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>TYLLFLIKT</em>, produced by WestPride and the Swedish Human Rights Federation.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>TYLLFLIKT</em>, WestPride and the Swedish Human Rights Federation.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>RASKRŠĆE</em>, produced by the Evangelic Union of Bosnia and Herzegovina.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>RASKRŠĆE</em>, Evangelic Union of Bosnia and Herzegovina.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>La Casa de Bernarda Alba</em> by Lorca, produced by Centro de Estudios Hispanicos.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>La Casa de Bernarda Alba</em> by Lorca, Centro de Estudios Hispanicos.</span>
             </div>
           </div>
         </div>
@@ -724,12 +774,10 @@
         <div class="reveal" style="margin-top:32px;">
           <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Recognitions & Grants</div>
           <div style="display:flex;flex-direction:column;gap:16px;">
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
               <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish University Union Grant — €3,000 for postgraduate studies at MAU.</span>
             </div>
-
             <div style="display:flex;gap:16px;align-items:flex-start;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;margin-top:3px;">2021</span>
               <div>
@@ -743,65 +791,54 @@
                 </div>
               </div>
             </div>
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Film Fund Grant — €45,000 for upcoming feature-length debut <em>Childhood Story</em>.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Film Fund Grant — €45,000 for <em>Childhood Story</em>.</span>
             </div>
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;"><em>Ulica Snova</em> — Best Short Film at the Bosnian Art Forum, recognized for contributing to minority rights in Bosnia-Herzegovina.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;"><em>Ulica Snova</em> — Best Short Film, Bosnian Art Forum.</span>
             </div>
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015–16</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish Development Agency SIDA Grant — €10,000 for building cinemas in Colombian slums, in collaboration with Colombian Civic Organisations and the University of South Colombia.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish Development Agency SIDA Grant — €10,000 for building cinemas in Colombian slums.</span>
             </div>
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">European Commission Grant — €5,000 for contributions to environmental protection in South-East Europe.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">European Commission Grant — €5,000 for environmental protection in South-East Europe.</span>
             </div>
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
               <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Diaspora Fund in Norway Grant — Two years of covered educational expenses.</span>
             </div>
-
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2011</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Ministry of Culture and Education of Sarajevo Kanton Grant — €1,000 for exceptional student contribution to minority rights in Bosnia-Herzegovina.</span>
+              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Ministry of Culture and Education of Sarajevo Kanton Grant — €1,000 for contributions to minority rights.</span>
             </div>
-
           </div>
         </div>
 
         <div class="reveal" style="margin-top:32px;">
           <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Scriptures</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
-
             <a href="https://mau.diva-portal.org/smash/record.jsf?utm_medium=iframely&pid=diva2%3A1888254&utm_source=canva&dswid=-6999" target="_blank" rel="noopener" style="text-decoration:none;">
               <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
                 <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">ARTIST'S WAY OF MAKING: art in audiovisual media productions</div>
                 <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA / MAU</div>
               </div>
             </a>
-
             <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1715007&dswid=-2790" target="_blank" rel="noopener" style="text-decoration:none;">
               <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
-                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">BOSNIAN IDENTITY AFTER THE WAR: The Importance of How the War Is Described in Media for Contemporary Bosnian Identity</div>
+                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">BOSNIAN IDENTITY AFTER THE WAR</div>
                 <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA</div>
               </div>
             </a>
-
             <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1486640&dswid=-323" target="_blank" rel="noopener" style="text-decoration:none;">
               <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
-                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">WHO DO YOU THINK YOU ARE? A Theoretical Exploration of Self-Identity in Predisposition to Aggressive Behaviour</div>
+                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">WHO DO YOU THINK YOU ARE?</div>
                 <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA</div>
               </div>
             </a>
-
           </div>
         </div>
 
