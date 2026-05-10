@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Bahre Srebrenica — Filmmaker, Editor, and Content Creator. Cinematic, journalistic and educational AI and non-AI audiovisuals." />
-  <title>Bahre Srebrenica — Filmmaker</title>
+  <title>Bahre Srebrenica Filmmaker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -18,10 +18,6 @@
       --slate: #0f3048;
       --slate-mid: #1a4a6a;
       --slate-light: #3a7a9a;
-      --sage: #0e4a5a;
-      --sage-light: #2a8a9a;
-      --fog: #8abccc;
-      --mist: #d0e8f0;
       --accent: #3aaccf;
       --accent-warm: #5abcdf;
       --text-primary: #e8f4f8;
@@ -35,7 +31,7 @@
 
     body {
       font-family: var(--font);
-      background: #030d14;
+      background: var(--navy);
       color: var(--text-primary);
       overflow-x: hidden;
       cursor: none;
@@ -74,7 +70,7 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 24px 48px;
       border-bottom: 0.5px solid rgba(58,172,207,0.1);
-      background: rgba(3,13,20,0.9);
+      background: rgba(3,13,20,0.92);
       backdrop-filter: blur(12px);
     }
     .nav-logo {
@@ -95,6 +91,7 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
     .nav-cta {
       font-size: 10px;
       letter-spacing: 2px;
@@ -105,11 +102,46 @@
       text-decoration: none;
       transition: all 0.2s;
     }
-    .nav-cta:hover {
-      background: var(--accent);
-      color: var(--navy);
-      border-color: var(--accent);
+    .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* HAMBURGER */
+    .nav-toggle {
+      width: 36px; height: 36px;
+      border: 0.5px solid var(--slate-mid);
+      background: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      color: var(--text-primary);
+      transition: all 0.2s;
+      font-family: var(--font);
+      line-height: 1;
     }
+    .nav-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* MENU OVERLAY */
+    .menu-overlay {
+      position: fixed; inset: 0;
+      background: rgba(3,13,20,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 48px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .menu-overlay.open { opacity: 1; pointer-events: all; }
+    .menu-overlay a {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 8vw, 80px);
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: 4px;
+      transition: color 0.2s;
+    }
+    .menu-overlay a:hover { color: var(--accent); }
 
     /* HERO */
     .hero {
@@ -323,9 +355,11 @@
     }
     .work-info {
       padding: 16px 20px;
-      background: #071520;
-      border-top: 0.5px solid rgba(58,172,207,0.08);
+      background: var(--bg-card);
+      border-top: 0.5px solid rgba(26,122,138,0.15);
     }
+    .work-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .work-meta { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
     .work-title {
       font-family: var(--font);
       font-size: 15px;
@@ -343,7 +377,7 @@
     /* ABOUT */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.4fr 1fr;
       gap: 80px;
       align-items: start;
     }
@@ -416,9 +450,10 @@
     }
 
     /* CONTACT */
-    #contact { background: #071520; }
+    #contact { background: var(--navy); }
     .contact-inner {
       max-width: 600px;
+      padding: 0 48px;
     }
     .contact-heading {
       font-family: var(--font);
@@ -493,18 +528,19 @@
       transform: translateY(0);
     }
 
+    /* Hide toggle on desktop */
+    .nav-toggle { display: none; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
-      .nav-links { display: none; }
+      .nav-links { display: none !important; }
+      .nav-toggle { display: flex !important; }
       .hero { padding: 0 24px 48px; }
       .hero-content { grid-template-columns: 1fr; gap: 32px; }
       .hero-right { align-items: flex-start; }
       .hero-desc { text-align: left; }
-      .strip { grid-template-columns: repeat(2, 1fr); border: none; }
-      .strip-item { border: none; }
       section { padding: 56px 24px; }
-      .work-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 16px; text-align: center; }
     }
@@ -515,24 +551,33 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay" id="menuOverlay">
+    <a href="#work" onclick="closeMenu()">Work</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
   <nav>
     <a href="#" class="nav-logo">Bahre Srebrenica</a>
-    <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" onclick="toggleMenu()">+</button>
     </div>
-    <a href="#contact" class="nav-cta">Get in touch</a>
   </nav>
 
 
   <!-- FILM POPUP MODAL -->
   <div id="film-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
-    <div style="background:#111922;border:0.5px solid #2a3f52;max-width:720px;width:100%;padding:40px;position:relative;border-radius:4px;max-height:90vh;overflow-y:auto;">
-      <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#6b8fa8;font-size:20px;cursor:pointer;">✕</button>
-      <div id="modal-tag" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7aa8c4;margin-bottom:12px;"></div>
+    <div style="background:var(--navy);border:0.5px solid #2a3f52;max-width:720px;width:100%;padding:40px;position:relative;border-radius:4px;max-height:90vh;overflow-y:auto;">
+      <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
+      <div id="modal-tag" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"></div>
       <h3 id="modal-title" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:3px;line-height:0.9;margin-bottom:12px;"></h3>
-      <div id="modal-meta" style="font-size:11px;letter-spacing:1px;color:#456070;margin-bottom:20px;"></div>
+      <div id="modal-meta" style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:20px;"></div>
       <p id="modal-desc" style="font-size:14px;color:#a8c4d4;line-height:1.8;margin-bottom:24px;"></p>
       <div id="modal-link"></div>
     </div>
@@ -563,10 +608,10 @@
     </div>
 
     <!-- IN DEVELOPMENT -->
-    <div style="padding:40px 48px 24px;background:linear-gradient(135deg, #0d1a2a 0%, #071520 60%, #030d14 100%);">
+    <div style="padding:40px 48px 24px;background:var(--navy);">
       <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">In Development</div>
       <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
-      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#1a4a6a transparent;">
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
 
         <div class="work-card" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
           <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
@@ -605,10 +650,10 @@
     </div>
 
     <!-- PRODUCED -->
-    <div style="padding:40px 48px 48px;background:linear-gradient(135deg, #1a0a0f 0%, #0d1520 40%, #030d14 100%);border-top:0.5px solid rgba(58,172,207,0.08);">
+    <div style="padding:40px 48px 48px;background:var(--navy);border-top:0.5px solid rgba(58,172,207,0.08);">
       <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">Produced</div>
       <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
-      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#1a4a6a transparent;">
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
 
         <div class="work-card" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
           <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;background:#0d1520;">
@@ -634,7 +679,7 @@
 
         <div class="work-card" onclick="openModal('Short Film','Ceramic of Andalusia','Documentary Short','Joaquin Diaz makes clay with his hands from the lands of his grandfather. The clay in Andalusia is special — his work is not just a craft, it is presented in museums.','https://vimeo.com/1190878327')">
           <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/1190878327?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0&color=2a8a9a" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <iframe src="https://player.vimeo.com/video/1190878327?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0&color=2a8a9a" style="position:absolute;top:50%;left:50%;width:600%;height:600%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -675,28 +720,25 @@
     </div>
     <div class="about-grid">
       <div>
-        <p class="about-text reveal"><em>Filmmaker and AI Audiovisual Artist</em> living and working between Munich, Berlin, and Sarajevo.</p>
-        <p class="about-body reveal">Bahre founded <em>filmb</em> in 2016. Since then he has directed award-winning short films, brought cinema to children in Colombian favelas, co-founded Bus Film Lab in Bosnia, and built a body of work spanning film, theatre, documentary. He speaks six languages and currently creates at Allianz, Munich.</p>
-        <p class="about-body reveal" style="margin-top:16px;">His documentary <em>Ritual</em> received heartfelt reviews after screening at City Kino Munich.</p>
 
         <div class="reveal" style="margin-top:32px;">
           <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Trainings</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2024</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master of Arts in CCI — Media and Communications, Malmö University (MAU)</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master of Arts in CCI — Media and Communications, Malmö University (MAU)</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master course in Documentary Film, Linköping University (LIU)</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master course in Documentary Film, Linköping University (LIU)</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master course in Docu-Performance, Academy of Music and Drama, Gothenburg University (GU)</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master course in Docu-Performance, Academy of Music and Drama, Gothenburg University (GU)</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Master of Science in Criminology, Malmö University (MAU)</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master of Science in Criminology, Malmö University (MAU)</span>
             </div>
           </div>
         </div>
@@ -706,67 +748,67 @@
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2023–</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Audiovisual Producer and Editor at <em>Allianz</em>, Munich. Studio and on-location filming.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Audiovisual Producer and Editor at <em>Allianz</em>, Munich. Studio and on-location filming.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Video Producer-Editor at <em>Wedio</em>, Aarhus, Denmark.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Video Producer-Editor at <em>Wedio</em>, Aarhus, Denmark.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022–23</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Freelance Video Editor at <em>Flexiana</em>, Barcelona, Spain.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Freelance Video Editor at <em>Flexiana</em>, Barcelona, Spain.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Co-founder of <em>BUS FILM LAB</em>, Busovača, Bosnia-Herzegovina.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Co-founder of <em>BUS FILM LAB</em>, Busovača, Bosnia-Herzegovina.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer, Director and Producer of <em>Biciklo</em>.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Writer, Director and Producer of <em>Biciklo</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Artistic Director of <em>BIH ART FORUM</em> at the Historical Museum of Bosnia and Herzegovina.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Artistic Director of <em>BIH ART FORUM</em> at the Historical Museum of Bosnia and Herzegovina.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of <em>Ulica Snova</em> (Dream Street).</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Producer of <em>Ulica Snova</em> (Dream Street).</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of <em>The Dancer</em> in collaboration with Malmö Theatre Academy.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Producer of <em>The Dancer</em> in collaboration with Malmö Theatre Academy.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Producer of <em>The Boy</em>.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Producer of <em>The Boy</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writing and producing at <em>Bridge — Association for Culture and Arts</em>, Sarajevo.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Writing and producing at <em>Bridge — Association for Culture and Arts</em>, Sarajevo.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2017</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Writer and Producer of <em>Silk-man</em> at Artisten, Academy for Music and Drama, GU.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Writer and Producer of <em>Silk-man</em> at Artisten, Academy for Music and Drama, GU.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2016</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Founder and Producer at <em>filmb</em>.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Founder and Producer at <em>filmb</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Photography and Human Rights Intern, Colombian Civic Organisation, University of South Colombia.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Photography and Human Rights Intern, Colombian Civic Organisation, University of South Colombia.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2014</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>TYLLFLIKT</em>, WestPride and the Swedish Human Rights Federation.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Theatre Director and Actor in <em>TYLLFLIKT</em>, WestPride and the Swedish Human Rights Federation.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>RASKRŠĆE</em>, Evangelic Union of Bosnia and Herzegovina.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Theatre Director and Actor in <em>RASKRŠĆE</em>, Evangelic Union of Bosnia and Herzegovina.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Theatre Director and Actor in <em>La Casa de Bernarda Alba</em> by Lorca, Centro de Estudios Hispanicos.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Theatre Director and Actor in <em>La Casa de Bernarda Alba</em> by Lorca, Centro de Estudios Hispanicos.</span>
             </div>
           </div>
         </div>
@@ -776,44 +818,44 @@
           <div style="display:flex;flex-direction:column;gap:16px;">
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish University Union Grant — €3,000 for postgraduate studies at MAU.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Swedish University Union Grant — €3,000 for postgraduate studies at MAU.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:flex-start;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;margin-top:3px;">2021</span>
               <div>
-                <div style="font-size:13px;color:#a8c4d4;line-height:1.6;margin-bottom:6px;"><em>Biciklo</em> — International recognition:</div>
+                <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px;"><em>Biciklo</em> — International recognition:</div>
                 <div style="display:flex;flex-direction:column;gap:6px;padding-left:12px;border-left:0.5px solid var(--slate);">
-                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🎬 Official Selection — Cannes Film Awards</span>
-                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🎬 Official Selection — Madrid Indie Film Festival</span>
-                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🎬 Official Selection — Brèves Images Court Métrage, Marseille</span>
-                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">🏆 Audience Award — KinoEst Fest, Italy</span>
-                  <span style="font-size:12px;color:#8aacbf;line-height:1.6;">⭐ Special Mention — Fecorno, Norte de Santander, Colombia</span>
+                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🎬 Official Selection — Cannes Film Awards</span>
+                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🎬 Official Selection — Madrid Indie Film Festival</span>
+                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🎬 Official Selection — Brèves Images Court Métrage, Marseille</span>
+                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🏆 Audience Award — KinoEst Fest, Italy</span>
+                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">⭐ Special Mention — Fecorno, Norte de Santander, Colombia</span>
                 </div>
               </div>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Film Fund Grant — €45,000 for <em>Childhood Story</em>.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Bosnian Film Fund Grant — €45,000 for <em>Childhood Story</em>.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;"><em>Ulica Snova</em> — Best Short Film, Bosnian Art Forum.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><em>Ulica Snova</em> — Best Short Film, Bosnian Art Forum.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015–16</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Swedish Development Agency SIDA Grant — €10,000 for building cinemas in Colombian slums.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Swedish Development Agency SIDA Grant — €10,000 for building cinemas in Colombian slums.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">European Commission Grant — €5,000 for environmental protection in South-East Europe.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">European Commission Grant — €5,000 for environmental protection in South-East Europe.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Bosnian Diaspora Fund in Norway Grant — Two years of covered educational expenses.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Bosnian Diaspora Fund in Norway Grant — Two years of covered educational expenses.</span>
             </div>
             <div style="display:flex;gap:16px;align-items:baseline;">
               <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2011</span>
-              <span style="font-size:13px;color:#a8c4d4;line-height:1.6;">Ministry of Culture and Education of Sarajevo Kanton Grant — €1,000 for contributions to minority rights.</span>
+              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Ministry of Culture and Education of Sarajevo Kanton Grant — €1,000 for contributions to minority rights.</span>
             </div>
           </div>
         </div>
@@ -850,10 +892,8 @@
       </div>
     </div>
   </section>
-
-  <section id="contact">
     <div class="contact-inner">
-      <h2 class="contact-heading reveal">Let's tell some<br><em>dope stories.</em></h2>
+      <h2 class="contact-heading reveal">Contact</h2>
       <p class="contact-sub reveal">Open to film projects, commercial work, documentary collaborations, and AI visual experiments.</p>
       <div class="reveal">
         <div id="contact-btn" onclick="document.getElementById('contact-btn').style.display='none';document.getElementById('contact-reveal').style.display='block';" style="display:inline-flex;align-items:center;gap:10px;border:0.5px solid var(--slate-mid);padding:14px 24px;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate-mid)'">
@@ -866,9 +906,11 @@
   </section>
 
   <footer>
-    <div class="footer-name">© 2026 Bahre Srebrenica</div>
+    <div class="footer-name" style="color:var(--text-muted);">© 2026 Bahre Srebrenica</div>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/bahre-srebrenica" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://mubi.com/es/cast/bahre-srebrenica" target="_blank" rel="noopener">MUBI</a>
+      <a href="https://www.imdb.com/name/nm11903727/" target="_blank" rel="noopener">IMDb</a>
     </div>
   </footer>
 
@@ -943,6 +985,19 @@
   </script>
 
   <script>
+    function toggleMenu() {
+      const overlay = document.getElementById('menuOverlay');
+      const btn = document.getElementById('navToggle');
+      const isOpen = overlay.classList.contains('open');
+      if(isOpen) { overlay.classList.remove('open'); btn.textContent = '+'; document.body.style.overflow = ''; }
+      else { overlay.classList.add('open'); btn.textContent = '×'; document.body.style.overflow = 'hidden'; }
+    }
+    function closeMenu() {
+      document.getElementById('menuOverlay').classList.remove('open');
+      document.getElementById('navToggle').textContent = '+';
+      document.body.style.overflow = '';
+    }
+
     function openModal(tag, title, meta, desc, link) {
       document.getElementById('modal-tag').textContent = tag;
       document.getElementById('modal-title').textContent = title;
