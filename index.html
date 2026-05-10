@@ -24,9 +24,9 @@
       --mist: #e8edf2;
       --accent: #7aa8c4;
       --accent-warm: #8fbcce;
-      --text-primary: #dde8ef;
-      --text-secondary: #8aacbf;
-      --text-muted: #456070;
+      --text-primary: #f0f4f8;
+      --text-secondary: #b8d0e0;
+      --text-muted: #7a9ab0;
       --font: 'Inter', sans-serif;
       --font-display: 'Bebas Neue', sans-serif;
     }
@@ -345,7 +345,7 @@
     .about-text em { color: var(--accent); font-style: italic; }
     .about-body {
       font-size: 15px;
-      color: var(--text-muted);
+      color: #a8c8d8;
       line-height: 2;
       margin-bottom: 32px;
     }
@@ -549,31 +549,20 @@
       <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;">My Work</div>
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#2a3f52 transparent;">
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;">
-            <img src="magnific__simple-text-on-one-past-color-biciklo__18918.jpg" alt="Biciklo" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
+          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190876158?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
-            <div class="work-title">Biciklo</div>
-            <div class="work-meta">Short Film · 2021</div>
-          </div>
-        </div>
-
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Director\'s Reel','Director\'s Reel','2022','A showcase of Bahre\'s directing and editing work across film, documentary and commercial projects.','https://vimeo.com/772128030')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;">
-            <img src="magnific__simple-text-on-one-past-color-directors-reel__18917.jpg" alt="Director's Reel" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
-            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
-          </div>
-          <div class="work-info">
-            <div class="work-title">Director's Reel</div>
-            <div class="work-meta">Reel · 2022</div>
+            <div class="work-title">Bosnian History Narrated</div>
+            <div class="work-meta">AI Doc · 20 Episodes</div>
           </div>
         </div>
 
         <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Fiction Film','Ljubov','In Development','A love story between Filip and Max, where Filip loses everything but gets a chance in life thanks to Max. A heartbreaking story about dreams, inspiration, regret, drug abuse. Electric, dynamic, dance, techno. Fiction film based on real events.','')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;">
-            <img src="magnific__simple-text-on-one-past-color-ljubov__18916.jpg" alt="Ljubov" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190876827?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -583,8 +572,8 @@
         </div>
 
         <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Documentary','You Better Run Now','In Development','A documentary about Roma girls\' abortion in Bosnia. In development, working with local Roma communities in Bosnia.','')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;">
-            <img src="magnific__simple-text-on-one-past-color-you-better-run-now__18915.jpg" alt="You Better Run Now" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/1190875924?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
@@ -593,14 +582,25 @@
           </div>
         </div>
 
-        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
-          <div class="work-thumb" style="height:260px;overflow:hidden;">
-            <img src="magnific__simple-text-on-one-past-color-bosnian-history-narr__18914.jpg" alt="Bosnian History Narrated" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;"/>
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Director\'s Reel','Director\'s Reel','2022','A showcase of Bahre\'s directing and editing work across film, documentary and commercial projects.','https://vimeo.com/772128030')">
+          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/772128099?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:120%;height:120%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div class="work-overlay"><span class="overlay-text">More Info</span></div>
           </div>
           <div class="work-info">
-            <div class="work-title">Bosnian History Narrated</div>
-            <div class="work-meta">AI Doc · 20 Episodes</div>
+            <div class="work-title">Director's Reel</div>
+            <div class="work-meta">Reel · 2022</div>
+          </div>
+        </div>
+
+        <div class="work-card" style="flex:0 0 180px;min-width:180px;" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
+          <div class="work-thumb" style="height:260px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/650727499?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div class="work-overlay"><span class="overlay-text">More Info</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Biciklo</div>
+            <div class="work-meta">Short Film · 2021</div>
           </div>
         </div>
 
@@ -614,7 +614,7 @@
     </div>
     <div class="about-grid">
       <div>
-        <p class="about-text reveal"><em>AI Audiovisual Automation</em> professional in Film and Media based in Munich, Germany.</p>
+        <p class="about-text reveal"><em>Filmmaker and AI Audiovisual Specialist</em> based in Munich, Germany.</p>
         <p class="about-body reveal">Bahre founded <em>filmb</em> in 2016 to bring worthwhile stories to life. Since then he has directed award-winning short films, brought cinema to children in Colombian favelas, co-founded Bus Film Lab in Bosnia, and built a body of work spanning film, theatre, documentary. He speaks six languages and currently creates at Allianz, Munich.</p>
         <p class="about-body reveal" style="margin-top:16px;">His documentary <em>Ritual</em> received great reviews after screening at City Kino Munich. Now finishing <em>Ljubov</em> and <em>You Better Run Now</em>, with <em>Bosnian History Narrated</em> — a 20-episode AI documentary series — in development.</p>
 
