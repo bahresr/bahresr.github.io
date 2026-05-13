@@ -339,7 +339,9 @@
                   0 8px 32px rgba(0,0,0,0.5),
                   0 0 40px rgba(58,172,207,0.25);
     }
-    .work-card.popped {
+    /* Pause iframes by default, play on hover */
+    .work-card iframe { filter: brightness(0.7); transition: filter 0.3s ease; }
+    .work-card:hover iframe { filter: brightness(1); }
       transform: scale(1) translateY(0);
       opacity: 1;
     }
@@ -1085,6 +1087,21 @@
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
     function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
     animRing();
+
+    // Hover play/pause for work cards
+    document.querySelectorAll('.work-card').forEach(card => {
+      const iframe = card.querySelector('iframe');
+      if(!iframe) return;
+      const src = iframe.src;
+      // Replace autoplay=1 with autoplay=0 initially
+      iframe.src = src.replace('autoplay=1', 'autoplay=0');
+      card.addEventListener('mouseenter', () => {
+        iframe.src = iframe.src.replace('autoplay=0', 'autoplay=1');
+      });
+      card.addEventListener('mouseleave', () => {
+        iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
+      });
+    });
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); } });
