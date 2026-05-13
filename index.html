@@ -687,8 +687,6 @@
 
     <!-- IN DEVELOPMENT -->
     <div id="in-development" style="padding:32px 48px 24px;background:var(--navy);">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">In Development</div>
-      <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
 
         <div class="work-card" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
@@ -797,7 +795,7 @@
 
         <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
           <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/895596736?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(8px) brightness(0.4);" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <iframe src="https://player.vimeo.com/video/895596736?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:2;">
               <span style="font-size:24px;">🔒</span>
               <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(180,220,255,0.7);">Private</span>
@@ -811,7 +809,7 @@
 
         <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
           <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
-            <iframe src="https://player.vimeo.com/video/895593138?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(8px) brightness(0.4);" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <iframe src="https://player.vimeo.com/video/895593138?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:2;">
               <span style="font-size:24px;">🔒</span>
               <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(180,220,255,0.7);">Private</span>
@@ -1166,21 +1164,6 @@
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
     function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
     animRing();
-
-    // Hover play/pause for work cards
-    document.querySelectorAll('.work-card').forEach(card => {
-      const iframe = card.querySelector('iframe');
-      if(!iframe) return;
-      const src = iframe.src;
-      // Replace autoplay=1 with autoplay=0 initially
-      iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      card.addEventListener('mouseenter', () => {
-        iframe.src = iframe.src.replace('autoplay=0', 'autoplay=1');
-      });
-      card.addEventListener('mouseleave', () => {
-        iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
-      });
-    });
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); } });
