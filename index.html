@@ -608,6 +608,20 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
+  <!-- COMMERCIAL LOCK MODAL -->
+  <div id="commercial-modal" onclick="if(event.target===this)document.getElementById('commercial-modal').style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#0d2030;border:1.5px solid rgba(180,220,255,0.2);max-width:400px;width:100%;padding:40px;position:relative;border-radius:12px;box-shadow:0 0 0 1px rgba(58,172,207,0.1),0 20px 60px rgba(0,0,0,0.6);text-align:center;">
+      <button onclick="document.getElementById('commercial-modal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
+      <div style="font-size:32px;margin-bottom:16px;">🔒</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:3px;margin-bottom:8px;">Private Content</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:28px;line-height:1.6;">Enter your access code or contact Bahre to request one.</p>
+      <input id="commercial-code" type="password" placeholder="Enter code" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(180,220,255,0.2);border-radius:8px;color:#fff;font-size:14px;letter-spacing:2px;text-align:center;outline:none;margin-bottom:12px;font-family:var(--font);" onkeydown="if(event.key==='Enter')checkCommercialCode()"/>
+      <div id="commercial-error" style="font-size:11px;color:#e05a5a;margin-bottom:12px;display:none;">Incorrect code. Try again or request access below.</div>
+      <button onclick="checkCommercialCode()" class="btn-glass btn-glass-primary" style="width:100%;justify-content:center;margin-bottom:12px;">Submit</button>
+      <a href="https://wa.me/4915252614371?text=Hi%20Bahre%2C%20I%27d%20like%20to%20request%20access%20to%20your%20commercial%20work." target="_blank" rel="noopener" class="btn-glass" style="width:100%;justify-content:center;display:flex;">💬 Request Access on WhatsApp</a>
+    </div>
+  </div>
+
   <!-- MENU OVERLAY -->
   <div class="menu-overlay" id="menuOverlay">
     <a href="#work" onclick="closeMenu()">Work</a>
@@ -664,8 +678,15 @@
       </div>
     </div>
 
+    <!-- IN DEVELOPMENT + PRODUCED HEADER ROW -->
+    <div style="padding:40px 48px 0;background:var(--navy);display:flex;gap:48px;align-items:center;border-bottom:0.5px solid rgba(58,172,207,0.08);">
+      <a href="#in-development" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);text-decoration:none;padding-bottom:12px;border-bottom:1.5px solid var(--accent);">In Development</a>
+      <a href="#produced" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding-bottom:12px;border-bottom:1.5px solid transparent;transition:all 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Produced</a>
+      <a href="#commercial" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding-bottom:12px;border-bottom:1.5px solid transparent;transition:all 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Commercial Work 🔒</a>
+    </div>
+
     <!-- IN DEVELOPMENT -->
-    <div style="padding:40px 48px 24px;background:var(--navy);">
+    <div id="in-development" style="padding:32px 48px 24px;background:var(--navy);">
       <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">In Development</div>
       <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
@@ -707,9 +728,7 @@
     </div>
 
     <!-- PRODUCED -->
-    <div style="padding:40px 48px 48px;background:var(--navy);border-top:0.5px solid rgba(58,172,207,0.08);">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">Produced</div>
-      <div style="width:32px;height:0.5px;background:var(--accent);margin-bottom:20px;"></div>
+    <div id="produced" style="padding:32px 48px 48px;background:var(--navy);border-top:0.5px solid rgba(58,172,207,0.08);">
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
 
         <div class="work-card" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
@@ -769,9 +788,44 @@
 
       </div>
     </div>
-  </section>
 
-  <section id="about">
+    <!-- COMMERCIAL WORK - LOCKED -->
+    <div id="commercial" style="padding:32px 48px 48px;background:var(--navy);border-top:0.5px solid rgba(58,172,207,0.08);">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Commercial Work <span style="color:var(--accent);">🔒</span></div>
+      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;"></div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
+
+        <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/895596736?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(8px) brightness(0.4);" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:2;">
+              <span style="font-size:24px;">🔒</span>
+              <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(180,220,255,0.7);">Private</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Commercial Reel I</div>
+            <div class="work-meta">Commercial · Private</div>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
+          <div class="work-thumb" style="height:300px;overflow:hidden;position:relative;">
+            <iframe src="https://player.vimeo.com/video/895593138?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(8px) brightness(0.4);" frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:2;">
+              <span style="font-size:24px;">🔒</span>
+              <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(180,220,255,0.7);">Private</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-title">Commercial Reel II</div>
+            <div class="work-meta">Commercial · Private</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
     <div class="section-header">
       <span class="section-label">About</span>
     </div>
@@ -1041,6 +1095,31 @@
   </script>
 
   <script>
+    function openCommercial() {
+      document.getElementById('commercial-modal').style.display = 'flex';
+      document.getElementById('commercial-code').value = '';
+      document.getElementById('commercial-error').style.display = 'none';
+      setTimeout(() => document.getElementById('commercial-code').focus(), 100);
+    }
+    function checkCommercialCode() {
+      const code = document.getElementById('commercial-code').value.trim();
+      if(code === '0207B') {
+        document.getElementById('commercial-modal').style.display = 'none';
+        // Unlock - remove blur from commercial cards
+        document.querySelectorAll('#commercial .work-card').forEach((card, i) => {
+          const iframe = card.querySelector('iframe');
+          if(iframe) iframe.style.filter = '';
+          const lock = card.querySelector('[style*="position:absolute;inset:0;display:flex"]');
+          if(lock) lock.style.display = 'none';
+          const urls = ['https://vimeo.com/895596736', 'https://vimeo.com/895593138'];
+          card.onclick = () => openModal('Commercial', i===0?'Commercial Reel I':'Commercial Reel II', 'Commercial', '', urls[i]);
+        });
+      } else {
+        document.getElementById('commercial-error').style.display = 'block';
+        document.getElementById('commercial-code').value = '';
+      }
+    }
+
     function toggleMenu() {
       const overlay = document.getElementById('menuOverlay');
       const btn = document.getElementById('navToggle');
