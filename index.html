@@ -12,17 +12,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #030d14;
-      --navy-mid: #071520;
-      --navy-light: #0d2030;
-      --slate: #0f3048;
-      --slate-mid: #1a4a6a;
-      --slate-light: #3a7a9a;
-      --accent: #3aaccf;
-      --accent-warm: #5abcdf;
-      --text-primary: #e8f4f8;
-      --text-secondary: #90c8d8;
-      --text-muted: #4a8a9a;
+      --navy: #080e1a;
+      --navy-mid: #0d1526;
+      --navy-light: #121d32;
+      --slate: #1a2a4a;
+      --slate-mid: #2a4a7a;
+      --slate-light: #4a6aaa;
+      --accent: #4a8aff;
+      --accent-warm: #6aaaff;
+      --text-primary: #ffffff;
+      --text-secondary: #a0b8d8;
+      --text-muted: #5a7aaa;
       --font: 'Inter', sans-serif;
       --font-display: 'Bebas Neue', sans-serif;
     }
@@ -31,7 +31,8 @@
 
     body {
       font-family: var(--font);
-      background: var(--navy);
+      background: linear-gradient(135deg, #0a1628 0%, #0d1f3d 30%, #1a2f5a 60%, #0f1a35 100%);
+      background-attachment: fixed;
       color: var(--text-primary);
       overflow-x: hidden;
       cursor: none;
@@ -69,9 +70,10 @@
       z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 14px 48px;
-      border-bottom: 0.5px solid rgba(58,172,207,0.1);
-      background: rgba(3,13,20,0.92);
-      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid rgba(74,138,255,0.15);
+      background: rgba(8,14,26,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     .nav-logo {
       font-family: var(--font-display);
@@ -92,7 +94,6 @@
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-right { display: flex; align-items: center; gap: 16px; }
-    /* GLOSSY BUTTON STYLE */
     .btn-glass {
       display: inline-flex;
       align-items: center;
@@ -107,32 +108,31 @@
       font-weight: 500;
       transition: all 0.25s ease;
       text-decoration: none;
-      border: 1.5px solid rgba(180,220,255,0.25);
-      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(74,138,255,0.25);
+      background: rgba(13,21,38,0.7);
       backdrop-filter: blur(8px);
-      box-shadow: 0 0 0 1px rgba(180,220,255,0.08),
-                  inset 0 1px 0 rgba(255,255,255,0.12),
+      box-shadow: 0 0 0 1px rgba(74,138,255,0.08),
+                  inset 0 1px 0 rgba(255,255,255,0.06),
                   0 4px 16px rgba(0,0,0,0.3);
-      color: var(--text-primary);
+      color: var(--text-secondary);
     }
     .btn-glass:hover {
-      border-color: rgba(58,172,207,0.6);
-      background: linear-gradient(135deg, rgba(58,172,207,0.15) 0%, rgba(58,172,207,0.05) 100%);
-      box-shadow: 0 0 0 1px rgba(58,172,207,0.3),
-                  inset 0 1px 0 rgba(255,255,255,0.15),
-                  0 4px 20px rgba(58,172,207,0.2);
+      border-color: rgba(74,138,255,0.5);
+      background: rgba(74,138,255,0.12);
       color: #fff;
+      box-shadow: 0 0 0 1px rgba(74,138,255,0.2),
+                  0 4px 20px rgba(74,138,255,0.2);
     }
     .btn-glass-primary {
-      background: linear-gradient(135deg, rgba(58,172,207,0.4) 0%, rgba(58,172,207,0.15) 100%);
-      border: 1.5px solid rgba(58,172,207,0.5);
-      color: #fff;
+      background: rgba(74,138,255,0.2);
+      border: 1px solid rgba(74,138,255,0.4);
+      color: var(--accent);
     }
     .btn-glass-primary:hover {
-      background: linear-gradient(135deg, rgba(58,172,207,0.6) 0%, rgba(58,172,207,0.3) 100%);
-      box-shadow: 0 0 0 1px rgba(58,172,207,0.5),
-                  inset 0 1px 0 rgba(255,255,255,0.2),
-                  0 4px 24px rgba(58,172,207,0.35);
+      background: rgba(74,138,255,0.35);
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(74,138,255,0.4),
+                  0 4px 24px rgba(74,138,255,0.3);
     }
 
     /* HAMBURGER */
@@ -153,7 +153,7 @@
     /* MENU OVERLAY */
     .menu-overlay {
       position: fixed; inset: 0;
-      background: rgba(3,13,20,0.97);
+      background: rgba(8,14,26,0.97);
       backdrop-filter: blur(20px);
       z-index: 99;
       display: flex; flex-direction: column;
@@ -321,27 +321,29 @@
     .work-card {
       position: relative;
       overflow: hidden;
-      background: var(--navy-light);
+      background: rgba(13,21,38,0.9);
       cursor: none;
       transform: scale(0.92) translateY(20px);
       opacity: 0;
       transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease, box-shadow 0.3s ease;
       flex: 0 0 220px !important;
       min-width: 220px !important;
-      border-radius: 10px;
-      box-shadow: 0 0 0 3px rgba(180,220,255,0.25),
-                  inset 0 1px 0 rgba(255,255,255,0.15),
-                  0 4px 24px rgba(0,0,0,0.5);
+      border-radius: 16px;
+      border: 1px solid rgba(74,138,255,0.15);
+      box-shadow: 0 0 0 1px rgba(74,138,255,0.08),
+                  0 8px 32px rgba(0,0,0,0.4),
+                  inset 0 1px 0 rgba(255,255,255,0.06);
     }
     .work-card:hover {
-      box-shadow: 0 0 0 4px rgba(58,172,207,0.6),
-                  inset 0 1px 0 rgba(255,255,255,0.2),
-                  0 8px 32px rgba(0,0,0,0.5),
-                  0 0 40px rgba(58,172,207,0.25);
+      border-color: rgba(74,138,255,0.4);
+      box-shadow: 0 0 0 1px rgba(74,138,255,0.2),
+                  0 8px 40px rgba(74,138,255,0.15),
+                  0 0 60px rgba(74,138,255,0.08),
+                  inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    /* Pause iframes by default, play on hover */
-    .work-card iframe { filter: brightness(0.7); transition: filter 0.3s ease; }
-    .work-card:hover iframe { filter: brightness(1); }
+    /* Videos slightly dimmed by default, full brightness on hover */
+    .work-card iframe { filter: brightness(0.9) saturate(0.9); transition: filter 0.3s ease; }
+    .work-card:hover iframe { filter: brightness(1) saturate(1); }
     .work-card.popped {
       transform: scale(1) translateY(0);
       opacity: 1;
@@ -385,27 +387,23 @@
     }
     .work-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0) 30%,
-        rgba(0,10,20,0.7) 100%
-      );
+      background: linear-gradient(180deg, transparent 30%, rgba(8,14,26,0.8) 100%);
       display: flex; align-items: flex-end; justify-content: flex-start;
       opacity: 1;
       transition: opacity 0.3s;
-      border-radius: 4px;
-      box-shadow: inset 0 0 0 0.5px rgba(180,220,255,0.15),
-                  inset 0 1px 0 rgba(255,255,255,0.12),
-                  inset 0 -1px 0 rgba(0,0,0,0.3);
+      border-radius: 16px;
+      box-shadow: inset 0 0 0 1px rgba(74,138,255,0.1),
+                  inset 0 1px 0 rgba(255,255,255,0.05);
     }
     .overlay-text {
-      font-size:9px;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      color:rgba(180,220,255,0.8);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
       padding: 12px 14px;
       opacity: 0;
       transition: opacity 0.3s;
+      font-weight: 600;
     }
     .work-card:hover .overlay-text { opacity: 1; }
     .work-info {
@@ -468,12 +466,13 @@
     .about-photo-placeholder {
       width: 100%;
       aspect-ratio: 3/4;
-      background: var(--navy-light);
+      background: rgba(13,21,38,0.8);
       overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 0 0 3px rgba(180,220,255,0.25),
-                  inset 0 1px 0 rgba(255,255,255,0.15),
-                  0 4px 24px rgba(0,0,0,0.5);
+      border-radius: 16px;
+      border: 1px solid rgba(74,138,255,0.15);
+      box-shadow: 0 0 0 1px rgba(74,138,255,0.08),
+                  0 8px 32px rgba(0,0,0,0.4),
+                  inset 0 1px 0 rgba(255,255,255,0.06);
     }
     .about-photo-placeholder img {
       width: 100%;
@@ -508,7 +507,7 @@
     }
 
     /* CONTACT */
-    #contact { background: var(--navy); }
+    #contact { background: transparent; }
     .contact-inner {
       max-width: 600px;
       padding: 0 48px;
@@ -544,10 +543,11 @@
     /* FOOTER */
     footer {
       padding: 24px 48px;
-      border-top: 0.5px solid rgba(122,168,196,0.08);
+      border-top: 0.5px solid rgba(74,138,255,0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(8,14,26,0.6);
     }
     .footer-name {
       font-size: 9px;
@@ -591,16 +591,13 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 20px 24px; }
+      nav { padding: 12px 20px; }
       .nav-links { display: none !important; }
       .nav-toggle { display: flex !important; }
-      .hero { padding: 0 24px 48px; }
-      .hero-content { grid-template-columns: 1fr; gap: 32px; }
-      .hero-right { align-items: flex-start; }
-      .hero-desc { text-align: left; }
-      section { padding: 56px 24px; }
+      section { padding: 40px 16px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      footer { padding: 20px 24px; flex-direction: column; gap: 16px; text-align: center; }
+      footer { padding: 20px 20px; flex-direction: column; gap: 16px; text-align: center; }
+      .work-card { flex: 0 0 170px !important; min-width: 170px !important; border-radius: 12px; }
     }
   </style>
 </head>
@@ -610,13 +607,13 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- COMMERCIAL LOCK MODAL -->
-  <div id="commercial-modal" onclick="if(event.target===this)document.getElementById('commercial-modal').style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
-    <div style="background:#0d2030;border:1.5px solid rgba(180,220,255,0.2);max-width:400px;width:100%;padding:40px;position:relative;border-radius:12px;box-shadow:0 0 0 1px rgba(58,172,207,0.1),0 20px 60px rgba(0,0,0,0.6);text-align:center;">
+  <div id="commercial-modal" onclick="if(event.target===this)document.getElementById('commercial-modal').style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(8,14,26,0.92);z-index:1000;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:rgba(13,21,38,0.98);border:1.5px solid rgba(180,220,255,0.2);max-width:400px;width:100%;padding:40px;position:relative;border-radius:12px;box-shadow:0 0 0 1px rgba(58,172,207,0.1),0 20px 60px rgba(0,0,0,0.6);text-align:center;">
       <button onclick="document.getElementById('commercial-modal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
       <div style="font-size:32px;margin-bottom:16px;">🔒</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:3px;margin-bottom:8px;">Private Content</h3>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--text-primary);letter-spacing:3px;margin-bottom:8px;">Private Content</h3>
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:28px;line-height:1.6;">Enter your access code or contact Bahre to request one.</p>
-      <input id="commercial-code" type="password" placeholder="Enter code" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(180,220,255,0.2);border-radius:8px;color:#fff;font-size:14px;letter-spacing:2px;text-align:center;outline:none;margin-bottom:12px;font-family:var(--font);" onkeydown="if(event.key==='Enter')checkCommercialCode()"/>
+      <input id="commercial-code" type="password" placeholder="Enter code" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(180,220,255,0.2);border-radius:8px;color:var(--text-primary);font-size:14px;letter-spacing:2px;text-align:center;outline:none;margin-bottom:12px;font-family:var(--font);" onkeydown="if(event.key==='Enter')checkCommercialCode()"/>
       <div id="commercial-error" style="font-size:11px;color:#e05a5a;margin-bottom:12px;display:none;">Incorrect code. Try again or request access below.</div>
       <button onclick="checkCommercialCode()" class="btn-glass btn-glass-primary" style="width:100%;justify-content:center;margin-bottom:12px;">Submit</button>
       <a href="https://wa.me/4915252614371?text=Hi%20Bahre%2C%20I%27d%20like%20to%20request%20access%20to%20your%20commercial%20work." target="_blank" rel="noopener" class="btn-glass" style="width:100%;justify-content:center;display:flex;">💬 Request Access on WhatsApp</a>
@@ -644,13 +641,13 @@
 
 
   <!-- FILM POPUP MODAL -->
-  <div id="film-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
-    <div style="background:var(--navy);border:0.5px solid #2a3f52;max-width:720px;width:100%;padding:40px;position:relative;border-radius:4px;max-height:90vh;overflow-y:auto;">
+  <div id="film-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(8,14,26,0.92);z-index:1000;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:rgba(13,21,38,0.98);border:1.5px solid rgba(58,122,191,0.2);max-width:720px;width:100%;padding:40px;position:relative;border-radius:12px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(58,122,191,0.15);">
       <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
       <div id="modal-tag" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"></div>
       <h3 id="modal-title" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:3px;line-height:0.9;margin-bottom:12px;"></h3>
       <div id="modal-meta" style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:20px;"></div>
-      <p id="modal-desc" style="font-size:14px;color:#a8c4d4;line-height:1.8;margin-bottom:24px;"></p>
+      <p id="modal-desc" style="font-size:14px;color:var(--text-secondary);line-height:1.8;margin-bottom:24px;"></p>
       <div id="modal-link"></div>
     </div>
   </div>
@@ -661,17 +658,19 @@
     <div style="position:relative;width:100%;min-height:70vh;overflow:hidden;display:flex;align-items:center;">
       <!-- Vimeo background video -->
       <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
-        <iframe src="https://player.vimeo.com/video/1190807953?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <iframe src="https://player.vimeo.com/video/1190807953?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
-      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(10,15,22,0.92) 40%, transparent 100%);z-index:1;"></div>
-      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 35%, rgba(10,15,22,0.7) 100%);z-index:1;"></div>
-      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,15,22,1) 0%, transparent 40%);z-index:1;"></div>
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(10,15,22,0.7) 0%, transparent 30%);z-index:1;"></div>
+      <!-- Full metallic glass overlay -->
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(8,14,26,0.5) 0%,rgba(13,21,58,0.3) 50%,rgba(8,14,26,0.2) 100%);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);"></div>
+      <!-- Left stronger fade for text -->
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(8,14,26,0.92) 0%,rgba(8,14,26,0.5) 45%,transparent 100%);"></div>
+      <!-- Bottom fade to blend into next section -->
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,18,40,1) 0%,transparent 35%);"></div>
       <div style="position:relative;z-index:2;padding:80px 48px;max-width:520px;">
-        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7aa8c4;margin-bottom:12px;">Featured Film</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,140px);color:#fff;letter-spacing:4px;line-height:0.9;margin-bottom:16px;">Ritual</h2>
-        <div style="font-size:11px;letter-spacing:1px;color:#6b8fa8;margin-bottom:16px;">Documentary · 2025 · 22 min · Screened at City Kino Munich</div>
-        <p style="font-size:14px;color:#a8c4d4;line-height:1.7;margin-bottom:28px;max-width:480px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Featured Film</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,140px);color:var(--text-primary);letter-spacing:4px;line-height:0.9;margin-bottom:16px;">Ritual</h2>
+        <div style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:16px;">Documentary · 2025 · 22 min · Screened at City Kino Munich</div>
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:28px;max-width:480px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','','https://vimeo.com/1190799491')" class="btn-glass btn-glass-primary">▶ Watch Teaser</button>
           <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','')" class="btn-glass">ⓘ More Info</button>
@@ -680,14 +679,14 @@
     </div>
 
     <!-- IN DEVELOPMENT + PRODUCED HEADER ROW -->
-    <div style="padding:40px 48px 0;background:var(--navy);display:flex;gap:48px;align-items:center;border-bottom:0.5px solid rgba(58,172,207,0.08);">
+    <div style="padding:40px 48px 0;background: transparent;display:flex;gap:48px;align-items:center;border-bottom:0.5px solid rgba(58,172,207,0.08);">
       <a href="#in-development" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);text-decoration:none;padding-bottom:12px;border-bottom:1.5px solid var(--accent);">In Development</a>
       <a href="#produced" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding-bottom:12px;border-bottom:1.5px solid transparent;transition:all 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Produced</a>
       <a href="#commercial" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding-bottom:12px;border-bottom:1.5px solid transparent;transition:all 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Commercial Work 🔒</a>
     </div>
 
     <!-- IN DEVELOPMENT -->
-    <div id="in-development" style="padding:32px 48px 24px;background:var(--navy);">
+    <div id="in-development" style="padding:32px 48px 24px;background: transparent;">
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
 
         <div class="work-card" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
@@ -727,7 +726,7 @@
     </div>
 
     <!-- PRODUCED -->
-    <div id="produced" style="padding:32px 48px 48px;background:var(--navy);border-top:0.5px solid rgba(58,172,207,0.08);">
+    <div id="produced" style="padding:32px 48px 48px;background: transparent;border-top:0.5px solid rgba(58,172,207,0.08);">
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
 
         <div class="work-card" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
@@ -789,7 +788,7 @@
     </div>
 
     <!-- COMMERCIAL WORK - LOCKED -->
-    <div id="commercial" style="padding:32px 48px 48px;background:var(--navy);border-top:0.5px solid rgba(58,172,207,0.08);">
+    <div id="commercial" style="padding:32px 48px 48px;background: transparent;border-top:0.5px solid rgba(58,172,207,0.08);">
       <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Commercial Work <span style="color:var(--accent);">🔒</span></div>
       <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;"></div>
       <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;">
@@ -975,19 +974,19 @@
           <div style="display:flex;flex-direction:column;gap:12px;">
             <a href="https://mau.diva-portal.org/smash/record.jsf?utm_medium=iframely&pid=diva2%3A1888254&utm_source=canva&dswid=-6999" target="_blank" rel="noopener" style="text-decoration:none;">
               <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
-                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">ARTIST'S WAY OF MAKING: art in audiovisual media productions</div>
+                <div style="font-size:13px;color:var(--text-secondary);font-weight:700;line-height:1.5;margin-bottom:6px;">ARTIST'S WAY OF MAKING: art in audiovisual media productions</div>
                 <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA / MAU</div>
               </div>
             </a>
             <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1715007&dswid=-2790" target="_blank" rel="noopener" style="text-decoration:none;">
               <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
-                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">BOSNIAN IDENTITY AFTER THE WAR</div>
+                <div style="font-size:13px;color:var(--text-secondary);font-weight:700;line-height:1.5;margin-bottom:6px;">BOSNIAN IDENTITY AFTER THE WAR</div>
                 <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA</div>
               </div>
             </a>
             <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1486640&dswid=-323" target="_blank" rel="noopener" style="text-decoration:none;">
               <div style="border:0.5px solid var(--slate);padding:16px 20px;border-radius:4px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--slate)'">
-                <div style="font-size:13px;color:#a8c4d4;font-weight:700;line-height:1.5;margin-bottom:6px;">WHO DO YOU THINK YOU ARE?</div>
+                <div style="font-size:13px;color:var(--text-secondary);font-weight:700;line-height:1.5;margin-bottom:6px;">WHO DO YOU THINK YOU ARE?</div>
                 <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">DIVA</div>
               </div>
             </a>
