@@ -457,13 +457,9 @@
       background: #050a15;
       overflow: hidden;
       border-radius: 32px;
-      border: 4px solid rgba(180,180,200,0.4);
+      border: 3px solid rgba(100, 150, 255, 0.35);
       box-shadow: 
-        inset 0 4px 0 rgba(255,255,255,0.2),
-        inset 4px 0 0 rgba(255,255,255,0.08),
-        inset -4px 0 0 rgba(255,255,255,0.08),
-        0 0 0 1px rgba(150,150,170,0.2),
-        0 40px 100px rgba(0,0,0,0.9);
+        0 5px 15px rgba(0, 0, 0, 0.2);
     }
     .about-photo-placeholder img {
       width: 100%;
@@ -586,13 +582,51 @@
       .nav-links { display: none !important; }
       .nav-toggle { display: flex !important; }
       section { padding: 40px 20px !important; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 !important; }
-      footer { padding: 20px 20px; flex-direction: column; gap: 16px; text-align: center; }
-      .work-card { flex: 0 0 160px !important; min-width: 160px !important; border-radius: 12px; }
-      /* Fix all inline padded divs for mobile safe zones */
+      /* Hero section mobile fixes */
+      .hero-section { padding: 40px 16px !important; }
+      div[style*="padding:80px 48px"] { padding: 40px 20px !important; }
+      /* Tighter side padding for all sections */
       [style*="padding:32px 48px"], [style*="padding:40px 48px"], [style*="padding:80px 48px"] {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      .about-grid { 
+        grid-template-columns: 1fr; 
+        gap: 40px; 
+        padding: 0 !important; 
+      }
+      .about-photo-placeholder {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        border-radius: 20px;
+        border: 2px solid rgba(100, 150, 255, 0.3) !important;
+      }
+      footer { padding: 20px 20px; flex-direction: column; gap: 16px; text-align: center; }
+      .work-card { 
+        flex: 0 0 160px !important; 
+        min-width: 160px !important; 
+        border-radius: 16px;
+        border: 2px solid rgba(100, 150, 255, 0.25) !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+        position: relative;
+      }
+      .work-card::after {
+        content: '›';
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 28px;
+        color: rgba(100, 150, 255, 0.4);
+        pointer-events: none;
+      }
+      .work-card .work-thumb {
+        height: 220px !important;
+      }
+      .work-card:hover {
+        border-color: rgba(100, 150, 255, 0.5) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
       }
       /* Fix about section text */
       .about-grid > div { padding: 0 !important; }
@@ -658,7 +692,7 @@
     <div style="position:relative;width:100%;min-height:70vh;overflow:hidden;display:flex;align-items:center;">
       <!-- Vimeo background video -->
       <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
-        <iframe src="https://player.vimeo.com/video/1190807953?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <iframe src="https://player.vimeo.com/video/1190807953?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
       <!-- Full metallic glass overlay -->
       <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(8,14,26,0.5) 0%,rgba(13,21,58,0.3) 50%,rgba(8,14,26,0.2) 100%);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);"></div>
@@ -668,7 +702,7 @@
       <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,18,40,1) 0%,transparent 35%);"></div>
       <div style="position:relative;z-index:2;padding:80px 48px;max-width:520px;">
         <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Featured Film</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,100px);color:var(--text-primary);letter-spacing:4px;line-height:0.9;margin-bottom:16px;">Ritual</h2>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,7vw,80px);color:var(--text-primary);letter-spacing:4px;line-height:0.9;margin-bottom:16px;">Ritual</h2>
         <div style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:16px;">Documentary · 2025 · 22 min · Screened at City Kino Munich</div>
         <p style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:28px;max-width:480px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
