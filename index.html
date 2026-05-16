@@ -80,6 +80,7 @@
       background: rgba(8,14,26,0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      border-radius: 0 0 24px 24px;
     }
     .nav-logo {
       font-family: var(--font-display);
@@ -373,6 +374,10 @@
       gap: 80px;
       align-items: start;
       padding: 0 48px;
+      border: 0.5px solid rgba(74,138,255,0.15);
+      border-top: none;
+      border-bottom: none;
+      border-radius: 24px;
     }
     .about-text {
       font-family: var(--font);
@@ -434,6 +439,7 @@
       justify-content: space-between;
       align-items: center;
       background: rgba(8,14,26,0.6);
+      border-radius: 24px 24px 0 0;
     }
     .footer-name {
       font-size: 9px;
@@ -527,17 +533,6 @@
     }
 
     /* Fade scroll — cards fade out on left/right edges */
-    .fade-scroll {
-      mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%) !important;
-      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%) !important;
-      mask-position: 0 0 !important;
-      -webkit-mask-position: 0 0 !important;
-      mask-repeat: no-repeat !important;
-      -webkit-mask-repeat: no-repeat !important;
-      mask-size: 100% 100% !important;
-      -webkit-mask-size: 100% 100% !important;
-    }
-
     /* ============================================
        MOBILE / TABLET BREAKPOINTS
        ============================================ */
@@ -577,10 +572,23 @@
         max-width: 100% !important;
       }
 
-      /* Work/Film sections */
+      /* Work/Film sections - edge-to-edge scrolling on mobile */
       #in-development,
       #commercial {
-        padding: 32px 16px 40px !important;
+        padding: 32px 0 40px 0 !important;
+      }
+      
+      /* Films and commercial scroll containers need padding */
+      #in-development > div:first-of-type,
+      #commercial > div:first-of-type {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      
+      #in-development > div[style*="overflow-x"],
+      #commercial > div[style*="overflow-x"] {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
       }
 
       /* Contact section */
@@ -748,29 +756,22 @@
   <section id="work" style="padding:0;">
 
     <!-- FEATURED FILM -->
-    <div style="position:relative;width:100%;min-height:70vh;overflow:hidden;display:flex;align-items:center;">
-      <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
-        <iframe src="https://player.vimeo.com/video/1190807953?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" frameborder="0" allow="autoplay; fullscreen"></iframe>
+    <div style="position:relative;width:100%;min-height:70vh;overflow:hidden;display:flex;align-items:center;border-radius:24px;">
+      <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:24px;">
+        <iframe src="https://player.vimeo.com/video/1192828713?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
-      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(8,14,26,0.5) 0%,rgba(13,21,58,0.3) 50%,rgba(8,14,26,0.2) 100%);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);"></div>
-      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(8,14,26,0.92) 0%,rgba(8,14,26,0.5) 45%,transparent 100%);"></div>
-      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,18,40,1) 0%,transparent 35%);"></div>
-      <!-- Fade all edges for seamless blend - responsive sizing -->
-      <!-- Fade left -->
-      <div style="position:absolute;left:0;top:0;bottom:0;width:clamp(80px,15vw,150px);z-index:2;background:linear-gradient(to right,rgba(10,18,40,1) 0%,transparent 100%);pointer-events:none;"></div>
-      <!-- Fade right -->
-      <div style="position:absolute;right:0;top:0;bottom:0;width:clamp(80px,15vw,150px);z-index:2;background:linear-gradient(to left,rgba(10,18,40,1) 0%,transparent 100%);pointer-events:none;"></div>
-      <!-- Fade top -->
-      <div style="position:absolute;top:0;left:0;right:0;height:clamp(60px,10vh,100px);z-index:2;background:linear-gradient(to bottom,rgba(10,18,40,1) 0%,transparent 100%);pointer-events:none;"></div>
-      <!-- Fade bottom to blend into next section -->
-      <div style="position:absolute;bottom:0;left:0;right:0;height:clamp(100px,15vh,150px);z-index:2;background:linear-gradient(to bottom,transparent 0%,rgba(10,18,40,0.5) 60%,rgba(10,18,40,1) 100%);pointer-events:none;"></div>
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(8,14,26,0.2) 0%,rgba(13,21,58,0.1) 50%,rgba(8,14,26,0.05) 100%);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);"></div>
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(8,14,26,0.85) 0%,rgba(8,14,26,0.5) 35%,rgba(8,14,26,0.2) 60%,transparent 100%);"></div>
+      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,14,26,0.3) 0%,transparent 50%);"></div>
+      <!-- Subtle glassy border frame -->
+      <div style="position:absolute;inset:0;z-index:2;border:0.5px solid rgba(74,138,255,0.15);pointer-events:none;"></div>
       <div class="featured-section-inner" style="position:relative;z-index:3;padding:80px 48px;max-width:520px;">
         <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Featured Film</div>
         <h2 class="featured-title">Ritual</h2>
         <div style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:16px;">Documentary · 2025 · 22 min · Screened at City Kino Munich</div>
         <p style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:28px;max-width:480px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','','https://vimeo.com/1190799491')" class="btn-glass btn-glass-primary">▶ Watch Teaser</button>
+          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','','https://vimeo.com/1190807953')" class="btn-glass btn-glass-primary">▶ Watch Teaser</button>
           <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','')" class="btn-glass">ⓘ More Info</button>
         </div>
       </div>
@@ -778,10 +779,10 @@
 
 
     <!-- ALL FILMS -->
-    <div id="in-development" style="padding:32px 48px 48px;background: transparent;">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Films</div>
-      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;"></div>
-      <div class="fade-scroll" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
+    <div id="in-development" style="padding:32px 0 48px 0;background: transparent;border:0.5px solid rgba(74,138,255,0.15);border-radius:24px;overflow:hidden;">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;padding:0 48px;">Films</div>
+      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;margin-left:48px;"></div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;padding-left:48px;padding-right:48px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
 
         <div class="work-card" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
           <div class="work-thumb">
@@ -868,10 +869,10 @@
 
 
     <!-- COMMERCIAL WORK - LOCKED -->
-    <div id="commercial" style="padding:32px 48px 48px;background: transparent;border-top:0.5px solid rgba(58,172,207,0.08);">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Commercial Work <span style="color:var(--accent);">🔒</span></div>
-      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;"></div>
-      <div class="fade-scroll" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
+    <div id="commercial" style="padding:32px 0 48px 0;background: transparent;border:0.5px solid rgba(74,138,255,0.15);border-top:0.5px solid rgba(58,172,207,0.08);border-radius:24px;overflow:hidden;">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;padding:0 48px;">Commercial Work <span style="color:var(--accent);">🔒</span></div>
+      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;margin-left:48px;"></div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;padding-left:48px;padding-right:48px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
 
         <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
           <div class="work-thumb">
@@ -1069,7 +1070,7 @@
         <div class="reveal" style="margin-top:48px;">
           <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:700;">Master Theses — Scriptures</div>
           <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;"></div>
-          <div class="fade-scroll theses-scroll" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
+          <div class="theses-scroll" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
 
             <div class="work-card" onclick="window.open('https://mau.diva-portal.org/smash/record.jsf?utm_medium=iframely&pid=diva2%3A1888254&utm_source=canva&dswid=-6999', '_blank');" style="cursor:pointer;">
               <div class="work-thumb" style="background:linear-gradient(135deg, #0d1f3d 0%, #1a2f5a 50%, #0f1a35 100%);">
