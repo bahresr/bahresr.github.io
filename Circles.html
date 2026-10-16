@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Circles</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0a0b; --text: #f4f0eb;
+  --muted: rgba(244,240,235,0.35); --border: rgba(244,240,235,0.1);
+  --c-green: #4ade80; --c-red: #ef4444;
+}
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Syne Mono', monospace; overflow: hidden; }
+
+/* TOP BAR */
+.topbar { position: fixed; top: 0; left: 0; right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 100; background: linear-gradient(to bottom, var(--bg) 60%, transparent); gap: 10px; }
+.app-title { font-family: 'Playfair Display', serif; color: var(--text); opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.95rem; flex: 1; cursor: pointer; }
+.topbar-btns { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+.btn-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--text); color: var(--bg); border: none; font-size: 1.3rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, opacity 0.2s; box-shadow: 0 2px 16px rgba(0,0,0,0.5); font-family: 'Syne Mono', monospace; }
+.btn-icon.secondary { background: rgba(244,240,235,0.12); color: var(--text); font-size: 1.1rem; }
+.btn-icon:active { transform: scale(0.9); opacity: 0.8; }
+
+/* CIRCLES */
+.circles-wrap { position: fixed; top: 64px; bottom: 0; left: 0; right: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: y mandatory; display: flex; flex-direction: column; align-items: center; padding: 0; }
+.circle-slot { width: 100vw; height: calc((100vh - 64px) / 3); padding: 0; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+.circles-page { width: 100%; min-height: calc(100vh - 64px); flex-shrink: 0; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; padding: 4px 0; }
+.circle-slot .circle, .circle-slot .circle-empty-slot { width: min(calc((100vh - 72px) / 3 - 16px), 88vw); height: min(calc((100vh - 72px) / 3 - 16px), 88vw); flex-shrink: 0; }
+.circle { border-radius: 50%; position: relative; overflow: hidden; cursor: pointer; animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; touch-action: pan-y; }
+@keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.circle-bg { position: absolute; inset: 0; border-radius: 50%; background: #1a1a1e; border: 1.5px solid var(--border); }
+
+/* WAVE FILL */
+.circle-fill { position: absolute; bottom: 0; left: 0; right: 0; overflow: visible; transition: height 1.2s cubic-bezier(0.4,0,0.2,1), background 1.2s ease; }
+.wave-svg { position: absolute; top: -28px; left: 0; width: 200%; height: 32px; animation: waveSvg 7s linear infinite; }
+.wave-svg2 { position: absolute; top: -18px; left: 0; width: 200%; height: 24px; animation: waveSvg 11s linear infinite reverse; opacity: 0.35; }
+@keyframes waveSvg { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.circle-shine { position: absolute; top: 10%; left: 15%; width: 35%; height: 30%; background: radial-gradient(ellipse, rgba(255,255,255,0.13) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+.circle-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; gap: 5px; pointer-events: none; }
+.circle-name { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 4.5vw, 1.5rem); font-weight: 700; text-align: center; line-height: 1.2; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 75%; }
+.circle-countdown { font-size: clamp(0.65rem, 3vw, 0.85rem); letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
+.circle-pct { font-size: clamp(0.55rem, 2.5vw, 0.72rem); color: rgba(255,255,255,0.45); letter-spacing: 0.1em; }
+
+/* EMPTY SLOT = tap to add */
+.circle-empty-slot { border-radius: 50%; border: 1.5px dashed var(--border); display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: border-color 0.2s, color 0.2s, transform 0.2s, background 0.2s; -webkit-tap-highlight-color: transparent; }
+.circle-empty-slot .plus { font-size: 2.4rem; line-height: 1; font-family: 'Playfair Display', serif; }
+.circle-empty-slot:hover { border-color: rgba(244,240,235,0.45); color: var(--text); background: rgba(244,240,235,0.03); }
+.circle-empty-slot:active { transform: scale(0.96); }
+
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+.is-overdue { animation: pulse 1.2s ease-in-out infinite; }
+
+/* DONE REACTION */
+.done-flash { position: absolute; inset: 0; border-radius: 50%; background: #4ade80; display: flex; align-items: center; justify-content: center; z-index: 5; opacity: 0; pointer-events: none; }
+.done-flash span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.8rem, 9vw, 3rem); letter-spacing: 0.06em; color: #0a0a0b; }
+.spark { position: fixed; width: 9px; height: 9px; border-radius: 50%; z-index: 400; pointer-events: none; }
+
+/* DONE RAIL (left side, crossed out) */
+.done-rail { position: fixed; left: 10px; top: 76px; width: 26vw; max-width: 130px; display: flex; flex-direction: column; gap: 7px; z-index: 40; pointer-events: none; }
+.done-item { font-size: 0.58rem; letter-spacing: 0.04em; color: var(--text); opacity: 0.4; text-decoration: line-through; text-decoration-color: rgba(74,222,128,0.85); text-decoration-thickness: 1.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.done-item:nth-child(n+4) { opacity: 0.28; }
+.done-item:nth-child(n+6) { opacity: 0.18; }
+
+/* TOAST (undo) */
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 30px); background: #18181c; border: 1px solid var(--border); border-radius: 14px; padding: 11px 14px 11px 16px; display: flex; align-items: center; gap: 14px; z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; font-size: 0.78rem; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+.toast.show { opacity: 1; pointer-events: all; transform: translate(-50%, 0); }
+.toast .t-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55vw; }
+.toast button { background: rgba(244,240,235,0.12); color: var(--text); border: none; border-radius: 9px; padding: 7px 12px; font-family: 'Syne Mono', monospace; font-size: 0.74rem; letter-spacing: 0.06em; cursor: pointer; }
+
+/* MODALS shared */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.overlay.open { opacity: 1; pointer-events: all; }
+.sheet { background: #18181c; border: 1px solid var(--border); border-radius: 28px 28px 0 0; padding: 28px 24px 48px; width: 100%; max-width: 480px; transform: translateY(40px); transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1); }
+.overlay.open .sheet { transform: translateY(0); }
+.sheet-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px; }
+.sheet-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 22px; }
+.sheet-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.sheet-title-sm { font-family: 'Playfair Display', serif; font-size: 1.2rem; }
+.btn-x { background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+
+/* FORM */
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+.field input { width: 100%; background: #0e0e10; border: 1px solid var(--border); border-radius: 14px; padding: 13px 16px; color: var(--text); font-family: 'Syne Mono', monospace; font-size: 0.92rem; outline: none; -webkit-appearance: none; transition: border-color 0.2s; }
+.field input:focus { border-color: rgba(244,240,235,0.4); }
+.field input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); }
+.btn-row { display: flex; gap: 10px; margin-top: 6px; }
+.btn-save { flex: 1; background: var(--text); color: var(--bg); border: none; border-radius: 14px; padding: 15px; font-family: 'Syne Mono', monospace; font-size: 0.88rem; letter-spacing: 0.08em; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
+.btn-save:active { transform: scale(0.97); opacity: 0.85; }
+.btn-done { flex: 1; background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.35); border-radius: 14px; padding: 15px; font-family: 'Syne Mono', monospace; font-size: 0.88rem; letter-spacing: 0.08em; cursor: pointer; transition: opacity 0.2s; }
+.hint { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; text-align: center; margin-top: 16px; }
+
+/* TASK LIST */
+.list-sheet { max-height: 78vh; display: flex; flex-direction: column; }
+.task-scroll { overflow-y: auto; flex: 1; }
+.section-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 14px 0 8px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+.task-row { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-bottom: 1px solid var(--border); }
+.task-row:last-child { border-bottom: none; }
+.task-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 6px currentColor; }
+.task-info { flex: 1; }
+.task-row-name { font-size: 0.86rem; margin-bottom: 2px; }
+.task-row-date { font-size: 0.63rem; color: var(--muted); letter-spacing: 0.07em; }
+.task-row-name.done-name { text-decoration: line-through; opacity: 0.45; }
+.btn-del { background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; padding: 4px 6px; transition: color 0.2s; line-height: 1; }
+.btn-del:hover { color: var(--c-red); }
+.btn-edit-row { background: none; border: none; color: var(--muted); font-size: 0.75rem; cursor: pointer; padding: 4px 6px; transition: color 0.2s; letter-spacing: 0.05em; }
+.btn-edit-row:hover { color: var(--text); }
+.empty-msg { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 18px 0; }
+
+/* NAV DOTS */
+.dot-nav { position: fixed; right: 10px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 50; }
+.nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); transition: background 0.3s, transform 0.3s; cursor: pointer; }
+.nav-dot:hover { background: rgba(244,240,235,0.5); transform: scale(1.3); }
+.nav-dot.active { background: var(--text); transform: scale(1.5); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="app-title" onclick="openList()">Circles&nbsp;<span style="opacity:0.4;font-size:0.8em;">|</span>&nbsp;<span style="opacity:0.55;font-size:0.78em;letter-spacing:0.04em;">Bahre's deadline system</span></span>
+  <div class="topbar-btns">
+    <button class="btn-icon secondary" onclick="openList()" title="All tasks">✓</button>
+    <button class="btn-icon" onclick="openAdd()" title="Add task">+</button>
+  </div>
+</div>
+
+<div class="done-rail" id="doneRail"></div>
+<div class="circles-wrap" id="circlesWrap"></div>
+<div class="dot-nav" id="dotNav"></div>
+<div class="toast" id="toast"></div>
+
+<!-- ADD MODAL -->
+<div class="overlay" id="addModal" onclick="bgClose(event,'addModal')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">New deadline</div>
+    <div class="field"><label>What's the task?</label><input type="text" id="inName" placeholder="e.g. Submit report" maxlength="50"></div>
+    <div class="field"><label>Deadline date</label><input type="date" id="inDate"></div>
+    <div class="field"><label>Deadline time (optional)</label><input type="time" id="inTime" value="23:59"></div>
+    <button class="btn-save" onclick="saveTask()">Add it</button>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="overlay" id="editModal" onclick="bgClose(event,'editModal')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Edit task</div>
+    <div class="field"><label>Task name</label><input type="text" id="editName" maxlength="50"></div>
+    <div class="field"><label>Deadline date</label><input type="date" id="editDate"></div>
+    <div class="field"><label>Deadline time</label><input type="time" id="editTime"></div>
+    <input type="hidden" id="editId">
+    <div class="btn-row">
+      <button class="btn-done" onclick="markDone()">✓ Mark done</button>
+      <button class="btn-save" onclick="saveEdit()">Save</button>
+    </div>
+    <div class="hint">tap a circle = done · hold a circle = edit</div>
+  </div>
+</div>
+
+<!-- LIST MODAL -->
+<div class="overlay" id="listModal" onclick="bgClose(event,'listModal')">
+  <div class="sheet list-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <div class="sheet-title-sm">All tasks</div>
+      <button class="btn-x" onclick="closeModal('listModal')">×</button>
+    </div>
+    <div class="task-scroll" id="taskScroll"></div>
+  </div>
+</div>
+
+<script>
+let tasks = JSON.parse(localStorage.getItem('circles_v3') || '[]');
+let done  = JSON.parse(localStorage.getItem('circles_done') || '[]');
+function save() {
+  localStorage.setItem('circles_v3', JSON.stringify(tasks));
+  localStorage.setItem('circles_done', JSON.stringify(done));
+}
+
+// migrate old key
+const old = localStorage.getItem('circles_v2');
+if (old && tasks.length === 0) { tasks = JSON.parse(old); save(); }
+
+let busy = false, pressTimer = null, longPressed = false, lastDone = null, toastTimer = null;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function urgency(dateStr, timeStr) {
+  const now = new Date(), deadline = new Date(dateStr + 'T' + (timeStr||'23:59') + ':00');
+  const remainMs = deadline - now;
+  if (remainMs <= 0) return 1;
+  return Math.min(1, Math.max(0, 1 - remainMs / (30*24*3600*1000)));
+}
+
+function fillColor(r) {
+  if (r >= 1) return '#ef4444';
+  if (r > 0.7) { const t=(r-0.7)/0.3; return `rgb(${Math.round(251+(239-251)*t)},${Math.round(146*(1-t))},${Math.round(60*(1-t))})`; }
+  if (r > 0.35){ const t=(r-0.35)/0.35; return `rgb(${Math.round(74+(251-74)*t)},${Math.round(222-(222-146)*t)},${Math.round(128*(1-t))})`; }
+  return '#4ade80';
+}
+
+function countdown(dateStr, timeStr) {
+  const now = new Date();
+  const deadline = new Date(dateStr + 'T' + (timeStr||'23:59') + ':00');
+  const diffMs = deadline - now;
+  if (diffMs < 0) {
+    const hrs = Math.abs(Math.round(diffMs/3600000));
+    if (hrs < 24) return `${hrs}h overdue`;
+    return `${Math.floor(hrs/24)}d overdue`;
+  }
+  const diffH = diffMs / 3600000;
+  if (diffH < 1) return `${Math.round(diffMs/60000)}min left`;
+  if (diffH < 24) return `${Math.round(diffH)}h left`;
+  const days = Math.floor(diffH/24);
+  if (days === 1) return '1 day left';
+  return `${days} days left`;
+}
+
+function sorted() { return [...tasks].sort((a,b) => new Date(a.date+'T'+(a.time||'23:59'))-new Date(b.date+'T'+(b.time||'23:59'))); }
+
+function wavePath(color) {
+  return `<svg class="wave-svg" viewBox="0 0 800 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 16 C50 6 150 6 200 16 C250 26 350 26 400 16 C450 6 550 6 600 16 C650 26 750 26 800 16 L800 32 L0 32 Z" fill="${color}"/>
+  </svg>
+  <svg class="wave-svg2" viewBox="0 0 800 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 12 C50 4 150 4 200 12 C250 20 350 20 400 12 C450 4 550 4 600 12 C650 20 750 20 800 12 L800 24 L0 24 Z" fill="${color}"/>
+  </svg>`;
+}
+
+function render() {
+  const list = sorted();
+  const wrap = document.getElementById('circlesWrap');
+  const dotNav = document.getElementById('dotNav');
+  const prevScroll = wrap.scrollTop;
+  wrap.innerHTML = ''; dotNav.innerHTML = '';
+
+  // always keep at least one empty "+" circle after the last task
+  const total = Math.max(list.length + 1, 3);
+  const pages = [];
+  for (let i = 0; i < total; i += 3) pages.push(list.slice(i, i+3));
+
+  pages.forEach((pageItems, pageIdx) => {
+    const page = document.createElement('div');
+    page.className = 'circles-page';
+
+    for (let i = 0; i < 3; i++) {
+      const t = pageItems[i];
+      const slot = document.createElement('div');
+      slot.className = 'circle-slot';
+
+      if (!t) {
+        slot.innerHTML = `<div class="circle-empty-slot" onclick="openAdd()"><div class="plus">+</div><div>add task</div></div>`;
+        page.appendChild(slot);
+        continue;
+      }
+
+      const r = urgency(t.date, t.time);
+      const color = fillColor(r);
+      const pct = Math.round(r*100);
+      const cd = countdown(t.date, t.time);
+      const overdue = cd.includes('overdue');
+
+      slot.innerHTML = `
+        <div class="circle ${overdue?'is-overdue':''}" data-id="${t.id}"
+             onpointerdown="pressStart(${t.id})" onpointerup="pressEnd(${t.id})"
+             onpointerleave="pressCancel()" onpointercancel="pressCancel()"
+             oncontextmenu="return false">
+          <div class="circle-bg"></div>
+          <div class="circle-fill" style="height:${pct}%; background:${color};">
+            ${wavePath(color)}
+          </div>
+          <div class="circle-shine"></div>
+          <div class="circle-content">
+            <div class="circle-name">${escHtml(t.name)}</div>
+            <div class="circle-countdown">${cd}</div>
+            <div class="circle-pct">${pct}% urgent</div>
+          </div>
+        </div>`;
+      page.appendChild(slot);
+    }
+
+    wrap.appendChild(page);
+
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (pageIdx===0?' active':'');
+    (function(idx){ dot.onclick = () => scrollToPage(idx); })(pageIdx);
+    dotNav.appendChild(dot);
+  });
+
+  wrap.scrollTop = prevScroll;
+
+  wrap.onscroll = () => {
+    const pageH = wrap.clientHeight;
+    const activeIdx = Math.round(wrap.scrollTop / pageH);
+    document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===activeIdx));
+  };
+  document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===Math.round(prevScroll / (wrap.clientHeight||1))));
+
+  renderRail();
+}
+
+// ── DONE RAIL (left side) ──
+function renderRail() {
+  document.getElementById('doneRail').innerHTML =
+    done.slice(0, 8).map(t => `<div class="done-item">${escHtml(t.name)}</div>`).join('');
+}
+
+// ── TAP = DONE, HOLD = EDIT ──
+function pressStart(id) {
+  longPressed = false;
+  clearTimeout(pressTimer);
+  pressTimer = setTimeout(() => {
+    longPressed = true; pressTimer = null;
+    if (navigator.vibrate) navigator.vibrate(15);
+    openEdit(id);
+  }, 550);
+}
+function pressEnd(id) {
+  if (pressTimer) {
+    clearTimeout(pressTimer); pressTimer = null;
+    if (!longPressed) completeTask(id);
+  }
+}
+function pressCancel() { clearTimeout(pressTimer); pressTimer = null; }
+
+function burst(el) {
+  const r = el.getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top + r.height/2;
+  const colors = ['#4ade80','#f4f0eb','#fbbf24','#86efac'];
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('div');
+    s.className = 'spark';
+    s.style.left = (cx-4) + 'px'; s.style.top = (cy-4) + 'px';
+    s.style.background = colors[i % colors.length];
+    document.body.appendChild(s);
+    const ang = (Math.PI*2*i)/18 + Math.random()*0.3;
+    const dist = r.width*0.55 + Math.random()*60;
+    s.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: `translate(${Math.cos(ang)*dist}px,${Math.sin(ang)*dist}px) scale(0.2)`, opacity: 0 }
+    ], { duration: 750 + Math.random()*250, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' })
+      .finished.then(() => s.remove());
+  }
+}
+
+async function completeTask(id) {
+  if (busy) return;
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  busy = true;
+  const el = document.querySelector(`.circle[data-id="${id}"]`);
+
+  if (el) {
+    el.style.animation = 'none';
+    const flash = document.createElement('div');
+    flash.className = 'done-flash';
+    flash.innerHTML = '<span>DONE</span>';
+    el.appendChild(flash);
+    flash.animate([{opacity:0},{opacity:1}], {duration:250, fill:'forwards'});
+    flash.firstChild.animate([
+      { transform:'scale(0.4)', opacity:0 },
+      { transform:'scale(1.2)', opacity:1, offset:0.6 },
+      { transform:'scale(1)', opacity:1 }
+    ], { duration:500, easing:'ease-out', fill:'both' });
+    burst(el);
+    if (navigator.vibrate) navigator.vibrate([20,40,20]);
+    await sleep(950);
+
+    // fly to the left side and vanish
+    const r = el.getBoundingClientRect();
+    const dx = 30 - (r.left + r.width/2);
+    const dy = 90 - (r.top + r.height/2);
+    try {
+      await el.animate([
+        { transform:'translate(0,0) scale(1)', opacity:1 },
+        { transform:`translate(${dx}px,${dy}px) scale(0.05)`, opacity:0 }
+      ], { duration:650, easing:'cubic-bezier(.6,0,.4,1)', fill:'forwards' }).finished;
+    } catch(e) {}
+  }
+
+  done.unshift({ ...t, completedAt: new Date().toLocaleDateString('en-CA') });
+  tasks = tasks.filter(x => x.id !== id);
+  lastDone = t;
+  save(); busy = false; render(); showToast(t.name);
+}
+
+function showToast(name) {
+  const el = document.getElementById('toast');
+  el.innerHTML = `<span class="t-name">✓ ${escHtml(name)}</span><button onclick="undoDone()">Undo</button>`;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 5000);
+}
+
+function undoDone() {
+  if (!lastDone) return;
+  const i = done.findIndex(d => d.id === lastDone.id);
+  if (i > -1) done.splice(i, 1);
+  tasks.push(lastDone);
+  lastDone = null;
+  document.getElementById('toast').classList.remove('show');
+  save(); render();
+}
+
+// ── EDIT ──
+function openEdit(id) {
+  const t = tasks.find(x => x.id===id);
+  if (!t) return;
+  document.getElementById('editId').value = id;
+  document.getElementById('editName').value = t.name;
+  document.getElementById('editDate').value = t.date;
+  document.getElementById('editTime').value = t.time || '23:59';
+  openModal('editModal');
+}
+
+function saveEdit() {
+  const id = parseInt(document.getElementById('editId').value);
+  const name = document.getElementById('editName').value.trim();
+  const date = document.getElementById('editDate').value;
+  if (!name || !date) { alert('Fill in both fields!'); return; }
+  const t = tasks.find(x => x.id===id);
+  const etime = document.getElementById('editTime').value || '23:59';
+  if (t) { t.name = name; t.date = date; t.time = etime; }
+  save(); closeModal('editModal'); render();
+}
+
+function markDone() {
+  const id = parseInt(document.getElementById('editId').value);
+  closeModal('editModal');
+  setTimeout(() => completeTask(id), 250);
+}
+
+// ── ADD ──
+function openAdd() {
+  document.getElementById('inName').value = '';
+  document.getElementById('inDate').value = '';
+  openModal('addModal');
+  setTimeout(() => document.getElementById('inName').focus(), 320);
+}
+
+function saveTask() {
+  const name = document.getElementById('inName').value.trim();
+  const date = document.getElementById('inDate').value;
+  if (!name || !date) { alert('Please fill in both fields.'); return; }
+  const time = document.getElementById('inTime').value || '23:59';
+  tasks.push({ id: Date.now(), name, date, time });
+  save(); closeModal('addModal'); render();
+}
+
+// ── LIST ──
+function openList() { renderList(); openModal('listModal'); }
+
+function renderList() {
+  const list = sorted();
+  const el = document.getElementById('taskScroll');
+  let html = '';
+
+  if (list.length === 0) {
+    html += '<div class="empty-msg">No active tasks.</div>';
+  } else {
+    html += '<div class="section-label">Active</div>';
+    html += list.map(t => {
+      const r = urgency(t.date, t.time), color = fillColor(r), cd = countdown(t.date, t.time);
+      return `<div class="task-row">
+        <div class="task-dot" style="background:${color};color:${color};"></div>
+        <div class="task-info">
+          <div class="task-row-name">${escHtml(t.name)}</div>
+          <div class="task-row-date">${t.date}${t.time?' · '+t.time:''} · ${cd}</div>
+        </div>
+        <button class="btn-edit-row" onclick="closeModal('listModal');openEdit(${t.id})">edit</button>
+        <button class="btn-del" onclick="delTask(${t.id})">×</button>
+      </div>`;
+    }).join('');
+  }
+
+  if (done.length > 0) {
+    html += '<div class="section-label" style="margin-top:8px;">✓ Completed</div>';
+    html += done.map((t,i) => `
+      <div class="task-row">
+        <div class="task-dot" style="background:#4ade80;color:#4ade80;opacity:0.4;"></div>
+        <div class="task-info">
+          <div class="task-row-name done-name">${escHtml(t.name)}</div>
+          <div class="task-row-date">done ${t.completedAt || ''}</div>
+        </div>
+        <button class="btn-del" onclick="delDone(${i})">×</button>
+      </div>`).join('');
+  }
+
+  el.innerHTML = html;
+}
+
+function delTask(id) { tasks = tasks.filter(t => t.id!==id); save(); renderList(); render(); }
+function delDone(i) { done.splice(i,1); save(); renderList(); renderRail(); }
+
+// ── MODAL HELPERS ──
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function bgClose(e, id) { if (e.target===document.getElementById(id)) closeModal(id); }
+
+// ── UTILS ──
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+const today = new Date().toLocaleDateString('en-CA');
+document.getElementById('inDate').min = today;
+document.getElementById('inName').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('inDate').focus(); });
+document.getElementById('inDate').addEventListener('keydown', e => { if(e.key==='Enter') saveTask(); });
+document.getElementById('editName').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('editDate').focus(); });
+document.getElementById('editDate').addEventListener('keydown', e => { if(e.key==='Enter') saveEdit(); });
+
+function scrollToPage(idx) {
+  const wrap = document.getElementById('circlesWrap');
+  wrap.scrollTo({ top: idx * wrap.clientHeight, behavior: 'smooth' });
+  document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+}
+
+render();
+setInterval(() => { if (!busy) render(); }, 60000);
+</script>
+</body>
+</html>
