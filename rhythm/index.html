@@ -16,14 +16,7 @@
 <style>
 :root{
   --bg:#f6f3ee; --card:#ffffff; --ink:#1c1b22; --mute:#8a8794; --line:#e8e4ec; --track:#eeeaf2;
-  --fast:#8b5cf6;      /* purple */
-  --cal:#f5b700;       /* yellow */
-  --protein:#22b573;   /* green  */
-  --active:#3b82f6;    /* blue   */
-  --fat:#f59e0b;       /* amber  */
-  --carb:#60a5fa;      /* light blue */
-  --sugar:#c084fc;     /* light purple */
-  --over:#e5484d;
+  --purple:#8b5cf6; --yellow:#f5b700; --green:#22b573; --blue:#3b82f6;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
@@ -32,94 +25,56 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 body{padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 28px);max-width:520px;margin:0 auto}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-h1{font-size:20px;margin:0;letter-spacing:.02em}
-.bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--cal) 0 25%,var(--protein) 25% 50%,var(--active) 50% 75%,var(--fast) 75% 100%);margin-bottom:14px}
-.hbtns button{background:none;border:0;color:var(--ink);font-size:21px;padding:6px 9px;cursor:pointer}
-.week{display:flex;justify-content:space-between;margin-bottom:14px}
-.day{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mute);letter-spacing:.06em}
-.day.today{color:var(--ink);font-weight:600}
+h1{font-size:20px;margin:0 0 6px;letter-spacing:.02em}
+.bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--yellow) 0 25%,var(--green) 25% 50%,var(--blue) 50% 75%,var(--purple) 75% 100%);margin-bottom:14px}
 .card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:12px}
 .ring-wrap{position:relative;width:min(300px,78vw);margin:4px auto 14px;aspect-ratio:1}
 .ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 18%}
-.timer{font-size:38px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--fast)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16%}
+.timer{font-size:38px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--purple)}
 .timer.idle{color:var(--ink)}
-.stage{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fast);margin-top:4px;font-weight:600}
-.stage.idle{color:var(--mute)}
+.stage{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;font-weight:600}
 .sub{font-size:12px;color:var(--mute);margin-top:6px}
 .times{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:12px}
 .times b{display:block;color:var(--ink);font-size:14px;margin-top:2px}
-.btn{width:100%;border:0;border-radius:16px;padding:15px;font-size:16px;font-weight:600;cursor:pointer;background:var(--fast);color:#fff}
+.btn{width:100%;border:0;border-radius:16px;padding:15px;font-size:16px;font-weight:600;cursor:pointer;background:var(--purple);color:#fff}
 .btn.ghost{background:var(--track);color:var(--ink)}
 .link{background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;cursor:pointer;padding:8px 0 0;display:block;margin:0 auto}
-.row{display:flex;align-items:center;gap:14px}
-.mini-ring{width:84px;height:84px;flex:none}
-.mini-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.big{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
-.big small{font-size:14px;color:var(--mute);font-weight:500}
-.label{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
-.left{font-size:13px;color:var(--mute);margin-top:2px}
-.left.over{color:var(--over);font-weight:600}
-.macros{margin-top:14px;display:grid;gap:10px}
-.mac .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
-.mac .top span:first-child{color:var(--mute)}
-.mac .top .o{color:var(--over);font-weight:600}
-.track{height:8px;border-radius:8px;background:var(--track);overflow:hidden}
-.track i{display:block;height:100%;border-radius:8px;width:0}
-.chips{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.chip{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer}
-.chip:active{background:var(--track)}
-.entries{margin-top:10px;font-size:12.5px;color:var(--mute)}
-.entries span{display:inline-flex;align-items:center;gap:4px;background:var(--track);border-radius:999px;padding:3px 4px 3px 10px;margin:3px 4px 0 0}
-.entries button{background:none;border:0;color:var(--mute);cursor:pointer;font-size:14px;padding:0 6px}
+.label{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.hr{display:flex;gap:12px;padding:12px 8px;border-radius:14px}
+.hr+.hr{margin-top:2px}
+.dot{flex:none;width:12px;height:12px;border-radius:50%;margin-top:4px}
+.ht{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}
+.ht span{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.hr p{margin:4px 0 0;font-size:13.5px;line-height:1.45;color:var(--mute)}
+.hr.done .dot{opacity:.9}
+.hr.done p{color:var(--mute)}
+.hr.now{background:var(--track)}
+.hr.now p{color:var(--ink)}
+.hr.future{opacity:.55}
 .hist{font-size:13px}
 .hist div{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line)}
 .hist div:first-child{border-top:0}
-.ok{color:var(--protein)}
-.stat{font-size:13px;line-height:1.5;padding:8px 0;border-top:1px solid var(--line)}
-.stat:first-of-type{border-top:0}
-.stat b{font-variant-numeric:tabular-nums}
-.stat small{color:var(--mute)}
-.wbar{height:10px;border-radius:10px;background:var(--track);overflow:hidden;margin:10px 0 4px}
-.wbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--active),var(--protein))}
-dialog{border:0;border-radius:20px;background:var(--card);color:var(--ink);padding:20px;width:min(380px,92vw);max-height:88vh;overflow:auto}
+.ok{color:var(--green)}
+.note{font-size:11px;color:var(--mute);line-height:1.5}
+dialog{border:0;border-radius:20px;background:var(--card);color:var(--ink);padding:20px;width:min(360px,90vw)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
-dialog h2{margin:0 0 8px;font-size:17px}
+dialog h2{margin:0 0 12px;font-size:17px}
 dialog label{display:block;font-size:12px;color:var(--mute);margin:12px 0 4px}
 dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dlg-actions{display:flex;gap:8px;margin-top:14px}
+.dlg-actions{display:flex;gap:8px;margin-top:16px}
 .dlg-actions .btn{padding:12px;font-size:15px}
-.note{font-size:11px;color:var(--mute);margin-top:12px;line-height:1.45}
-.ql{display:flex;gap:8px;align-items:flex-end}
-.ql textarea{flex:1;resize:none;padding:11px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
-.ql .sm{flex:none;width:46px;height:46px;border-radius:14px;border:0;background:var(--track);color:var(--ink);font-size:18px;cursor:pointer}
-.ql .sm.go{background:var(--fast);color:#fff}
-.ql .sm.rec{background:var(--fast);color:#fff;animation:pulse 1s infinite}
-@keyframes pulse{50%{opacity:.55}}
-.qmsg{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.4;min-height:1em}
-#repImg{width:100%;border-radius:12px;border:1px solid var(--line);margin-top:8px;background:#fff}
 </style>
 </head>
 <body>
-<header>
-  <h1>Rhythm</h1>
-  <div class="hbtns">
-    <button id="openReport" aria-label="Report">📊</button>
-    <button id="openSettings" aria-label="Settings">⚙︎</button>
-  </div>
-</header>
+<h1>Rhythm · 16h fast</h1>
 <div class="bar"></div>
 
-<div class="week" id="week"></div>
-
-<!-- FASTING -->
 <div class="card">
   <div class="ring-wrap">
     <svg viewBox="0 0 200 200">
       <circle cx="100" cy="100" r="88" fill="none" stroke="var(--track)" stroke-width="14"/>
-      <circle id="fastArc" cx="100" cy="100" r="88" fill="none" stroke="var(--fast)" stroke-width="14" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="552.92"/>
+      <circle id="arc" cx="100" cy="100" r="88" fill="none" stroke="var(--purple)" stroke-width="14" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="552.92"/>
     </svg>
     <div class="ring-center">
       <div class="timer" id="timer">00:00:00</div>
@@ -129,82 +84,25 @@ dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--l
   </div>
   <div class="times">
     <div>Started<b id="tStart">–</b></div>
-    <div style="text-align:right"><span id="goalLbl">Goal</span><b id="tGoal">–</b></div>
+    <div style="text-align:right">Ends automatically<b id="tEnd">–</b></div>
   </div>
-  <button class="btn" id="fastBtn">Start fast</button>
+  <button class="btn" id="fastBtn">Start 16h fast</button>
   <button class="link" id="editStart" hidden>Edit start time</button>
 </div>
 
-<!-- QUICK LOG -->
 <div class="card">
-  <div class="label" style="margin-bottom:8px">Quick log</div>
-  <div class="ql">
-    <textarea id="qlText" rows="2" placeholder="chicken 450 kcal 40g protein 12g fat 3g sugar"></textarea>
-    <button class="sm" id="qlMic" aria-label="Dictate">🎤</button>
-    <button class="sm go" id="qlGo" aria-label="Log it">✓</button>
-  </div>
-  <div class="qmsg" id="qlMsg">Type, paste (one item per line) or dictate. Also: "89.4 kg", "30 min walk", "start fast", "end fast".</div>
-</div>
-
-<!-- FOOD -->
-<div class="card">
-  <div class="row">
-    <div class="mini-ring"><svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--track)" stroke-width="10"/>
-      <circle id="calArc" cx="50" cy="50" r="42" fill="none" stroke="var(--cal)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
-    </svg></div>
-    <div>
-      <div class="label">Calories today</div>
-      <div class="big" id="calVal">0<small> / 2000 kcal</small></div>
-      <div class="left" id="calLeft"></div>
-    </div>
-  </div>
-  <div class="macros" id="macros"></div>
-  <div class="chips"><button class="chip" id="addMeal">+ Add meal</button></div>
-  <div class="entries" id="mealList"></div>
-</div>
-
-<!-- ACTIVITY -->
-<div class="card">
-  <div class="row">
-    <div class="mini-ring"><svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--track)" stroke-width="10"/>
-      <circle id="actArc" cx="50" cy="50" r="42" fill="none" stroke="var(--active)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
-    </svg></div>
-    <div><div class="label">Activity</div><div class="big" id="actVal">0<small> / 60 min</small></div></div>
-  </div>
-  <div class="chips" id="actChips"></div>
-  <div class="entries" id="actList"></div>
-</div>
-
-<!-- WEIGHT -->
-<div class="card">
-  <div class="label">Weight</div>
-  <div class="row" style="justify-content:space-between;margin-top:6px">
-    <div class="big" id="wVal">–</div>
-    <svg id="wSpark" width="150" height="46" viewBox="0 0 150 46"></svg>
-  </div>
-  <div class="wbar"><i id="wProg"></i></div>
-  <div class="left" id="wInfo"></div>
-  <div class="chips"><button class="chip" id="addWeight">+ Log weight</button><button class="chip" id="undoWeight">Remove last</button></div>
-</div>
-
-<!-- TRENDS -->
-<div class="card">
-  <div class="label" style="margin-bottom:6px">Calories · trends</div>
-  <div id="stats"></div>
-  <svg id="chart" viewBox="0 0 320 140" style="width:100%;margin-top:8px"></svg>
-  <div class="note" style="margin-top:4px">Deficit is measured against your maintenance calories. About 7,700 kcal is roughly 1 kg of body fat, which is an approximation only.</div>
+  <div class="label">Hour by hour</div>
+  <div id="hours"></div>
+  <div class="note" style="margin-top:10px">General approximations. Timing varies from person to person and depends on your last meal and activity. This is not medical advice. If you have a medical condition, take medication, are pregnant, or have a history of disordered eating, check with a doctor before fasting. Stop if you feel unwell.</div>
 </div>
 
 <div class="card">
-  <div class="label" style="margin-bottom:8px">Recent fasts</div>
+  <div class="label">Recent fasts</div>
   <div class="hist" id="hist"></div>
 </div>
 
-<!-- DIALOGS -->
 <dialog id="startDlg">
-  <h2 id="startTitle">Fast started at</h2>
+  <h2>Fast started at</h2>
   <label for="startInput">Date and time</label>
   <input type="datetime-local" id="startInput">
   <div class="dlg-actions">
@@ -213,152 +111,118 @@ dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--l
   </div>
 </dialog>
 
-<dialog id="mealDlg">
-  <h2>Add meal</h2>
-  <label for="mName">Name (optional)</label>
-  <input type="text" id="mName">
-  <div class="two">
-    <div><label for="mK">Calories (kcal)</label><input type="number" id="mK" inputmode="decimal"></div>
-    <div><label for="mP">Protein (g)</label><input type="number" id="mP" inputmode="decimal"></div>
-    <div><label for="mF">Fat (g)</label><input type="number" id="mF" inputmode="decimal"></div>
-    <div><label for="mC">Carbs (g)</label><input type="number" id="mC" inputmode="decimal"></div>
-    <div><label for="mS">Sugar (g)</label><input type="number" id="mS" inputmode="decimal"></div>
-  </div>
-  <div class="dlg-actions">
-    <button class="btn ghost" id="mealCancel">Cancel</button>
-    <button class="btn" id="mealOk">Add</button>
-  </div>
-</dialog>
-
-<dialog id="setDlg">
-  <h2>Settings</h2>
-  <div class="two">
-    <div><label for="gFast">Fast goal (h)</label><input type="number" id="gFast" inputmode="decimal"></div>
-    <div><label for="gAct">Activity (min/day)</label><input type="number" id="gAct" inputmode="decimal"></div>
-    <div><label for="gMaint">Maintenance (kcal)</label><input type="number" id="gMaint" inputmode="decimal"></div>
-    <div><label for="gDef">Daily deficit (kcal)</label><input type="number" id="gDef" inputmode="decimal"></div>
-    <div><label for="gPro">Protein (g/day)</label><input type="number" id="gPro" inputmode="decimal"></div>
-    <div><label for="gFat">Fat (g/day)</label><input type="number" id="gFat" inputmode="decimal"></div>
-    <div><label for="gSug">Sugar limit (g/day)</label><input type="number" id="gSug" inputmode="decimal"></div>
-    <div><label>Daily target</label><input type="text" id="gTarget" disabled></div>
-    <div><label for="gW0">Start weight (kg)</label><input type="number" id="gW0" inputmode="decimal"></div>
-    <div><label for="gW1">Goal weight (kg)</label><input type="number" id="gW1" inputmode="decimal"></div>
-  </div>
-  <div class="note" id="tgtNote"></div>
-  <div class="dlg-actions">
-    <button class="btn ghost" id="exportBtn">Backup JSON</button>
-    <button class="btn ghost" id="importBtn">Restore JSON</button>
-  </div>
-  <div class="dlg-actions">
-    <button class="btn ghost" id="copyTxtBtn">Copy as text</button>
-    <button class="btn ghost" id="csvBtn">Download CSV</button>
-  </div>
-  <div class="dlg-actions">
-    <button class="btn ghost" id="setCancel">Close</button>
-    <button class="btn" id="setOk">Save</button>
-  </div>
-  <input type="file" id="importFile" accept="application/json" hidden>
-  <div class="note">Data lives only in this browser on this device. Use Backup and Restore to move it between phone and desktop. Maintenance calories are your own estimate of what you burn per day. Everything here is a general approximation, not medical advice.</div>
-</dialog>
-
-<dialog id="repDlg">
-  <h2>Report</h2>
-  <img id="repImg" alt="Rhythm report">
-  <div class="note">Long-press the image to save it on a phone, or use the button.</div>
-  <div class="dlg-actions">
-    <button class="btn ghost" id="repClose">Close</button>
-    <button class="btn" id="repDl">Download PNG</button>
-  </div>
-</dialog>
-
 <script>
 (function(){
-const KEY='rhythm.v1';
-const DEF={goal:{fastH:16,maint:2500,deficit:500,protein:150,fat:70,sugar:50,active:60,wStart:90,wGoal:85},fastStart:null,fasts:[],logs:{},weights:[]};
+const KEY='rhythm.v1', GOAL=16, GOAL_MS=GOAL*3600e3;
+const COLORS=['var(--yellow)','var(--green)','var(--blue)','var(--purple)'];
+const PHASES=['Digesting','Settling','Switching fuel','Fat burning'];
+const HOURS=[
+ 'Your body is still digesting and absorbing your last meal. Blood sugar and insulin are elevated.',
+ 'Digestion continues. With insulin high, the body mostly burns the glucose coming from the meal.',
+ 'Absorption is winding down and blood sugar starts to drift back toward its baseline.',
+ 'Insulin begins to fall. The body starts shifting from food energy toward stored energy.',
+ 'Blood sugar is near baseline. The liver releases stored glucose (glycogen) to keep it steady.',
+ 'With insulin lower, stored body fat becomes easier to access. Hunger often shows up around your usual meal times.',
+ 'The liver is the main glucose source, drawing on its glycogen. Hunger comes in waves and usually passes.',
+ 'Liver glycogen is gradually dropping. The body leans a little more on fatty acids for energy.',
+ 'Fat breakdown picks up while insulin stays low. A mild energy dip or hunger wave is common.',
+ 'Fatty acids are an increasingly important fuel. Water or unsweetened tea or coffee can help with hunger.',
+ 'The liver starts turning some fatty acids into ketones, an alternative fuel for brain and muscles.',
+ 'Fat burning is now clearly ahead of sugar burning. Ketone levels are still low but rising.',
+ 'Insulin is near its low point for the day. Many people notice hunger fading and steadier focus.',
+ 'Ketones keep rising gradually. Growth hormone tends to increase during fasting, which is thought to help preserve muscle.',
+ 'Energy now comes mostly from fat. If you feel light-headed or weak, drink water, or stop the fast.',
+ 'Goal reached. When you eat, a balanced meal tends to sit better than a very large or very sugary one.'
+];
 
-function normalize(s){
-  const o={...JSON.parse(JSON.stringify(DEF)),...s};
-  o.goal={...DEF.goal,...(s.goal||{})};
-  o.weights=Array.isArray(s.weights)?s.weights:[];
-  o.fasts=Array.isArray(s.fasts)?s.fasts:[];
-  o.logs=s.logs||{};
-  Object.keys(o.logs).forEach(k=>{
-    const L=o.logs[k];
-    if(L.p){ L.m=(L.m||[]).concat(L.p.map(e=>({t:e.t,p:e.v}))); delete L.p; }
-    L.m=L.m||[]; L.a=L.a||[];
-  });
-  return o;
-}
 function load(){
-  try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s) return normalize(s); }catch(e){}
-  return normalize({});
+  try{
+    const s=JSON.parse(localStorage.getItem(KEY));
+    if(s&&typeof s==='object'){ if(!Array.isArray(s.fasts)) s.fasts=[]; if(!('fastStart' in s)) s.fastStart=null; return s; }
+  }catch(e){}
+  return {fastStart:null,fasts:[]};
 }
 let S=load();
 function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} }
 
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
-const dk=t=>{const d=new Date(t);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
-const todayKey=()=>dk(Date.now());
-const dayLog=k=>S.logs[k]||(S.logs[k]={m:[],a:[]});
-const n0=x=>Math.round(x||0);
-const fmt=x=>Math.round(x).toLocaleString();
-const fmtHMS=ms=>{const s=Math.max(0,Math.floor(ms/1000));return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);};
-const fmtDT=t=>{const d=new Date(t);return d.toLocaleDateString(undefined,{weekday:'short'})+', '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});};
 const hm=t=>{const d=new Date(t);return pad(d.getHours())+':'+pad(d.getMinutes());};
+const fmtHMS=ms=>{const s=Math.max(0,Math.floor(ms/1000));return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);};
+const fmtDT=t=>{const d=new Date(t);return d.toLocaleDateString(undefined,{weekday:'short'})+', '+hm(t);};
 const toInput=t=>new Date(t-new Date(t).getTimezoneOffset()*60000).toISOString().slice(0,16);
-const setArc=(el,frac,len)=>el.setAttribute('stroke-dashoffset',(len*(1-Math.min(1,Math.max(0,frac)))).toFixed(2));
-const target=()=>Math.max(0,S.goal.maint-S.goal.deficit);
 
-function tot(k){
-  const L=S.logs[k]; const t={k:0,p:0,f:0,c:0,s:0,a:0};
-  if(!L) return t;
-  L.m.forEach(e=>{t.k+=e.k||0;t.p+=e.p||0;t.f+=e.f||0;t.c+=e.c||0;t.s+=e.s||0;});
-  L.a.forEach(e=>{t.a+=e.v||0;});
-  return t;
+// the fast stops by itself at 16h, even if the app was closed: the end time is recorded as start + 16h
+function autoStop(){
+  if(S.fastStart && Date.now()-S.fastStart>=GOAL_MS){
+    S.fasts.push({s:S.fastStart,e:S.fastStart+GOAL_MS,g:GOAL,auto:true});
+    S.fastStart=null; save(); return true;
+  }
+  return false;
 }
 
-/* ---------- fasting ---------- */
-const STAGES=[[0,'Fed · digesting'],[4,'Blood sugar settling'],[8,'Fasting state'],[12,'Fat burning ramps up'],[16,'Deep fat burn'],[24,'Extended fast']];
-const stageFor=h=>{let s=STAGES[0][1];for(const [t,n] of STAGES) if(h>=t) s=n;return s;};
+function renderHours(){
+  const el=S.fastStart?Date.now()-S.fastStart:null;
+  const cur=el===null?0:Math.min(GOAL,Math.floor(el/3600e3)+1);
+  let h='';
+  for(let i=1;i<=GOAL;i++){
+    const state=el===null?'idle':(i<cur?'done':(i===cur?'now':'future'));
+    const col=COLORS[Math.floor((i-1)/4)];
+    const when=S.fastStart?('from '+hm(S.fastStart+(i-1)*3600e3)):'';
+    const mark=state==='done'?'✓ ':'';
+    h+=`<div class="hr ${state}"><span class="dot" style="background:${col}"></span><div><div class="ht"><b>Hour ${i}</b><span>${mark}${when}</span></div><p>${HOURS[i-1]}</p></div></div>`;
+  }
+  $('hours').innerHTML=h;
+}
 
-function renderFast(){
-  const fArc=$('fastArc'), goalMs=S.goal.fastH*3600e3;
-  $('goalLbl').textContent=S.goal.fastH+'h goal';
+let lastCur=-1;
+function render(){
+  autoStop();
+  const arc=$('arc');
   if(S.fastStart){
-    const el=Date.now()-S.fastStart, h=el/3600e3;
+    const el=Date.now()-S.fastStart, cur=Math.min(GOAL,Math.floor(el/3600e3)+1);
     $('timer').textContent=fmtHMS(el); $('timer').className='timer';
-    $('stage').textContent=stageFor(h); $('stage').className='stage';
-    const over=el-goalMs;
-    $('sub').textContent=over>=0?('+'+fmtHMS(over).slice(0,5)+' past goal'):(fmtHMS(-over).slice(0,5)+' to go');
-    setArc(fArc,el/goalMs,552.92);
+    const ph=Math.floor((cur-1)/4);
+    $('stage').textContent=PHASES[ph]; $('stage').style.color=COLORS[ph];
+    const left=GOAL_MS-el;
+    $('sub').textContent='hour '+cur+' of '+GOAL+' · '+fmtHMS(left).slice(0,5)+' to go';
+    arc.setAttribute('stroke-dashoffset',(552.92*(1-el/GOAL_MS)).toFixed(2));
+    arc.style.stroke=COLORS[ph];
     $('tStart').textContent=fmtDT(S.fastStart);
-    $('tGoal').textContent=fmtDT(S.fastStart+goalMs);
-    $('fastBtn').textContent='End fast'; $('fastBtn').className='btn ghost';
+    $('tEnd').textContent=fmtDT(S.fastStart+GOAL_MS);
+    $('fastBtn').textContent='End fast early'; $('fastBtn').className='btn ghost';
     $('editStart').hidden=false;
+    if(cur!==lastCur){ lastCur=cur; renderHours(); }
   }else{
     const last=S.fasts[S.fasts.length-1];
-    if(last){ $('timer').textContent=fmtHMS(Date.now()-last.e); $('sub').textContent='since last fast ended'; }
-    else { $('timer').textContent='00:00:00'; $('sub').textContent='no fast running'; }
-    $('timer').className='timer idle';
-    $('stage').textContent='Eating window'; $('stage').className='stage idle';
-    setArc(fArc,0,552.92);
-    $('tStart').textContent='–'; $('tGoal').textContent='–';
-    $('fastBtn').textContent='Start fast'; $('fastBtn').className='btn';
+    $('timer').textContent=last?fmtHMS(Date.now()-last.e):'00:00:00'; $('timer').className='timer idle';
+    $('stage').textContent=last&&last.auto?'16h fast complete ✓':'Eating window'; $('stage').style.color=last&&last.auto?'var(--green)':'var(--mute)';
+    $('sub').textContent=last?'since your last fast ended':'no fast running';
+    arc.setAttribute('stroke-dashoffset','552.92'); arc.style.stroke='var(--purple)';
+    $('tStart').textContent='–'; $('tEnd').textContent='–';
+    $('fastBtn').textContent='Start 16h fast'; $('fastBtn').className='btn';
     $('editStart').hidden=true;
+    if(lastCur!==0){ lastCur=0; renderHours(); }
   }
 }
-function openStart(mode){
-  $('startTitle').textContent=mode==='new'?'Start fast at':'Fast started at';
-  $('startInput').value=toInput(mode==='edit'&&S.fastStart?S.fastStart:Date.now());
-  $('startDlg').showModal();
+function renderHist(){
+  const list=S.fasts.slice(-7).reverse();
+  $('hist').innerHTML=list.length?list.map(f=>{
+    const hrs=(f.e-f.s)/3600e3, ok=hrs>=GOAL-0.01;
+    const d=new Date(f.s).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+    return `<div><span>${d}</span><span class="${ok?'ok':''}">${hrs.toFixed(1)}h ${ok?'✓':''}</span></div>`;
+  }).join(''):'<div><span style="color:var(--mute)">No completed fasts yet</span></div>';
 }
+function renderAll(){ lastCur=-1; render(); renderHist(); }
+
 $('fastBtn').onclick=()=>{
-  if(S.fastStart){ S.fasts.push({s:S.fastStart,e:Date.now(),g:S.goal.fastH}); S.fastStart=null; }
-  else S.fastStart=Date.now();
+  if(S.fastStart){
+    if(!confirm('End the fast early?')) return;
+    S.fasts.push({s:S.fastStart,e:Date.now(),g:GOAL}); S.fastStart=null;
+  }else S.fastStart=Date.now();
   save(); renderAll();
 };
-$('editStart').onclick=()=>openStart('edit');
+$('editStart').onclick=()=>{ $('startInput').value=toInput(S.fastStart); $('startDlg').showModal(); };
 $('startCancel').onclick=()=>$('startDlg').close();
 $('startOk').onclick=()=>{
   const t=new Date($('startInput').value).getTime();
@@ -366,383 +230,8 @@ $('startOk').onclick=()=>{
   $('startDlg').close();
 };
 
-/* ---------- food ---------- */
-function macroRow(label,val,goal,color,unit,isLimit){
-  const over=goal&&val>goal;
-  const frac=goal?val/goal:0;
-  const right=goal?`<span class="${over?'o':''}">${n0(val)} / ${n0(goal)} ${unit}${over?(isLimit?' · over limit':' · over'):''}</span>`:`<span>${n0(val)} ${unit}</span>`;
-  return `<div class="mac"><div class="top"><span>${label}</span>${right}</div><div class="track"><i style="width:${Math.min(100,frac*100)}%;background:${color}"></i></div></div>`;
-}
-function renderFood(){
-  const t=tot(todayKey()), T=target();
-  $('calVal').innerHTML=`${fmt(t.k)}<small> / ${fmt(T)} kcal</small>`;
-  setArc($('calArc'),T?t.k/T:0,263.9);
-  const left=T-t.k;
-  $('calLeft').textContent=left>=0?`${fmt(left)} kcal left`:`${fmt(-left)} kcal over target`;
-  $('calLeft').className='left'+(left<0?' over':'');
-  $('macros').innerHTML=
-    macroRow('Protein',t.p,S.goal.protein,'var(--protein)','g')+
-    macroRow('Fat',t.f,S.goal.fat,'var(--fat)','g')+
-    macroRow('Carbs',t.c,0,'var(--carb)','g')+
-    macroRow('Sugar',t.s,S.goal.sugar,'var(--sugar)','g',true);
-  const L=dayLog(todayKey());
-  $('mealList').innerHTML=L.m.map((e,i)=>{
-    const bits=[]; if(e.k) bits.push(n0(e.k)+' kcal');
-    if(e.p) bits.push('P'+n0(e.p)); if(e.f) bits.push('F'+n0(e.f)); if(e.c) bits.push('C'+n0(e.c)); if(e.s) bits.push('S'+n0(e.s));
-    return `<span>${hm(e.t)} · ${e.n?e.n+' · ':''}${bits.join(' ')}<button data-del="m" data-i="${i}" aria-label="Remove">×</button></span>`;
-  }).join('');
-}
-$('addMeal').onclick=()=>{ ['mName','mK','mP','mF','mC','mS'].forEach(id=>$(id).value=''); $('mealDlg').showModal(); };
-$('mealCancel').onclick=()=>$('mealDlg').close();
-$('mealOk').onclick=()=>{
-  const g=id=>{const v=parseFloat($(id).value);return v>0?v:0;};
-  const e={t:Date.now(),n:$('mName').value.trim(),k:g('mK'),p:g('mP'),f:g('mF'),c:g('mC'),s:g('mS')};
-  if(e.k||e.p||e.f||e.c||e.s){ dayLog(todayKey()).m.push(e); save(); renderAll(); }
-  $('mealDlg').close();
-};
-
-/* ---------- activity ---------- */
-const ACT_CHIPS=[10,20,30,45];
-$('actChips').innerHTML=ACT_CHIPS.map(v=>`<button class="chip" data-a="${v}">+${v}m</button>`).join('')+`<button class="chip" data-a="custom">Custom</button>`;
-function renderAct(){
-  const L=dayLog(todayKey()), a=tot(todayKey()).a;
-  $('actVal').innerHTML=`${n0(a)}<small> / ${n0(S.goal.active)} min</small>`;
-  setArc($('actArc'),a/S.goal.active,263.9);
-  $('actList').innerHTML=L.a.map((e,i)=>`<span>${hm(e.t)} · ${e.v}min<button data-del="a" data-i="${i}" aria-label="Remove">×</button></span>`).join('');
-}
-document.addEventListener('click',e=>{
-  const c=e.target.closest('[data-a]');
-  if(c){
-    let v=c.dataset.a; if(v==='custom') v=prompt('Activity (min)');
-    v=parseFloat(v);
-    if(v>0){ dayLog(todayKey()).a.push({t:Date.now(),v:Math.round(v)}); save(); renderAll(); }
-    return;
-  }
-  const d=e.target.closest('[data-del]');
-  if(d){ dayLog(todayKey())[d.dataset.del].splice(+d.dataset.i,1); save(); renderAll(); }
-});
-
-/* ---------- weight ---------- */
-function wByDay(){
-  const m={}; S.weights.slice().sort((a,b)=>a.t-b.t).forEach(w=>{m[dk(w.t)]=w;});
-  return Object.keys(m).sort().map(k=>({k,v:m[k].v,t:m[k].t}));
-}
-function renderWeight(){
-  const arr=wByDay(), G=S.goal;
-  if(!arr.length){
-    $('wVal').innerHTML='–'; $('wProg').style.width='0';
-    $('wInfo').textContent=`Goal ${G.wGoal} kg · start ${G.wStart} kg · no weigh-ins yet`;
-    $('wSpark').innerHTML=''; return;
-  }
-  const cur=arr[arr.length-1].v;
-  $('wVal').innerHTML=`${cur.toFixed(1)}<small> kg</small>`;
-  const span=G.wStart-G.wGoal;
-  const prog=span!==0?(G.wStart-cur)/span:0;
-  $('wProg').style.width=Math.min(100,Math.max(0,prog*100))+'%';
-  const toGo=cur-G.wGoal;
-  let info=toGo>0?`${toGo.toFixed(1)} kg to goal (${G.wGoal} kg)`:`Goal ${G.wGoal} kg reached`;
-  const weekAgo=Date.now()-7*864e5;
-  const ref=arr.find(w=>w.t>=weekAgo&&w.t<arr[arr.length-1].t);
-  if(ref){ const d=cur-ref.v; info+=` · ${d>0?'+':''}${d.toFixed(1)} kg in 7 days`; }
-  $('wInfo').textContent=info;
-  const pts=arr.slice(-30);
-  if(pts.length>1){
-    const vs=pts.map(p=>p.v), mn=Math.min(...vs), mx=Math.max(...vs), rg=(mx-mn)||1;
-    const path=pts.map((p,i)=>`${(i/(pts.length-1)*146+2).toFixed(1)},${(42-((p.v-mn)/rg)*38).toFixed(1)}`).join(' ');
-    $('wSpark').innerHTML=`<polyline points="${path}" fill="none" style="stroke:var(--active)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-  }else $('wSpark').innerHTML='';
-}
-function logWeight(v){ if(v>20&&v<400){ S.weights.push({t:Date.now(),v:Math.round(v*10)/10}); save(); renderAll(); return true; } return false; }
-$('addWeight').onclick=()=>{ const v=prompt('Weight (kg)'); if(v) logWeight(parseFloat(v.replace(',','.'))); };
-$('undoWeight').onclick=()=>{ if(S.weights.length){ S.weights.sort((a,b)=>a.t-b.t); S.weights.pop(); save(); renderAll(); } };
-
-/* ---------- trends ---------- */
-function weekKeys(){ const now=new Date(), dow=(now.getDay()+6)%7, ks=[]; for(let i=0;i<=dow;i++) ks.push(dk(new Date(now.getFullYear(),now.getMonth(),now.getDate()-dow+i))); return ks; }
-function monthKeys(){ const now=new Date(), ks=[]; for(let d=1;d<=now.getDate();d++) ks.push(dk(new Date(now.getFullYear(),now.getMonth(),d))); return ks; }
-function pstats(keys){
-  let eaten=0,days=0,p=0;
-  keys.forEach(k=>{ const t=tot(k); if(t.k>0){ eaten+=t.k; days++; p+=t.p; } });
-  const deficit=S.goal.maint*days-eaten;
-  return {days,eaten,tgt:target()*days,deficit,kg:deficit/7700,avgP:days?p/days:0,avgK:days?eaten/days:0};
-}
-function statLine(name,s){
-  if(!s.days) return `<div class="stat"><b>${name}</b> <small>no calories logged yet</small></div>`;
-  return `<div class="stat"><b>${name}</b> <small>· ${s.days} day${s.days>1?'s':''} logged</small><br>${fmt(s.eaten)} kcal eaten (avg ${fmt(s.avgK)}/day) · target ${fmt(s.tgt)}<br>${s.deficit>=0?'Deficit':'Surplus'} <b>${fmt(Math.abs(s.deficit))} kcal</b> ≈ ${Math.abs(s.kg).toFixed(2)} kg${s.deficit<0?' gained':' lost'}</div>`;
-}
-function lastDays(n){
-  const out=[], now=new Date();
-  for(let i=n-1;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i); out.push({k:dk(d),label:String(d.getDate()),kcal:tot(dk(d)).k}); }
-  return out;
-}
-function chartInner(days,w,h,c,fs){
-  fs=fs||9;
-  const T=target(), mx=Math.max(T*1.3,...days.map(d=>d.kcal),1), bw=(w-24)/days.length, base=h-22, top=8;
-  let s='';
-  days.forEach((d,i)=>{
-    const bh=(d.kcal/mx)*(base-top), x=12+i*bw;
-    s+=`<rect x="${(x+bw*0.15).toFixed(1)}" y="${(base-bh).toFixed(1)}" width="${(bw*0.7).toFixed(1)}" height="${Math.max(bh,d.kcal?2:0).toFixed(1)}" rx="3" fill="${d.kcal>T?c.over:c.bar}"/>`;
-    s+=`<text x="${(x+bw/2).toFixed(1)}" y="${h-7}" font-size="${fs}" text-anchor="middle" fill="${c.text}">${d.label}</text>`;
-  });
-  const ty=base-(T/mx)*(base-top);
-  s+=`<line x1="8" x2="${w-8}" y1="${ty.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="${c.line}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
-  s+=`<text x="${w-8}" y="${(ty-4).toFixed(1)}" font-size="${fs}" text-anchor="end" fill="${c.text}">target ${fmt(T)}</text>`;
-  return s;
-}
-function renderTrends(){
-  $('stats').innerHTML=statLine('This week',pstats(weekKeys()))+statLine('This month',pstats(monthKeys()));
-  $('chart').innerHTML=chartInner(lastDays(14),320,140,{bar:'#f5b700',over:'#e5484d',line:'#8b5cf6',text:'#8a8794'});
-}
-
-/* ---------- week strip + history ---------- */
-function miniDay(k){
-  const t=tot(k), T=target();
-  let best=0;
-  S.fasts.forEach(f=>{ if(dk(f.e)===k) best=Math.max(best,(f.e-f.s)/3600e3/(f.g||S.goal.fastH)); });
-  if(S.fastStart&&dk(Date.now())===k) best=Math.max(best,(Date.now()-S.fastStart)/3600e3/S.goal.fastH);
-  const rings=[[15.5,'var(--fast)',best],[12,'var(--cal)',T?t.k/T:0],[8.5,'var(--protein)',t.p/S.goal.protein],[5,'var(--active)',t.a/S.goal.active]];
-  return `<svg width="34" height="34" viewBox="0 0 36 36" style="transform:rotate(-90deg)">`+rings.map(([r,c,f])=>{
-    const len=2*Math.PI*r;
-    return `<circle cx="18" cy="18" r="${r}" fill="none" stroke="var(--track)" stroke-width="2.4"/><circle cx="18" cy="18" r="${r}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="${len}" stroke-dashoffset="${len*(1-Math.min(1,f))}"/>`;
-  }).join('')+`</svg>`;
-}
-function renderWeek(){
-  const now=new Date(), dow=(now.getDay()+6)%7, names=['MON','TUE','WED','THU','FRI','SAT','SUN']; let h='';
-  for(let i=0;i<7;i++){ const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-dow+i); h+=`<div class="day ${i===dow?'today':''}">${names[i]}${miniDay(dk(d))}</div>`; }
-  $('week').innerHTML=h;
-}
-function renderHist(){
-  const list=S.fasts.slice(-5).reverse();
-  $('hist').innerHTML=list.length?list.map(f=>{
-    const hrs=(f.e-f.s)/3600e3, ok=hrs>=(f.g||S.goal.fastH);
-    const d=new Date(f.s).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
-    return `<div><span>${d}</span><span class="${ok?'ok':''}">${hrs.toFixed(1)}h / ${f.g}h ${ok?'✓':''}</span></div>`;
-  }).join(''):'<div><span style="color:var(--mute)">No completed fasts yet</span></div>';
-}
-
-/* ---------- settings ---------- */
-const GF={gFast:'fastH',gAct:'active',gMaint:'maint',gDef:'deficit',gPro:'protein',gFat:'fat',gSug:'sugar',gW0:'wStart',gW1:'wGoal'};
-function updTarget(){
-  const m=parseFloat($('gMaint').value)||0, d=parseFloat($('gDef').value)||0, t=Math.max(0,m-d);
-  $('gTarget').value=fmt(t)+' kcal';
-  $('tgtNote').textContent=t&&t<1500?'This target is quite low. For a sustained deficit it is worth checking the number with a doctor or dietitian.':'';
-}
-$('openSettings').onclick=()=>{
-  Object.keys(GF).forEach(id=>$(id).value=S.goal[GF[id]]);
-  updTarget(); $('setDlg').showModal();
-};
-['gMaint','gDef'].forEach(id=>$(id).addEventListener('input',updTarget));
-$('setCancel').onclick=()=>$('setDlg').close();
-$('setOk').onclick=()=>{
-  Object.keys(GF).forEach(id=>{ const v=parseFloat($(id).value); if(v>0) S.goal[GF[id]]=v; });
-  save(); renderAll(); $('setDlg').close();
-};
-function download(name,content,type){
-  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([content],{type}));
-  a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-}
-function flash(btn,txt){ const o=btn.textContent; btn.textContent=txt; setTimeout(()=>btn.textContent=o,1600); }
-$('exportBtn').onclick=()=>download('rhythm-'+todayKey()+'.json',JSON.stringify(S,null,2),'application/json');
-$('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=e=>{
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=()=>{
-    try{
-      const s=JSON.parse(r.result);
-      if(s&&s.goal&&s.logs&&Array.isArray(s.fasts)){
-        if(confirm('Replace data on this device with the imported file?')){ S=normalize(s); save(); renderAll(); $('setDlg').close(); }
-      }else alert('Not a Rhythm export file.');
-    }catch(err){ alert('Could not read that file.'); }
-  };
-  r.readAsText(f); e.target.value='';
-};
-
-/* ---------- text + CSV export ---------- */
-function allDays(){
-  const ks=new Set(Object.keys(S.logs));
-  S.fasts.forEach(f=>ks.add(dk(f.e)));
-  S.weights.forEach(w=>ks.add(dk(w.t)));
-  if(S.fastStart) ks.add(todayKey());
-  return [...ks].sort();
-}
-function buildText(){
-  const G=S.goal, wk=pstats(weekKeys()), mo=pstats(monthKeys());
-  let o='RHYTHM EXPORT '+todayKey()+'\n';
-  o+='Goals: fast '+G.fastH+' h | target '+fmt(target())+' kcal (maintenance '+fmt(G.maint)+' minus deficit '+fmt(G.deficit)+') | protein '+G.protein+' g | fat '+G.fat+' g | sugar limit '+G.sugar+' g | activity '+G.active+' min | weight '+G.wStart+' to '+G.wGoal+' kg\n';
-  o+='This week: '+wk.days+' days logged, '+fmt(wk.eaten)+' kcal, deficit vs maintenance '+fmt(wk.deficit)+' kcal\n';
-  o+='This month: '+mo.days+' days logged, '+fmt(mo.eaten)+' kcal, deficit vs maintenance '+fmt(mo.deficit)+' kcal\n';
-  const wd=wByDay(); const wm={}; wd.forEach(w=>wm[w.k]=w.v);
-  allDays().forEach(k=>{
-    const L=S.logs[k]||{m:[],a:[]}, t=tot(k);
-    o+='\n'+k+'\n';
-    if(wm[k]) o+='  Weight: '+wm[k].toFixed(1)+' kg\n';
-    S.fasts.filter(f=>dk(f.e)===k).forEach(f=>{ o+='  Fast: '+((f.e-f.s)/3600e3).toFixed(1)+' h ('+hm(f.s)+' to '+hm(f.e)+', goal '+f.g+' h)\n'; });
-    if(k===todayKey()&&S.fastStart) o+='  Fast running since '+hm(S.fastStart)+'\n';
-    o+='  Food: '+n0(t.k)+' kcal | protein '+n0(t.p)+' g | fat '+n0(t.f)+' g | carbs '+n0(t.c)+' g | sugar '+n0(t.s)+' g\n';
-    L.m.forEach(e=>{ o+='    '+hm(e.t)+' '+(e.n?e.n+': ':'')+n0(e.k)+' kcal, P'+n0(e.p)+' F'+n0(e.f)+' C'+n0(e.c)+' S'+n0(e.s)+'\n'; });
-    o+='  Activity: '+n0(t.a)+' min'+(L.a.length?' ('+L.a.map(e=>hm(e.t)+' '+e.v+'min').join(', ')+')':'')+'\n';
-  });
-  return o;
-}
-function buildCSV(){
-  const rows=[['date','type','time','value','unit']];
-  const wd=wByDay();
-  allDays().forEach(k=>{
-    const L=S.logs[k]||{m:[],a:[]};
-    S.fasts.filter(f=>dk(f.e)===k).forEach(f=>rows.push([k,'fast',hm(f.e),((f.e-f.s)/3600e3).toFixed(2),'h']));
-    L.m.forEach(e=>{ [['calories','k','kcal'],['protein','p','g'],['fat','f','g'],['carbs','c','g'],['sugar','s','g']].forEach(([nm,key,u])=>{ if(e[key]) rows.push([k,nm,hm(e.t),e[key],u]); }); });
-    L.a.forEach(e=>rows.push([k,'activity',hm(e.t),e.v,'min']));
-    wd.filter(w=>w.k===k).forEach(w=>rows.push([k,'weight',hm(w.t),w.v,'kg']));
-  });
-  return rows.map(r=>r.join(',')).join('\n');
-}
-$('copyTxtBtn').onclick=()=>{
-  const b=$('copyTxtBtn'), t=buildText();
-  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>flash(b,'Copied ✓')).catch(()=>{ download('rhythm-'+todayKey()+'.txt',t,'text/plain'); flash(b,'Downloaded'); });
-};
-$('csvBtn').onclick=()=>download('rhythm-'+todayKey()+'.csv',buildCSV(),'text/csv');
-
-/* ---------- visual report (PNG) ---------- */
-function buildReportSVG(){
-  const W=800, G=S.goal, t=tot(todayKey()), wk=pstats(weekKeys()), mo=pstats(monthKeys()), wd=wByDay();
-  const cur=wd.length?wd[wd.length-1].v:null;
-  const C={bar:'#f5b700',over:'#e5484d',line:'#8b5cf6',text:'#8a8794'};
-  let y=0, s='';
-  const txt=(x,yy,str,size,fill,weight,anchor)=>`<text x="${x}" y="${yy}" font-size="${size}" fill="${fill||'#1c1b22'}" font-weight="${weight||400}" text-anchor="${anchor||'start'}" font-family="-apple-system,Helvetica,Arial,sans-serif">${str}</text>`;
-  s+=`<rect width="${W}" height="1000" fill="#f6f3ee"/>`;
-  s+=`<rect x="40" y="40" width="180" height="8" rx="4" fill="#f5b700"/><rect x="220" y="40" width="180" height="8" rx="4" fill="#22b573"/><rect x="400" y="40" width="180" height="8" rx="4" fill="#3b82f6"/><rect x="580" y="40" width="180" height="8" rx="4" fill="#8b5cf6"/>`;
-  s+=txt(40,100,'Rhythm',40,'#1c1b22',700)+txt(760,100,new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}),18,'#8a8794',400,'end');
-  y=140;
-  const card=(h)=>{ const r=`<rect x="40" y="${y}" width="720" height="${h}" rx="22" fill="#fff"/>`; return r; };
-  // today
-  s+=card(190);
-  s+=txt(64,y+36,'TODAY',14,'#8a8794',600);
-  s+=txt(64,y+88,fmt(t.k)+' kcal',44,'#1c1b22',700)+txt(64,y+116,'target '+fmt(target())+' · '+(target()-t.k>=0?fmt(target()-t.k)+' left':fmt(t.k-target())+' over'),18,'#8a8794');
-  const mac=[['Protein',t.p,G.protein,'#22b573'],['Fat',t.f,G.fat,'#f59e0b'],['Sugar',t.s,G.sugar,'#c084fc']];
-  mac.forEach((m,i)=>{ const x=64+i*230; s+=txt(x,y+150,m[0],14,'#8a8794')+txt(x+150,y+150,n0(m[1])+' / '+m[2]+' g',14,'#1c1b22',600,'end')+`<rect x="${x}" y="${y+160}" width="150" height="9" rx="5" fill="#eeeaf2"/><rect x="${x}" y="${y+160}" width="${Math.min(150,m[2]?m[1]/m[2]*150:0)}" height="9" rx="5" fill="${m[3]}"/>`; });
-  s+=txt(736,y+88,'Carbs '+n0(t.c)+' g',18,'#8a8794',400,'end')+txt(736,y+116,'Activity '+n0(t.a)+' / '+G.active+' min',18,'#8a8794',400,'end');
-  y+=210;
-  // week / month
-  s+=card(240);
-  s+=txt(64,y+36,'WEEK AND MONTH',14,'#8a8794',600);
-  [['This week',wk],['This month',mo]].forEach((p,i)=>{
-    const yy=y+80+i*84, q=p[1];
-    s+=txt(64,yy,p[0],22,'#1c1b22',700);
-    if(!q.days){ s+=txt(64,yy+28,'no calories logged yet',18,'#8a8794'); return; }
-    s+=txt(64,yy+28,fmt(q.eaten)+' kcal eaten over '+q.days+(q.days>1?' days':' day')+' (avg '+fmt(q.avgK)+'/day)',18,'#1c1b22');
-    s+=txt(736,yy+28,(q.deficit>=0?'Deficit ':'Surplus ')+fmt(Math.abs(q.deficit))+' kcal ≈ '+Math.abs(q.kg).toFixed(2)+' kg',18,q.deficit>=0?'#22b573':'#e5484d',600,'end');
-  });
-  y+=260;
-  // weight
-  s+=card(150);
-  s+=txt(64,y+36,'WEIGHT',14,'#8a8794',600);
-  if(cur===null){ s+=txt(64,y+90,'no weigh-ins yet',22,'#8a8794'); }
-  else{
-    const span=G.wStart-G.wGoal, prog=span?Math.min(1,Math.max(0,(G.wStart-cur)/span)):0;
-    s+=txt(64,y+92,cur.toFixed(1)+' kg',44,'#1c1b22',700)+txt(736,y+80,(cur>G.wGoal?(cur-G.wGoal).toFixed(1)+' kg to goal ('+G.wGoal+' kg)':'goal reached'),18,'#8a8794',400,'end');
-    s+=`<rect x="64" y="${y+112}" width="672" height="12" rx="6" fill="#eeeaf2"/><rect x="64" y="${y+112}" width="${(672*prog).toFixed(0)}" height="12" rx="6" fill="#3b82f6"/>`;
-  }
-  y+=170;
-  // chart
-  s+=card(260);
-  s+=txt(64,y+36,'CALORIES · LAST 14 DAYS',14,'#8a8794',600);
-  s+=`<g transform="translate(64,${y+50})"><svg x="0" y="0" width="672" height="190" viewBox="0 0 672 190">${chartInner(lastDays(14),672,190,C,14)}</svg></g>`;
-  y+=280;
-  s+=txt(400,y+10,'Approximate values from self-logged data, not medical advice.',13,'#8a8794',400,'middle');
-  const H=y+40;
-  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${s.replace('height="1000"','height="'+H+'"')}</svg>`,W,H};
-}
-let repURL='';
-$('openReport').onclick=()=>{
-  const r=buildReportSVG(), img=new Image();
-  img.onload=()=>{
-    const c=document.createElement('canvas'); c.width=r.W*2; c.height=r.H*2;
-    const x=c.getContext('2d'); x.scale(2,2); x.drawImage(img,0,0);
-    try{ repURL=c.toDataURL('image/png'); }catch(e){ repURL='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg); }
-    $('repImg').src=repURL; $('repDlg').showModal();
-  };
-  img.onerror=()=>{ repURL='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg); $('repImg').src=repURL; $('repDlg').showModal(); };
-  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg);
-};
-$('repClose').onclick=()=>$('repDlg').close();
-$('repDl').onclick=()=>{ const a=document.createElement('a'); a.href=repURL; a.download='rhythm-report-'+todayKey()+(repURL.indexOf('image/png')>0?'.png':'.svg'); a.click(); };
-
-/* ---------- quick log: typed, dictated or pasted ---------- */
-const WORDNUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,fifteen:15,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90,hundred:100};
-function digits(s){ return s.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten|fifteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred)\b/g,w=>WORDNUM[w]); }
-const NUM='(\\d+(?:[.,]\\d+)?)';
-function grab(seg,words,allowG){
-  const g=allowG?'\\s*(?:g|gr|grams?)?':'';
-  let m=seg.match(new RegExp(NUM+g+'\\s*(?:of\\s+)?(?:'+words+')\\b'));
-  if(!m) m=seg.match(new RegExp('\\b(?:'+words+')\\s*[:=]?\\s*'+NUM));
-  return m?parseFloat(m[1].replace(',','.')):null;
-}
-function applyLog(txt){
-  const done=[],miss=[],meals=[]; let pending='', lastMeal=null;
-  digits(txt.toLowerCase()).split(/[,;\n]+|\band\b/).map(s=>s.trim()).filter(Boolean).forEach(seg=>{
-    if(/\b(start|started|begin|began)\b.*\bfast/.test(seg)){
-      if(S.fastStart) miss.push(seg+' (a fast is already running)'); else { S.fastStart=Date.now(); done.push('fast started'); }
-      return;
-    }
-    if(/\b(end|ended|break|broke|stop|stopped)\b.*\bfast/.test(seg)){
-      if(!S.fastStart) miss.push(seg+' (no fast running)');
-      else { S.fasts.push({s:S.fastStart,e:Date.now(),g:S.goal.fastH}); S.fastStart=null; done.push('fast ended'); }
-      return;
-    }
-    if(!/\d/.test(seg)){ pending=(pending+' '+seg).trim(); return; }   // a name that belongs to the next item
-    const name=(pending+' '+seg.split(/\d/)[0]).trim(); pending='';
-    const wm=seg.match(new RegExp(NUM+'\\s*kg\\b'))||seg.match(new RegExp('\\bweigh(?:t|ed)?\\s*(?:is|was|:)?\\s*'+NUM));
-    if(wm){
-      lastMeal=null;
-      const v=parseFloat(wm[1].replace(',','.'));
-      if(logWeight(v)) done.push(v+' kg weight'); else miss.push(seg);
-      return;
-    }
-    const e={t:Date.now(),n:name.replace(/\b(kcal|cals?|calories?|protein|fats?|sugars?|carbs?|grams?|g)\b/g,'').trim(),
-      k:grab(seg,'kcal|cals?|calories?|calorie',false),p:grab(seg,'protein|prot',true),f:grab(seg,'fats?',true),c:grab(seg,'carbs?|carbohydrates?',true),s:grab(seg,'sugars?',true)};
-    if(e.k||e.p||e.f||e.c||e.s){
-      const keys=['k','p','f','c','s'];
-      keys.forEach(x=>e[x]=e[x]?Math.round(e[x]):0);
-      // a nameless piece like "12 protein" right after a meal belongs to that meal, unless that field is already filled
-      if(!e.n&&lastMeal&&keys.every(x=>!e[x]||!lastMeal[x])){ keys.forEach(x=>{ if(e[x]) lastMeal[x]=e[x]; }); }
-      else { meals.push(e); lastMeal=e; }
-      return;
-    }
-    lastMeal=null;
-    const m=seg.match(new RegExp(NUM)); let v=parseFloat(m[1].replace(',','.'));
-    const hours=/\d\s*(h|hr|hrs|hour|hours)\b/.test(seg);
-    if(hours||/min|walk|run|jog|jump|rope|workout|gym|kettlebell|swim|bike|cycl|exercise|activity|training|yoga|hike/.test(seg)){
-      if(hours&&!/min/.test(seg)) v*=60;
-      dayLog(todayKey()).a.push({t:Date.now(),v:Math.round(v)}); done.push(Math.round(v)+' min activity');
-    }else miss.push(seg);
-  });
-  if(pending) miss.push(pending);
-  meals.forEach(e=>{
-    dayLog(todayKey()).m.push(e);
-    done.push((e.n?e.n+' ':'')+[e.k&&e.k+' kcal',e.p&&e.p+'g protein',e.f&&e.f+'g fat',e.c&&e.c+'g carbs',e.s&&e.s+'g sugar'].filter(Boolean).join(' '));
-  });
-  save(); renderAll();
-  $('qlMsg').textContent=(done.length?'Logged: '+done.join(' · ')+'. ':'')+(miss.length?'Not understood: '+miss.join(' | '):'');
-  if(!miss.length) $('qlText').value='';
-}
-$('qlGo').onclick=()=>{ const t=$('qlText').value.trim(); if(t) applyLog(t); };
-$('qlText').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); $('qlGo').click(); } });
-const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(SR){
-  const rec=new SR(); rec.lang=navigator.language||'en-US'; rec.interimResults=false; let on=false;
-  $('qlMic').onclick=()=>{ if(on){ rec.stop(); return; } try{ rec.start(); }catch(e){} };
-  rec.onstart=()=>{ on=true; $('qlMic').classList.add('rec'); };
-  rec.onend=()=>{ on=false; $('qlMic').classList.remove('rec'); };
-  rec.onresult=e=>{ const t=Array.from(e.results).map(r=>r[0].transcript).join(' '); $('qlText').value=($('qlText').value+' '+t).trim(); };
-  rec.onerror=ev=>{ $('qlMsg').textContent='Mic not available here ('+ev.error+'). Use the dictation key on your keyboard instead.'; };
-}else $('qlMic').hidden=true;
-
-/* ---------- boot ---------- */
-function renderAll(){ renderFast(); renderFood(); renderAct(); renderWeight(); renderTrends(); renderWeek(); renderHist(); }
 renderAll();
-setInterval(renderFast,1000);
-let lastDay=todayKey();
-setInterval(()=>{ if(todayKey()!==lastDay){ lastDay=todayKey(); renderAll(); } },30000);
+setInterval(()=>{ const was=S.fasts.length; render(); if(S.fasts.length!==was) renderHist(); },1000);
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderAll(); });
 if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 })();
