@@ -1,1262 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Bahre Srebrenica — Filmmaker, Editor, and Content Creator. Cinematic, journalistic and educational AI and non-AI audiovisuals." />
-  <title>Bahre Srebrenica Filmmaker</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #080e1a;
-      --navy-mid: #0d1526;
-      --navy-light: #121d32;
-      --slate: #1a2a4a;
-      --slate-mid: #2a4a7a;
-      --slate-light: #4a6aaa;
-      --accent: #4a8aff;
-      --accent-warm: #6aaaff;
-      --text-primary: #ffffff;
-      --text-secondary: #a0b8d8;
-      --text-muted: #5a7aaa;
-      --font: 'Inter', sans-serif;
-      --font-display: 'Bebas Neue', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font);
-      background: linear-gradient(135deg, #0a1628 0%, #0d1f3d 30%, #1a2f5a 60%, #0f1a35 100%);
-      background-attachment: fixed;
-      color: var(--text-primary);
-      overflow-x: hidden;
-      cursor: none;
-      font-size: 16px;
-      line-height: 1.7;
-      letter-spacing: 0.01em;
-    }
-
-    /* CURSOR — hidden on touch devices */
-    .cursor {
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-      transform: translate(-50%, -50%);
-    }
-    .cursor-ring {
-      width: 32px; height: 32px;
-      border: 0.5px solid var(--accent);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: all 0.08s ease;
-      opacity: 0.5;
-    }
-
-    /* Detect touch devices: hide custom cursor + restore native cursor */
-    @media (hover: none), (pointer: coarse) {
-      body { cursor: auto; }
-      .cursor, .cursor-ring { display: none !important; }
-    }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 14px 48px;
-      border-bottom: 0.5px solid rgba(74,138,255,0.15);
-      background: rgba(8,14,26,0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 0 0 24px 24px;
-    }
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-primary);
-      letter-spacing: 2px;
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 36px; align-items: center; }
-    .nav-links a {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .btn-glass {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 28px;
-      border-radius: 50px;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: var(--font);
-      font-weight: 500;
-      transition: all 0.25s ease;
-      text-decoration: none;
-      border: 1px solid rgba(74,138,255,0.25);
-      background: rgba(13,21,38,0.7);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 0 0 1px rgba(74,138,255,0.08),
-                  inset 0 1px 0 rgba(255,255,255,0.06),
-                  0 4px 16px rgba(0,0,0,0.3);
-      color: var(--text-secondary);
-    }
-    .btn-glass:hover {
-      border-color: rgba(74,138,255,0.5);
-      background: rgba(74,138,255,0.12);
-      color: #fff;
-      box-shadow: 0 0 0 1px rgba(74,138,255,0.2),
-                  0 4px 20px rgba(74,138,255,0.2);
-    }
-    .btn-glass-primary {
-      background: rgba(74,138,255,0.2);
-      border: 1px solid rgba(74,138,255,0.4);
-      color: var(--accent);
-    }
-    .btn-glass-primary:hover {
-      background: rgba(74,138,255,0.35);
-      color: #fff;
-      box-shadow: 0 0 0 1px rgba(74,138,255,0.4),
-                  0 4px 24px rgba(74,138,255,0.3);
-    }
-
-    /* HAMBURGER */
-    .nav-toggle {
-      width: 40px;
-      height: 40px;
-      border: 0.5px solid var(--slate-mid);
-      border-radius: 8px;
-      background: rgba(13,21,38,0.7);
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: var(--text-primary);
-      transition: all 0.2s;
-      font-family: var(--font);
-      line-height: 1;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-    .nav-toggle:hover, .nav-toggle:active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    /* MENU OVERLAY */
-    .menu-overlay {
-      position: fixed; inset: 0;
-      background: rgba(8,14,26,0.97);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 99;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 48px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .menu-overlay.open { opacity: 1; pointer-events: all; }
-    .menu-overlay a {
-      font-family: var(--font-display);
-      font-size: clamp(40px, 8vw, 80px);
-      color: var(--text-primary);
-      text-decoration: none;
-      letter-spacing: 4px;
-      transition: color 0.2s;
-    }
-    .menu-overlay a:hover { color: var(--accent); }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-      overflow: hidden;
-      padding: 0 48px 64px;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(10, 60, 80, 0.6) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 10%, rgba(5, 40, 60, 0.5) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 0%, rgba(15, 80, 100, 0.4) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 50%, rgba(20, 55, 70, 0.3) 0%, transparent 50%),
-        linear-gradient(180deg, #061520 0%, #0a1e2e 30%, #0d1820 60%, #0a0f16 100%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(100,200,220,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(100,200,220,0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
-    }
-    .hero-content {
-      position: relative; z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      align-items: flex-end;
-    }
-    .hero-left {}
-    .hero-eyebrow {
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--slate-light);
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(72px, 10vw, 120px);
-      font-weight: 400;
-      line-height: 0.9;
-      color: var(--text-primary);
-      letter-spacing: 4px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-    }
-    .hero-name em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 28px;
-      padding-bottom: 8px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
-    }
-    .hero-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      text-align: right;
-      max-width: 280px;
-    }
-    .hero-cta {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--navy);
-      background: var(--accent);
-      padding: 12px 28px;
-      text-decoration: none;
-      transition: all 0.2s;
-      display: inline-block;
-    }
-    .hero-cta:hover { background: var(--accent-warm); }
-
-    /* STRIP */
-    .strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    .strip-item { padding: 24px 32px; }
-    .strip-label {
-      font-size: 9px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-    .strip-val {
-      font-family: var(--font);
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--text-secondary);
-    }
-
-    /* SECTIONS */
-    section { padding: 80px 48px; }
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 48px;
-      border-bottom: 0.5px solid rgba(122,168,196,0.08);
-      padding-bottom: 16px;
-    }
-    .section-label {
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .section-link {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .section-link:hover { opacity: 0.6; }
-
-    /* WORK CARDS */
-    .work-card {
-      position: relative;
-      overflow: hidden;
-      background: transparent;
-      cursor: pointer;
-      transform: scale(0.95) translateY(10px);
-      opacity: 0;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease, box-shadow 0.3s ease;
-      flex: 0 0 280px !important;
-      min-width: 280px !important;
-      border-radius: 28px;
-      border: none;
-      padding: 0;
-      box-shadow: none;
-    }
-    .work-card:hover {
-      transform: scale(1) translateY(0);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-    .work-card iframe { filter: brightness(0.9) saturate(0.9); transition: filter 0.3s ease; }
-    .work-card:hover iframe { filter: brightness(1) saturate(1); }
-    .work-card.popped {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-    .work-card .work-thumb {
-      height: 380px !important;
-      overflow: hidden !important;
-      position: relative !important;
-      border-radius: 28px !important;
-    }
-    .work-thumb {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .work-card:hover .work-thumb { transform: scale(1.04); }
-    .work-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
-    .work-meta { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 80px;
-      align-items: start;
-      padding: 0 48px;
-      border: 0.5px solid rgba(74,138,255,0.15);
-      border-top: none;
-      border-bottom: none;
-      border-radius: 24px;
-    }
-    .about-text {
-      font-family: var(--font);
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-    }
-    .about-text em { color: var(--accent); font-style: italic; }
-    .about-body {
-      font-size: 15px;
-      color: #a8c8d8;
-      line-height: 2;
-      margin-bottom: 32px;
-    }
-    .about-photo-placeholder {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: #050a15;
-      overflow: hidden;
-      border-radius: 32px;
-      border: 3px solid rgba(100, 150, 255, 0.35);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    .about-photo-placeholder img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      filter: grayscale(20%) brightness(0.9);
-      transition: filter 0.4s ease;
-    }
-    .about-photo-placeholder:hover img {
-      filter: grayscale(0%) brightness(1);
-    }
-
-    /* CONTACT */
-    #contact { background: transparent; }
-    .contact-inner {
-      max-width: 600px;
-      padding: 0 48px;
-    }
-    .contact-heading {
-      font-family: var(--font);
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-    }
-    .contact-heading em { font-style: italic; color: var(--accent); }
-
-    /* FOOTER */
-    footer {
-      padding: 24px 48px;
-      border-top: 0.5px solid rgba(74,138,255,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(8,14,26,0.6);
-      border-radius: 24px 24px 0 0;
-    }
-    .footer-name {
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .footer-links { display: flex; gap: 28px; }
-    .footer-links a {
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--accent); }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Featured film responsive titles */
-    .featured-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(48px, 7vw, 80px);
-      color: var(--text-primary);
-      letter-spacing: 4px;
-      line-height: 0.9;
-      margin-bottom: 16px;
-    }
-
-    /* Card title classes — readable at all sizes */
-    .card-title-lg {
-      font-family: 'Bebas Neue', sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-align: center;
-      line-height: 1;
-      padding: 0 12px;
-      font-size: clamp(24px, 6vw, 48px);
-    }
-    .card-title-md {
-      font-family: 'Bebas Neue', sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-align: center;
-      line-height: 1;
-      padding: 0 12px;
-      font-size: clamp(22px, 5.5vw, 40px);
-    }
-    .card-title-xl {
-      font-family: 'Bebas Neue', sans-serif;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-align: center;
-      line-height: 1;
-      padding: 0 12px;
-      font-size: clamp(28px, 7vw, 56px);
-    }
-    .card-meta {
-      font-size: clamp(9px, 2.2vw, 11px);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0 8px;
-      text-align: center;
-    }
-    .card-lock {
-      font-size: clamp(32px, 8vw, 48px);
-    }
-    .card-lock-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-align: center;
-      line-height: 1;
-      padding: 0 12px;
-      font-size: clamp(16px, 4vw, 20px);
-      color: #fff;
-    }
-
-    /* Fade scroll — cards fade out on left/right edges */
-    /* ============================================
-       MOBILE / TABLET BREAKPOINTS
-       ============================================ */
-
-    /* Tablet */
-    @media (max-width: 1024px) {
-      nav { padding: 14px 24px; }
-      section { padding: 60px 24px; }
-      .about-grid { gap: 48px; padding: 0 24px; }
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      body { font-size: 15px; }
-      nav { padding: 12px 16px; }
-      .nav-logo { font-size: 16px; letter-spacing: 1.5px; }
-      .nav-links { display: none !important; }
-      .nav-toggle { display: flex !important; }
-      .nav-right { gap: 8px; }
-
-      /* MASTER padding rule: ALL sections get 16px sides on mobile */
-      section { padding: 40px 16px !important; }
-      
-      /* Catch all inline padding and force 16px left/right */
-      div[style*="padding:32px 48px"],
-      div[style*="padding:40px 48px"],
-      div[style*="padding:80px 48px"],
-      div[style*="padding:80px 16px"],
-      div[style*="padding:32px 48px 48px"] {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-      }
-
-      /* Featured film section */
-      .featured-section-inner {
-        padding: 60px 16px 40px !important;
-        max-width: 100% !important;
-      }
-
-      /* Work/Film sections - edge-to-edge scrolling on mobile */
-      #in-development,
-      #commercial {
-        padding: 32px 0 40px 0 !important;
-      }
-      
-      /* Films and commercial scroll containers need padding */
-      #in-development > div:first-of-type,
-      #commercial > div:first-of-type {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-      }
-      
-      #in-development > div[style*="overflow-x"],
-      #commercial > div[style*="overflow-x"] {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-      }
-
-      /* Contact section */
-      #contact {
-        padding: 60px 16px 80px !important;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr !important;
-        gap: 40px;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      .about-right {
-        order: -1;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      .about-photo-placeholder {
-        width: calc(100% - 0px) !important;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border-radius: 20px;
-        border: 2px solid rgba(100, 150, 255, 0.3) !important;
-        aspect-ratio: 3/4;
-      }
-      footer {
-        padding: 20px 16px;
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-      }
-
-      /* WORK CARDS — bigger on mobile so titles stay readable */
-      .work-card {
-        flex: 0 0 220px !important;
-        min-width: 220px !important;
-        border-radius: 20px;
-        position: relative;
-      }
-      .work-card::after {
-        content: '›';
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        font-size: 24px;
-        color: rgba(100, 150, 255, 0.5);
-        pointer-events: none;
-        z-index: 3;
-        background: rgba(8,14,26,0.6);
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 1;
-      }
-      .work-card .work-thumb {
-        height: 300px !important;
-        border-radius: 20px !important;
-      }
-
-      /* Cards never scale on touch (no real hover) */
-      .work-card:hover { transform: scale(1) translateY(0); }
-      .work-card:hover .work-thumb { transform: none; }
-
-      /* Contact area */
-      .contact-inner { padding: 0 16px !important; }
-
-      /* Modals — fit screen */
-      #film-modal > div,
-      #commercial-modal > div {
-        padding: 24px !important;
-        max-height: 92vh !important;
-      }
-      #modal-title { font-size: 36px !important; letter-spacing: 2px !important; }
-
-      /* Trainings / Work / Recognitions: stack year above text */
-      .timeline-row {
-        flex-direction: column !important;
-        gap: 4px !important;
-      }
-    }
-
-    /* Master Theses / Scriptures section on mobile */
-    @media (max-width: 768px) {
-      .theses-scroll {
-        display: flex !important;
-        flex-direction: column !important;
-        overflow-x: visible !important;
-        gap: 20px !important;
-        padding-bottom: 0 !important;
-      }
-      .theses-scroll .work-card {
-        flex: 1 1 auto !important;
-        min-width: 100% !important;
-        width: 100% !important;
-      }
-    }
-
-    /* Very small phones */
-    @media (max-width: 380px) {
-      .work-card {
-        flex: 0 0 200px !important;
-        min-width: 200px !important;
-      }
-      .work-card .work-thumb { height: 280px !important; }
-      .nav-logo { font-size: 14px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Rhythm</title>
+<meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Rhythm">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1c1b22; --mute:#8a8794; --line:#e8e4ec; --track:#eeeaf2;
+  --fast:#8b5cf6;      /* purple */
+  --cal:#f5b700;       /* yellow */
+  --protein:#22b573;   /* green  */
+  --active:#3b82f6;    /* blue   */
+  --fat:#f59e0b;       /* amber  */
+  --carb:#60a5fa;      /* light blue */
+  --sugar:#c084fc;     /* light purple */
+  --over:#e5484d;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#121214;--card:#1c1c20;--ink:#f2f0f6;--mute:#8f8c99;--line:#2b2b31;--track:#2b2b31;color-scheme:dark}
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 28px);max-width:520px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+h1{font-size:20px;margin:0;letter-spacing:.02em}
+.bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--cal) 0 25%,var(--protein) 25% 50%,var(--active) 50% 75%,var(--fast) 75% 100%);margin-bottom:14px}
+.hbtns button{background:none;border:0;color:var(--ink);font-size:21px;padding:6px 9px;cursor:pointer}
+.week{display:flex;justify-content:space-between;margin-bottom:14px}
+.day{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mute);letter-spacing:.06em}
+.day.today{color:var(--ink);font-weight:600}
+.card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:12px}
+.ring-wrap{position:relative;width:min(300px,78vw);margin:4px auto 14px;aspect-ratio:1}
+.ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 18%}
+.timer{font-size:38px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--fast)}
+.timer.idle{color:var(--ink)}
+.stage{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fast);margin-top:4px;font-weight:600}
+.stage.idle{color:var(--mute)}
+.sub{font-size:12px;color:var(--mute);margin-top:6px}
+.times{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:12px}
+.times b{display:block;color:var(--ink);font-size:14px;margin-top:2px}
+.btn{width:100%;border:0;border-radius:16px;padding:15px;font-size:16px;font-weight:600;cursor:pointer;background:var(--fast);color:#fff}
+.btn.ghost{background:var(--track);color:var(--ink)}
+.link{background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;cursor:pointer;padding:8px 0 0;display:block;margin:0 auto}
+.row{display:flex;align-items:center;gap:14px}
+.mini-ring{width:84px;height:84px;flex:none}
+.mini-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.big{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
+.big small{font-size:14px;color:var(--mute);font-weight:500}
+.label{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.left{font-size:13px;color:var(--mute);margin-top:2px}
+.left.over{color:var(--over);font-weight:600}
+.macros{margin-top:14px;display:grid;gap:10px}
+.mac .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.mac .top span:first-child{color:var(--mute)}
+.mac .top .o{color:var(--over);font-weight:600}
+.track{height:8px;border-radius:8px;background:var(--track);overflow:hidden}
+.track i{display:block;height:100%;border-radius:8px;width:0}
+.chips{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer}
+.chip:active{background:var(--track)}
+.entries{margin-top:10px;font-size:12.5px;color:var(--mute)}
+.entries span{display:inline-flex;align-items:center;gap:4px;background:var(--track);border-radius:999px;padding:3px 4px 3px 10px;margin:3px 4px 0 0}
+.entries button{background:none;border:0;color:var(--mute);cursor:pointer;font-size:14px;padding:0 6px}
+.hist{font-size:13px}
+.hist div{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line)}
+.hist div:first-child{border-top:0}
+.ok{color:var(--protein)}
+.stat{font-size:13px;line-height:1.5;padding:8px 0;border-top:1px solid var(--line)}
+.stat:first-of-type{border-top:0}
+.stat b{font-variant-numeric:tabular-nums}
+.stat small{color:var(--mute)}
+.wbar{height:10px;border-radius:10px;background:var(--track);overflow:hidden;margin:10px 0 4px}
+.wbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--active),var(--protein))}
+dialog{border:0;border-radius:20px;background:var(--card);color:var(--ink);padding:20px;width:min(380px,92vw);max-height:88vh;overflow:auto}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{margin:0 0 8px;font-size:17px}
+dialog label{display:block;font-size:12px;color:var(--mute);margin:12px 0 4px}
+dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dlg-actions{display:flex;gap:8px;margin-top:14px}
+.dlg-actions .btn{padding:12px;font-size:15px}
+.note{font-size:11px;color:var(--mute);margin-top:12px;line-height:1.45}
+.ql{display:flex;gap:8px;align-items:flex-end}
+.ql textarea{flex:1;resize:none;padding:11px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
+.ql .sm{flex:none;width:46px;height:46px;border-radius:14px;border:0;background:var(--track);color:var(--ink);font-size:18px;cursor:pointer}
+.ql .sm.go{background:var(--fast);color:#fff}
+.ql .sm.rec{background:var(--fast);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.qmsg{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.4;min-height:1em}
+#repImg{width:100%;border-radius:12px;border:1px solid var(--line);margin-top:8px;background:#fff}
+</style>
 </head>
 <body>
+<header>
+  <h1>Rhythm</h1>
+  <div class="hbtns">
+    <button id="openReport" aria-label="Report">📊</button>
+    <button id="openSettings" aria-label="Settings">⚙︎</button>
+  </div>
+</header>
+<div class="bar"></div>
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+<div class="week" id="week"></div>
 
-  <!-- COMMERCIAL LOCK MODAL -->
-  <div id="commercial-modal" onclick="if(event.target===this)document.getElementById('commercial-modal').style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(8,14,26,0.92);z-index:1000;align-items:center;justify-content:center;padding:24px;">
-    <div style="background:rgba(13,21,38,0.98);border:1.5px solid rgba(180,220,255,0.2);max-width:400px;width:100%;padding:40px;position:relative;border-radius:12px;box-shadow:0 0 0 1px rgba(58,172,207,0.1),0 20px 60px rgba(0,0,0,0.6);text-align:center;">
-      <button onclick="document.getElementById('commercial-modal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
-      <div style="font-size:32px;margin-bottom:16px;">🔒</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--text-primary);letter-spacing:3px;margin-bottom:8px;">Private Content</h3>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:28px;line-height:1.6;">Enter your access code or contact Bahre to request one.</p>
-      <input id="commercial-code" type="password" placeholder="Enter code" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(180,220,255,0.2);border-radius:8px;color:var(--text-primary);font-size:14px;letter-spacing:2px;text-align:center;outline:none;margin-bottom:12px;font-family:var(--font);" onkeydown="if(event.key==='Enter')checkCommercialCode()"/>
-      <div id="commercial-error" style="font-size:11px;color:#e05a5a;margin-bottom:12px;display:none;">Incorrect code. Try again or request access below.</div>
-      <button onclick="checkCommercialCode()" class="btn-glass btn-glass-primary" style="width:100%;justify-content:center;margin-bottom:12px;">Submit</button>
-      <a href="https://wa.me/4915252614371?text=Hi%20Bahre%2C%20I%27d%20like%20to%20request%20access%20to%20your%20commercial%20work." target="_blank" rel="noopener" class="btn-glass" style="width:100%;justify-content:center;display:flex;">💬 Request Access on WhatsApp</a>
+<!-- FASTING -->
+<div class="card">
+  <div class="ring-wrap">
+    <svg viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="88" fill="none" stroke="var(--track)" stroke-width="14"/>
+      <circle id="fastArc" cx="100" cy="100" r="88" fill="none" stroke="var(--fast)" stroke-width="14" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="552.92"/>
+    </svg>
+    <div class="ring-center">
+      <div class="timer" id="timer">00:00:00</div>
+      <div class="stage" id="stage"></div>
+      <div class="sub" id="sub"></div>
     </div>
   </div>
-
-  <!-- MENU OVERLAY -->
-  <div class="menu-overlay" id="menuOverlay">
-    <a href="#work" onclick="closeMenu()">Work</a>
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
+  <div class="times">
+    <div>Started<b id="tStart">–</b></div>
+    <div style="text-align:right"><span id="goalLbl">Goal</span><b id="tGoal">–</b></div>
   </div>
+  <button class="btn" id="fastBtn">Start fast</button>
+  <button class="link" id="editStart" hidden>Edit start time</button>
+</div>
 
-  <nav>
-    <a href="#" class="nav-logo">Bahre Srebrenica</a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu">+</button>
-    </div>
-  </nav>
+<!-- QUICK LOG -->
+<div class="card">
+  <div class="label" style="margin-bottom:8px">Quick log</div>
+  <div class="ql">
+    <textarea id="qlText" rows="2" placeholder="chicken 450 kcal 40g protein 12g fat 3g sugar"></textarea>
+    <button class="sm" id="qlMic" aria-label="Dictate">🎤</button>
+    <button class="sm go" id="qlGo" aria-label="Log it">✓</button>
+  </div>
+  <div class="qmsg" id="qlMsg">Type, paste (one item per line) or dictate. Also: "89.4 kg", "30 min walk", "start fast", "end fast".</div>
+</div>
 
-
-  <!-- FILM POPUP MODAL -->
-  <div id="film-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(8,14,26,0.92);z-index:1000;align-items:center;justify-content:center;padding:24px;">
-    <div style="background:rgba(13,21,38,0.98);border:1.5px solid rgba(58,122,191,0.2);max-width:720px;width:100%;padding:40px;position:relative;border-radius:12px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(58,122,191,0.15);">
-      <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
-      <div id="modal-tag" style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"></div>
-      <h3 id="modal-title" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:3px;line-height:0.9;margin-bottom:12px;"></h3>
-      <div id="modal-meta" style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:20px;"></div>
-      <p id="modal-desc" style="font-size:14px;color:var(--text-secondary);line-height:1.8;margin-bottom:24px;"></p>
-      <div id="modal-link"></div>
+<!-- FOOD -->
+<div class="card">
+  <div class="row">
+    <div class="mini-ring"><svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--track)" stroke-width="10"/>
+      <circle id="calArc" cx="50" cy="50" r="42" fill="none" stroke="var(--cal)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+    </svg></div>
+    <div>
+      <div class="label">Calories today</div>
+      <div class="big" id="calVal">0<small> / 2000 kcal</small></div>
+      <div class="left" id="calLeft"></div>
     </div>
   </div>
+  <div class="macros" id="macros"></div>
+  <div class="chips"><button class="chip" id="addMeal">+ Add meal</button></div>
+  <div class="entries" id="mealList"></div>
+</div>
 
-  <section id="work" style="padding:0;">
+<!-- ACTIVITY -->
+<div class="card">
+  <div class="row">
+    <div class="mini-ring"><svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--track)" stroke-width="10"/>
+      <circle id="actArc" cx="50" cy="50" r="42" fill="none" stroke="var(--active)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+    </svg></div>
+    <div><div class="label">Activity</div><div class="big" id="actVal">0<small> / 60 min</small></div></div>
+  </div>
+  <div class="chips" id="actChips"></div>
+  <div class="entries" id="actList"></div>
+</div>
 
-    <!-- FEATURED FILM -->
-    <div style="position:relative;width:100%;min-height:70vh;overflow:hidden;display:flex;align-items:center;border-radius:24px;">
-      <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:24px;">
-        <iframe src="https://player.vimeo.com/video/1192828713?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-      </div>
-      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(8,14,26,0.2) 0%,rgba(13,21,58,0.1) 50%,rgba(8,14,26,0.05) 100%);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);"></div>
-      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(8,14,26,0.85) 0%,rgba(8,14,26,0.5) 35%,rgba(8,14,26,0.2) 60%,transparent 100%);"></div>
-      <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,14,26,0.3) 0%,transparent 50%);"></div>
-      <!-- Subtle glassy border frame -->
-      <div style="position:absolute;inset:0;z-index:2;border:0.5px solid rgba(74,138,255,0.15);pointer-events:none;"></div>
-      <div class="featured-section-inner" style="position:relative;z-index:3;padding:80px 48px;max-width:520px;">
-        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Featured Film</div>
-        <h2 class="featured-title">Ritual</h2>
-        <div style="font-size:11px;letter-spacing:1px;color:var(--text-muted);margin-bottom:16px;">Documentary · 2025 · 22 min · Screened at City Kino Munich</div>
-        <p style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:28px;max-width:480px;">What do we do when we lose someone we love? A documentary collecting 22 voices from around the world — artists showing how grief becomes movement, memory and creation.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','','https://vimeo.com/1190807953')" class="btn-glass btn-glass-primary">▶ Watch Teaser</button>
-          <button onclick="openModal('Documentary','Ritual','2025 · 22 min · Screened at City Kino Munich','Ritual was produced over one year, interviewing more than 200 people about loss and their rituals for dealing with losing someone they loved. The film explores collective and individual memories — how some traditions help us grieve together, how we build museums to remember, how we used to honour people politically and historically, and how we today, individually, deal with loss as artists and as humans. Simple, raw human emotion, presented within 22 minutes.','')" class="btn-glass">ⓘ More Info</button>
-        </div>
-      </div>
-    </div>
+<!-- WEIGHT -->
+<div class="card">
+  <div class="label">Weight</div>
+  <div class="row" style="justify-content:space-between;margin-top:6px">
+    <div class="big" id="wVal">–</div>
+    <svg id="wSpark" width="150" height="46" viewBox="0 0 150 46"></svg>
+  </div>
+  <div class="wbar"><i id="wProg"></i></div>
+  <div class="left" id="wInfo"></div>
+  <div class="chips"><button class="chip" id="addWeight">+ Log weight</button><button class="chip" id="undoWeight">Remove last</button></div>
+</div>
 
+<!-- TRENDS -->
+<div class="card">
+  <div class="label" style="margin-bottom:6px">Calories · trends</div>
+  <div id="stats"></div>
+  <svg id="chart" viewBox="0 0 320 140" style="width:100%;margin-top:8px"></svg>
+  <div class="note" style="margin-top:4px">Deficit is measured against your maintenance calories. About 7,700 kcal is roughly 1 kg of body fat, which is an approximation only.</div>
+</div>
 
-    <!-- ALL FILMS -->
-    <div id="in-development" style="padding:32px 0 48px 0;background: transparent;border:0.5px solid rgba(74,138,255,0.15);border-radius:24px;overflow:hidden;">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;padding:0 48px;">Films</div>
-      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;margin-left:48px;"></div>
-      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;padding-left:48px;padding-right:48px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
+<div class="card">
+  <div class="label" style="margin-bottom:8px">Recent fasts</div>
+  <div class="hist" id="hist"></div>
+</div>
 
-        <div class="work-card" onclick="openModal('AI Documentary Series','Bosnian History Narrated','In Development · 20 Episodes','A 20-episode short series made by AI, produced and edited by Bahre.','')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1190876158?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-md" style="color:#fff;">Bosnian History Narrated</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">AI Documentary · 20 Episodes</span>
-            </div>
-          </div>
-        </div>
+<!-- DIALOGS -->
+<dialog id="startDlg">
+  <h2 id="startTitle">Fast started at</h2>
+  <label for="startInput">Date and time</label>
+  <input type="datetime-local" id="startInput">
+  <div class="dlg-actions">
+    <button class="btn ghost" id="startCancel">Cancel</button>
+    <button class="btn" id="startOk">Save</button>
+  </div>
+</dialog>
 
-        <div class="work-card" onclick="openModal('Fiction Film','Ljubov','In Development','A love story between Filip and Max, where Filip loses everything but gets a chance in life thanks to Max. A heartbreaking story about dreams, inspiration, regret, drug abuse. Electric, dynamic, dance, techno. Fiction film based on real events.','')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1190876827?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-lg" style="color:#ff6b9d;">Ljubov</div>
-              <span class="card-meta" style="color:rgba(255,200,220,0.8);">Fiction Film · In Development</span>
-            </div>
-          </div>
-        </div>
+<dialog id="mealDlg">
+  <h2>Add meal</h2>
+  <label for="mName">Name (optional)</label>
+  <input type="text" id="mName">
+  <div class="two">
+    <div><label for="mK">Calories (kcal)</label><input type="number" id="mK" inputmode="decimal"></div>
+    <div><label for="mP">Protein (g)</label><input type="number" id="mP" inputmode="decimal"></div>
+    <div><label for="mF">Fat (g)</label><input type="number" id="mF" inputmode="decimal"></div>
+    <div><label for="mC">Carbs (g)</label><input type="number" id="mC" inputmode="decimal"></div>
+    <div><label for="mS">Sugar (g)</label><input type="number" id="mS" inputmode="decimal"></div>
+  </div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="mealCancel">Cancel</button>
+    <button class="btn" id="mealOk">Add</button>
+  </div>
+</dialog>
 
-        <div class="work-card" onclick="openModal('Documentary','You Better Run Now','In Development','A documentary about Roma girls\' abortion in Bosnia. In development, working with local Roma communities in Bosnia.','')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1190875924?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-md" style="color:#ffa500;">You Better Run Now</div>
-              <span class="card-meta" style="color:rgba(255,200,150,0.8);">Documentary · In Development</span>
-            </div>
-          </div>
-        </div>
+<dialog id="setDlg">
+  <h2>Settings</h2>
+  <div class="two">
+    <div><label for="gFast">Fast goal (h)</label><input type="number" id="gFast" inputmode="decimal"></div>
+    <div><label for="gAct">Activity (min/day)</label><input type="number" id="gAct" inputmode="decimal"></div>
+    <div><label for="gMaint">Maintenance (kcal)</label><input type="number" id="gMaint" inputmode="decimal"></div>
+    <div><label for="gDef">Daily deficit (kcal)</label><input type="number" id="gDef" inputmode="decimal"></div>
+    <div><label for="gPro">Protein (g/day)</label><input type="number" id="gPro" inputmode="decimal"></div>
+    <div><label for="gFat">Fat (g/day)</label><input type="number" id="gFat" inputmode="decimal"></div>
+    <div><label for="gSug">Sugar limit (g/day)</label><input type="number" id="gSug" inputmode="decimal"></div>
+    <div><label>Daily target</label><input type="text" id="gTarget" disabled></div>
+    <div><label for="gW0">Start weight (kg)</label><input type="number" id="gW0" inputmode="decimal"></div>
+    <div><label for="gW1">Goal weight (kg)</label><input type="number" id="gW1" inputmode="decimal"></div>
+  </div>
+  <div class="note" id="tgtNote"></div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="exportBtn">Backup JSON</button>
+    <button class="btn ghost" id="importBtn">Restore JSON</button>
+  </div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="copyTxtBtn">Copy as text</button>
+    <button class="btn ghost" id="csvBtn">Download CSV</button>
+  </div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="setCancel">Close</button>
+    <button class="btn" id="setOk">Save</button>
+  </div>
+  <input type="file" id="importFile" accept="application/json" hidden>
+  <div class="note">Data lives only in this browser on this device. Use Backup and Restore to move it between phone and desktop. Maintenance calories are your own estimate of what you burn per day. Everything here is a general approximation, not medical advice.</div>
+</dialog>
 
-        <div class="work-card" onclick="openModal('Short Film','Biciklo','2021 · IMDb listed','Bahre\'s graduation short film about a boy who makes a problem and fixes it himself.\n\n🎬 Official Selection — Cannes Film Awards\n🎬 Official Selection — Madrid Indie Film Festival\n🎬 Official Selection — Brèves Images Court Métrage, Marseille\n🏆 Audience Award — KinoEst Fest, Italy\n⭐ Special Mention — Fecorno, Norte de Santander, Colombia','https://vimeo.com/535385624')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/535385624?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-xl" style="color:#4db8ff;">BICIKLO</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">Short Film · 2021</span>
-            </div>
-          </div>
-        </div>
+<dialog id="repDlg">
+  <h2>Report</h2>
+  <img id="repImg" alt="Rhythm report">
+  <div class="note">Long-press the image to save it on a phone, or use the button.</div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="repClose">Close</button>
+    <button class="btn" id="repDl">Download PNG</button>
+  </div>
+</dialog>
 
-        <div class="work-card" onclick="openModal('Director\'s Reel','Director\'s Reel','2022','A showcase of Bahre\'s directing and editing work across film, documentary and commercial projects.','https://vimeo.com/772128030')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/772128030?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-md" style="color:#66d9ff;">Director's Reel</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">Reel · 2022</span>
-            </div>
-          </div>
-        </div>
+<script>
+(function(){
+const KEY='rhythm.v1';
+const DEF={goal:{fastH:16,maint:2500,deficit:500,protein:150,fat:70,sugar:50,active:60,wStart:90,wGoal:85},fastStart:null,fasts:[],logs:{},weights:[]};
 
-        <div class="work-card" onclick="openModal('Short Film','Ceramic of Andalusia','Documentary Short','Joaquin Diaz makes clay with his hands from the lands of his grandfather. The clay in Andalusia is special — his work is not just a craft, it is presented in museums.','https://vimeo.com/1190878327')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1190878327?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-md" style="color:#d4a574;">Ceramic of Andalusia</div>
-              <span class="card-meta" style="color:rgba(212,165,116,0.8);">Documentary Short</span>
-            </div>
-          </div>
-        </div>
+function normalize(s){
+  const o={...JSON.parse(JSON.stringify(DEF)),...s};
+  o.goal={...DEF.goal,...(s.goal||{})};
+  o.weights=Array.isArray(s.weights)?s.weights:[];
+  o.fasts=Array.isArray(s.fasts)?s.fasts:[];
+  o.logs=s.logs||{};
+  Object.keys(o.logs).forEach(k=>{
+    const L=o.logs[k];
+    if(L.p){ L.m=(L.m||[]).concat(L.p.map(e=>({t:e.t,p:e.v}))); delete L.p; }
+    L.m=L.m||[]; L.a=L.a||[];
+  });
+  return o;
+}
+function load(){
+  try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s) return normalize(s); }catch(e){}
+  return normalize({});
+}
+let S=load();
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} }
 
-        <div class="work-card" onclick="openModal('Documentary Short','Fado — Singing Colour Hue','Documentary Short','Just like Sevdah, Bosnian music and Portuguese music share an unexpected history. Two countries on different sides of a continent expressing emotions in the same ways.','https://vimeo.com/1190878334')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1190878334?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-md" style="color:#66ff99;">Singing Colour Hue</div>
-              <span class="card-meta" style="color:rgba(180,255,200,0.8);">Documentary Short</span>
-            </div>
-          </div>
-        </div>
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const dk=t=>{const d=new Date(t);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
+const todayKey=()=>dk(Date.now());
+const dayLog=k=>S.logs[k]||(S.logs[k]={m:[],a:[]});
+const n0=x=>Math.round(x||0);
+const fmt=x=>Math.round(x).toLocaleString();
+const fmtHMS=ms=>{const s=Math.max(0,Math.floor(ms/1000));return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);};
+const fmtDT=t=>{const d=new Date(t);return d.toLocaleDateString(undefined,{weekday:'short'})+', '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});};
+const hm=t=>{const d=new Date(t);return pad(d.getHours())+':'+pad(d.getMinutes());};
+const toInput=t=>new Date(t-new Date(t).getTimezoneOffset()*60000).toISOString().slice(0,16);
+const setArc=(el,frac,len)=>el.setAttribute('stroke-dashoffset',(len*(1-Math.min(1,Math.max(0,frac)))).toFixed(2));
+const target=()=>Math.max(0,S.goal.maint-S.goal.deficit);
 
-        <div class="work-card" onclick="openModal('Documentary Short','Sebastian','Documentary Short','A story about fighter Sebastian — another story of a guy fighting his way into a better life. It\'s not just sports.','https://vimeo.com/1190878342')">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1190878342?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <div class="card-title-xl" style="color:#ff6b6b;">SEBASTIAN</div>
-              <span class="card-meta" style="color:rgba(255,150,150,0.8);">Documentary Short</span>
-            </div>
-          </div>
-        </div>
+function tot(k){
+  const L=S.logs[k]; const t={k:0,p:0,f:0,c:0,s:0,a:0};
+  if(!L) return t;
+  L.m.forEach(e=>{t.k+=e.k||0;t.p+=e.p||0;t.f+=e.f||0;t.c+=e.c||0;t.s+=e.s||0;});
+  L.a.forEach(e=>{t.a+=e.v||0;});
+  return t;
+}
 
-      </div>
-    </div>
+/* ---------- fasting ---------- */
+const STAGES=[[0,'Fed · digesting'],[4,'Blood sugar settling'],[8,'Fasting state'],[12,'Fat burning ramps up'],[16,'Deep fat burn'],[24,'Extended fast']];
+const stageFor=h=>{let s=STAGES[0][1];for(const [t,n] of STAGES) if(h>=t) s=n;return s;};
 
+function renderFast(){
+  const fArc=$('fastArc'), goalMs=S.goal.fastH*3600e3;
+  $('goalLbl').textContent=S.goal.fastH+'h goal';
+  if(S.fastStart){
+    const el=Date.now()-S.fastStart, h=el/3600e3;
+    $('timer').textContent=fmtHMS(el); $('timer').className='timer';
+    $('stage').textContent=stageFor(h); $('stage').className='stage';
+    const over=el-goalMs;
+    $('sub').textContent=over>=0?('+'+fmtHMS(over).slice(0,5)+' past goal'):(fmtHMS(-over).slice(0,5)+' to go');
+    setArc(fArc,el/goalMs,552.92);
+    $('tStart').textContent=fmtDT(S.fastStart);
+    $('tGoal').textContent=fmtDT(S.fastStart+goalMs);
+    $('fastBtn').textContent='End fast'; $('fastBtn').className='btn ghost';
+    $('editStart').hidden=false;
+  }else{
+    const last=S.fasts[S.fasts.length-1];
+    if(last){ $('timer').textContent=fmtHMS(Date.now()-last.e); $('sub').textContent='since last fast ended'; }
+    else { $('timer').textContent='00:00:00'; $('sub').textContent='no fast running'; }
+    $('timer').className='timer idle';
+    $('stage').textContent='Eating window'; $('stage').className='stage idle';
+    setArc(fArc,0,552.92);
+    $('tStart').textContent='–'; $('tGoal').textContent='–';
+    $('fastBtn').textContent='Start fast'; $('fastBtn').className='btn';
+    $('editStart').hidden=true;
+  }
+}
+function openStart(mode){
+  $('startTitle').textContent=mode==='new'?'Start fast at':'Fast started at';
+  $('startInput').value=toInput(mode==='edit'&&S.fastStart?S.fastStart:Date.now());
+  $('startDlg').showModal();
+}
+$('fastBtn').onclick=()=>{
+  if(S.fastStart){ S.fasts.push({s:S.fastStart,e:Date.now(),g:S.goal.fastH}); S.fastStart=null; }
+  else S.fastStart=Date.now();
+  save(); renderAll();
+};
+$('editStart').onclick=()=>openStart('edit');
+$('startCancel').onclick=()=>$('startDlg').close();
+$('startOk').onclick=()=>{
+  const t=new Date($('startInput').value).getTime();
+  if(!isNaN(t)&&t<=Date.now()){ S.fastStart=t; save(); renderAll(); }
+  $('startDlg').close();
+};
 
-    <!-- COMMERCIAL WORK - LOCKED -->
-    <div id="commercial" style="padding:32px 0 48px 0;background: transparent;border:0.5px solid rgba(74,138,255,0.15);border-top:0.5px solid rgba(58,172,207,0.08);border-radius:24px;overflow:hidden;">
-      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;padding:0 48px;">Commercial Work <span style="color:var(--accent);">🔒</span></div>
-      <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;margin-left:48px;"></div>
-      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;padding-left:48px;padding-right:48px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
+/* ---------- food ---------- */
+function macroRow(label,val,goal,color,unit,isLimit){
+  const over=goal&&val>goal;
+  const frac=goal?val/goal:0;
+  const right=goal?`<span class="${over?'o':''}">${n0(val)} / ${n0(goal)} ${unit}${over?(isLimit?' · over limit':' · over'):''}</span>`:`<span>${n0(val)} ${unit}</span>`;
+  return `<div class="mac"><div class="top"><span>${label}</span>${right}</div><div class="track"><i style="width:${Math.min(100,frac*100)}%;background:${color}"></i></div></div>`;
+}
+function renderFood(){
+  const t=tot(todayKey()), T=target();
+  $('calVal').innerHTML=`${fmt(t.k)}<small> / ${fmt(T)} kcal</small>`;
+  setArc($('calArc'),T?t.k/T:0,263.9);
+  const left=T-t.k;
+  $('calLeft').textContent=left>=0?`${fmt(left)} kcal left`:`${fmt(-left)} kcal over target`;
+  $('calLeft').className='left'+(left<0?' over':'');
+  $('macros').innerHTML=
+    macroRow('Protein',t.p,S.goal.protein,'var(--protein)','g')+
+    macroRow('Fat',t.f,S.goal.fat,'var(--fat)','g')+
+    macroRow('Carbs',t.c,0,'var(--carb)','g')+
+    macroRow('Sugar',t.s,S.goal.sugar,'var(--sugar)','g',true);
+  const L=dayLog(todayKey());
+  $('mealList').innerHTML=L.m.map((e,i)=>{
+    const bits=[]; if(e.k) bits.push(n0(e.k)+' kcal');
+    if(e.p) bits.push('P'+n0(e.p)); if(e.f) bits.push('F'+n0(e.f)); if(e.c) bits.push('C'+n0(e.c)); if(e.s) bits.push('S'+n0(e.s));
+    return `<span>${hm(e.t)} · ${e.n?e.n+' · ':''}${bits.join(' ')}<button data-del="m" data-i="${i}" aria-label="Remove">×</button></span>`;
+  }).join('');
+}
+$('addMeal').onclick=()=>{ ['mName','mK','mP','mF','mC','mS'].forEach(id=>$(id).value=''); $('mealDlg').showModal(); };
+$('mealCancel').onclick=()=>$('mealDlg').close();
+$('mealOk').onclick=()=>{
+  const g=id=>{const v=parseFloat($(id).value);return v>0?v:0;};
+  const e={t:Date.now(),n:$('mName').value.trim(),k:g('mK'),p:g('mP'),f:g('mF'),c:g('mC'),s:g('mS')};
+  if(e.k||e.p||e.f||e.c||e.s){ dayLog(todayKey()).m.push(e); save(); renderAll(); }
+  $('mealDlg').close();
+};
 
-        <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/895596736?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <span class="card-lock">🔒</span>
-              <div class="card-lock-title">Animated Graphs & Infographics</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">Commercial · Private</span>
-            </div>
-          </div>
-        </div>
+/* ---------- activity ---------- */
+const ACT_CHIPS=[10,20,30,45];
+$('actChips').innerHTML=ACT_CHIPS.map(v=>`<button class="chip" data-a="${v}">+${v}m</button>`).join('')+`<button class="chip" data-a="custom">Custom</button>`;
+function renderAct(){
+  const L=dayLog(todayKey()), a=tot(todayKey()).a;
+  $('actVal').innerHTML=`${n0(a)}<small> / ${n0(S.goal.active)} min</small>`;
+  setArc($('actArc'),a/S.goal.active,263.9);
+  $('actList').innerHTML=L.a.map((e,i)=>`<span>${hm(e.t)} · ${e.v}min<button data-del="a" data-i="${i}" aria-label="Remove">×</button></span>`).join('');
+}
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-a]');
+  if(c){
+    let v=c.dataset.a; if(v==='custom') v=prompt('Activity (min)');
+    v=parseFloat(v);
+    if(v>0){ dayLog(todayKey()).a.push({t:Date.now(),v:Math.round(v)}); save(); renderAll(); }
+    return;
+  }
+  const d=e.target.closest('[data-del]');
+  if(d){ dayLog(todayKey())[d.dataset.del].splice(+d.dataset.i,1); save(); renderAll(); }
+});
 
-        <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/895593138?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <span class="card-lock">🔒</span>
-              <div class="card-lock-title" style="color:#66d9ff;">Animated Intro Example</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">Commercial · Private</span>
-            </div>
-          </div>
-        </div>
+/* ---------- weight ---------- */
+function wByDay(){
+  const m={}; S.weights.slice().sort((a,b)=>a.t-b.t).forEach(w=>{m[dk(w.t)]=w;});
+  return Object.keys(m).sort().map(k=>({k,v:m[k].v,t:m[k].t}));
+}
+function renderWeight(){
+  const arr=wByDay(), G=S.goal;
+  if(!arr.length){
+    $('wVal').innerHTML='–'; $('wProg').style.width='0';
+    $('wInfo').textContent=`Goal ${G.wGoal} kg · start ${G.wStart} kg · no weigh-ins yet`;
+    $('wSpark').innerHTML=''; return;
+  }
+  const cur=arr[arr.length-1].v;
+  $('wVal').innerHTML=`${cur.toFixed(1)}<small> kg</small>`;
+  const span=G.wStart-G.wGoal;
+  const prog=span!==0?(G.wStart-cur)/span:0;
+  $('wProg').style.width=Math.min(100,Math.max(0,prog*100))+'%';
+  const toGo=cur-G.wGoal;
+  let info=toGo>0?`${toGo.toFixed(1)} kg to goal (${G.wGoal} kg)`:`Goal ${G.wGoal} kg reached`;
+  const weekAgo=Date.now()-7*864e5;
+  const ref=arr.find(w=>w.t>=weekAgo&&w.t<arr[arr.length-1].t);
+  if(ref){ const d=cur-ref.v; info+=` · ${d>0?'+':''}${d.toFixed(1)} kg in 7 days`; }
+  $('wInfo').textContent=info;
+  const pts=arr.slice(-30);
+  if(pts.length>1){
+    const vs=pts.map(p=>p.v), mn=Math.min(...vs), mx=Math.max(...vs), rg=(mx-mn)||1;
+    const path=pts.map((p,i)=>`${(i/(pts.length-1)*146+2).toFixed(1)},${(42-((p.v-mn)/rg)*38).toFixed(1)}`).join(' ');
+    $('wSpark').innerHTML=`<polyline points="${path}" fill="none" style="stroke:var(--active)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }else $('wSpark').innerHTML='';
+}
+function logWeight(v){ if(v>20&&v<400){ S.weights.push({t:Date.now(),v:Math.round(v*10)/10}); save(); renderAll(); return true; } return false; }
+$('addWeight').onclick=()=>{ const v=prompt('Weight (kg)'); if(v) logWeight(parseFloat(v.replace(',','.'))); };
+$('undoWeight').onclick=()=>{ if(S.weights.length){ S.weights.sort((a,b)=>a.t-b.t); S.weights.pop(); save(); renderAll(); } };
 
-        <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1192722654?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <span class="card-lock">🔒</span>
-              <div class="card-lock-title" style="color:#d4a574;">Regular Corporate Video</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">Commercial · Private</span>
-            </div>
-          </div>
-        </div>
+/* ---------- trends ---------- */
+function weekKeys(){ const now=new Date(), dow=(now.getDay()+6)%7, ks=[]; for(let i=0;i<=dow;i++) ks.push(dk(new Date(now.getFullYear(),now.getMonth(),now.getDate()-dow+i))); return ks; }
+function monthKeys(){ const now=new Date(), ks=[]; for(let d=1;d<=now.getDate();d++) ks.push(dk(new Date(now.getFullYear(),now.getMonth(),d))); return ks; }
+function pstats(keys){
+  let eaten=0,days=0,p=0;
+  keys.forEach(k=>{ const t=tot(k); if(t.k>0){ eaten+=t.k; days++; p+=t.p; } });
+  const deficit=S.goal.maint*days-eaten;
+  return {days,eaten,tgt:target()*days,deficit,kg:deficit/7700,avgP:days?p/days:0,avgK:days?eaten/days:0};
+}
+function statLine(name,s){
+  if(!s.days) return `<div class="stat"><b>${name}</b> <small>no calories logged yet</small></div>`;
+  return `<div class="stat"><b>${name}</b> <small>· ${s.days} day${s.days>1?'s':''} logged</small><br>${fmt(s.eaten)} kcal eaten (avg ${fmt(s.avgK)}/day) · target ${fmt(s.tgt)}<br>${s.deficit>=0?'Deficit':'Surplus'} <b>${fmt(Math.abs(s.deficit))} kcal</b> ≈ ${Math.abs(s.kg).toFixed(2)} kg${s.deficit<0?' gained':' lost'}</div>`;
+}
+function lastDays(n){
+  const out=[], now=new Date();
+  for(let i=n-1;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i); out.push({k:dk(d),label:String(d.getDate()),kcal:tot(dk(d)).k}); }
+  return out;
+}
+function chartInner(days,w,h,c,fs){
+  fs=fs||9;
+  const T=target(), mx=Math.max(T*1.3,...days.map(d=>d.kcal),1), bw=(w-24)/days.length, base=h-22, top=8;
+  let s='';
+  days.forEach((d,i)=>{
+    const bh=(d.kcal/mx)*(base-top), x=12+i*bw;
+    s+=`<rect x="${(x+bw*0.15).toFixed(1)}" y="${(base-bh).toFixed(1)}" width="${(bw*0.7).toFixed(1)}" height="${Math.max(bh,d.kcal?2:0).toFixed(1)}" rx="3" fill="${d.kcal>T?c.over:c.bar}"/>`;
+    s+=`<text x="${(x+bw/2).toFixed(1)}" y="${h-7}" font-size="${fs}" text-anchor="middle" fill="${c.text}">${d.label}</text>`;
+  });
+  const ty=base-(T/mx)*(base-top);
+  s+=`<line x1="8" x2="${w-8}" y1="${ty.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="${c.line}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+  s+=`<text x="${w-8}" y="${(ty-4).toFixed(1)}" font-size="${fs}" text-anchor="end" fill="${c.text}">target ${fmt(T)}</text>`;
+  return s;
+}
+function renderTrends(){
+  $('stats').innerHTML=statLine('This week',pstats(weekKeys()))+statLine('This month',pstats(monthKeys()));
+  $('chart').innerHTML=chartInner(lastDays(14),320,140,{bar:'#f5b700',over:'#e5484d',line:'#8b5cf6',text:'#8a8794'});
+}
 
-        <div class="work-card" onclick="openCommercial()" style="cursor:pointer;">
-          <div class="work-thumb">
-            <iframe src="https://player.vimeo.com/video/1192722655?background=1&autoplay=0&loop=0&muted=1&byline=0&title=0&controls=0" style="position:absolute;top:50%;left:50%;width:300%;height:300%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(6px) brightness(0.6);" frameborder="0" allow="autoplay; fullscreen"></iframe>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:2;">
-              <span class="card-lock">🔒</span>
-              <div class="card-lock-title" style="color:#ff6b6b;">Commercial Reel</div>
-              <span class="card-meta" style="color:rgba(180,220,255,0.8);">Commercial · Private</span>
-            </div>
-          </div>
-        </div>
+/* ---------- week strip + history ---------- */
+function miniDay(k){
+  const t=tot(k), T=target();
+  let best=0;
+  S.fasts.forEach(f=>{ if(dk(f.e)===k) best=Math.max(best,(f.e-f.s)/3600e3/(f.g||S.goal.fastH)); });
+  if(S.fastStart&&dk(Date.now())===k) best=Math.max(best,(Date.now()-S.fastStart)/3600e3/S.goal.fastH);
+  const rings=[[15.5,'var(--fast)',best],[12,'var(--cal)',T?t.k/T:0],[8.5,'var(--protein)',t.p/S.goal.protein],[5,'var(--active)',t.a/S.goal.active]];
+  return `<svg width="34" height="34" viewBox="0 0 36 36" style="transform:rotate(-90deg)">`+rings.map(([r,c,f])=>{
+    const len=2*Math.PI*r;
+    return `<circle cx="18" cy="18" r="${r}" fill="none" stroke="var(--track)" stroke-width="2.4"/><circle cx="18" cy="18" r="${r}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="${len}" stroke-dashoffset="${len*(1-Math.min(1,f))}"/>`;
+  }).join('')+`</svg>`;
+}
+function renderWeek(){
+  const now=new Date(), dow=(now.getDay()+6)%7, names=['MON','TUE','WED','THU','FRI','SAT','SUN']; let h='';
+  for(let i=0;i<7;i++){ const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-dow+i); h+=`<div class="day ${i===dow?'today':''}">${names[i]}${miniDay(dk(d))}</div>`; }
+  $('week').innerHTML=h;
+}
+function renderHist(){
+  const list=S.fasts.slice(-5).reverse();
+  $('hist').innerHTML=list.length?list.map(f=>{
+    const hrs=(f.e-f.s)/3600e3, ok=hrs>=(f.g||S.goal.fastH);
+    const d=new Date(f.s).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+    return `<div><span>${d}</span><span class="${ok?'ok':''}">${hrs.toFixed(1)}h / ${f.g}h ${ok?'✓':''}</span></div>`;
+  }).join(''):'<div><span style="color:var(--mute)">No completed fasts yet</span></div>';
+}
 
-      </div>
-    </div>
+/* ---------- settings ---------- */
+const GF={gFast:'fastH',gAct:'active',gMaint:'maint',gDef:'deficit',gPro:'protein',gFat:'fat',gSug:'sugar',gW0:'wStart',gW1:'wGoal'};
+function updTarget(){
+  const m=parseFloat($('gMaint').value)||0, d=parseFloat($('gDef').value)||0, t=Math.max(0,m-d);
+  $('gTarget').value=fmt(t)+' kcal';
+  $('tgtNote').textContent=t&&t<1500?'This target is quite low. For a sustained deficit it is worth checking the number with a doctor or dietitian.':'';
+}
+$('openSettings').onclick=()=>{
+  Object.keys(GF).forEach(id=>$(id).value=S.goal[GF[id]]);
+  updTarget(); $('setDlg').showModal();
+};
+['gMaint','gDef'].forEach(id=>$(id).addEventListener('input',updTarget));
+$('setCancel').onclick=()=>$('setDlg').close();
+$('setOk').onclick=()=>{
+  Object.keys(GF).forEach(id=>{ const v=parseFloat($(id).value); if(v>0) S.goal[GF[id]]=v; });
+  save(); renderAll(); $('setDlg').close();
+};
+function download(name,content,type){
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([content],{type}));
+  a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+function flash(btn,txt){ const o=btn.textContent; btn.textContent=txt; setTimeout(()=>btn.textContent=o,1600); }
+$('exportBtn').onclick=()=>download('rhythm-'+todayKey()+'.json',JSON.stringify(S,null,2),'application/json');
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const s=JSON.parse(r.result);
+      if(s&&s.goal&&s.logs&&Array.isArray(s.fasts)){
+        if(confirm('Replace data on this device with the imported file?')){ S=normalize(s); save(); renderAll(); $('setDlg').close(); }
+      }else alert('Not a Rhythm export file.');
+    }catch(err){ alert('Could not read that file.'); }
+  };
+  r.readAsText(f); e.target.value='';
+};
 
+/* ---------- text + CSV export ---------- */
+function allDays(){
+  const ks=new Set(Object.keys(S.logs));
+  S.fasts.forEach(f=>ks.add(dk(f.e)));
+  S.weights.forEach(w=>ks.add(dk(w.t)));
+  if(S.fastStart) ks.add(todayKey());
+  return [...ks].sort();
+}
+function buildText(){
+  const G=S.goal, wk=pstats(weekKeys()), mo=pstats(monthKeys());
+  let o='RHYTHM EXPORT '+todayKey()+'\n';
+  o+='Goals: fast '+G.fastH+' h | target '+fmt(target())+' kcal (maintenance '+fmt(G.maint)+' minus deficit '+fmt(G.deficit)+') | protein '+G.protein+' g | fat '+G.fat+' g | sugar limit '+G.sugar+' g | activity '+G.active+' min | weight '+G.wStart+' to '+G.wGoal+' kg\n';
+  o+='This week: '+wk.days+' days logged, '+fmt(wk.eaten)+' kcal, deficit vs maintenance '+fmt(wk.deficit)+' kcal\n';
+  o+='This month: '+mo.days+' days logged, '+fmt(mo.eaten)+' kcal, deficit vs maintenance '+fmt(mo.deficit)+' kcal\n';
+  const wd=wByDay(); const wm={}; wd.forEach(w=>wm[w.k]=w.v);
+  allDays().forEach(k=>{
+    const L=S.logs[k]||{m:[],a:[]}, t=tot(k);
+    o+='\n'+k+'\n';
+    if(wm[k]) o+='  Weight: '+wm[k].toFixed(1)+' kg\n';
+    S.fasts.filter(f=>dk(f.e)===k).forEach(f=>{ o+='  Fast: '+((f.e-f.s)/3600e3).toFixed(1)+' h ('+hm(f.s)+' to '+hm(f.e)+', goal '+f.g+' h)\n'; });
+    if(k===todayKey()&&S.fastStart) o+='  Fast running since '+hm(S.fastStart)+'\n';
+    o+='  Food: '+n0(t.k)+' kcal | protein '+n0(t.p)+' g | fat '+n0(t.f)+' g | carbs '+n0(t.c)+' g | sugar '+n0(t.s)+' g\n';
+    L.m.forEach(e=>{ o+='    '+hm(e.t)+' '+(e.n?e.n+': ':'')+n0(e.k)+' kcal, P'+n0(e.p)+' F'+n0(e.f)+' C'+n0(e.c)+' S'+n0(e.s)+'\n'; });
+    o+='  Activity: '+n0(t.a)+' min'+(L.a.length?' ('+L.a.map(e=>hm(e.t)+' '+e.v+'min').join(', ')+')':'')+'\n';
+  });
+  return o;
+}
+function buildCSV(){
+  const rows=[['date','type','time','value','unit']];
+  const wd=wByDay();
+  allDays().forEach(k=>{
+    const L=S.logs[k]||{m:[],a:[]};
+    S.fasts.filter(f=>dk(f.e)===k).forEach(f=>rows.push([k,'fast',hm(f.e),((f.e-f.s)/3600e3).toFixed(2),'h']));
+    L.m.forEach(e=>{ [['calories','k','kcal'],['protein','p','g'],['fat','f','g'],['carbs','c','g'],['sugar','s','g']].forEach(([nm,key,u])=>{ if(e[key]) rows.push([k,nm,hm(e.t),e[key],u]); }); });
+    L.a.forEach(e=>rows.push([k,'activity',hm(e.t),e.v,'min']));
+    wd.filter(w=>w.k===k).forEach(w=>rows.push([k,'weight',hm(w.t),w.v,'kg']));
+  });
+  return rows.map(r=>r.join(',')).join('\n');
+}
+$('copyTxtBtn').onclick=()=>{
+  const b=$('copyTxtBtn'), t=buildText();
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>flash(b,'Copied ✓')).catch(()=>{ download('rhythm-'+todayKey()+'.txt',t,'text/plain'); flash(b,'Downloaded'); });
+};
+$('csvBtn').onclick=()=>download('rhythm-'+todayKey()+'.csv',buildCSV(),'text/csv');
 
-    <section id="about">
-      <span class="section-label">About</span>
-    </section>
-    <div class="about-grid">
-      <div>
+/* ---------- visual report (PNG) ---------- */
+function buildReportSVG(){
+  const W=800, G=S.goal, t=tot(todayKey()), wk=pstats(weekKeys()), mo=pstats(monthKeys()), wd=wByDay();
+  const cur=wd.length?wd[wd.length-1].v:null;
+  const C={bar:'#f5b700',over:'#e5484d',line:'#8b5cf6',text:'#8a8794'};
+  let y=0, s='';
+  const txt=(x,yy,str,size,fill,weight,anchor)=>`<text x="${x}" y="${yy}" font-size="${size}" fill="${fill||'#1c1b22'}" font-weight="${weight||400}" text-anchor="${anchor||'start'}" font-family="-apple-system,Helvetica,Arial,sans-serif">${str}</text>`;
+  s+=`<rect width="${W}" height="1000" fill="#f6f3ee"/>`;
+  s+=`<rect x="40" y="40" width="180" height="8" rx="4" fill="#f5b700"/><rect x="220" y="40" width="180" height="8" rx="4" fill="#22b573"/><rect x="400" y="40" width="180" height="8" rx="4" fill="#3b82f6"/><rect x="580" y="40" width="180" height="8" rx="4" fill="#8b5cf6"/>`;
+  s+=txt(40,100,'Rhythm',40,'#1c1b22',700)+txt(760,100,new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}),18,'#8a8794',400,'end');
+  y=140;
+  const card=(h)=>{ const r=`<rect x="40" y="${y}" width="720" height="${h}" rx="22" fill="#fff"/>`; return r; };
+  // today
+  s+=card(190);
+  s+=txt(64,y+36,'TODAY',14,'#8a8794',600);
+  s+=txt(64,y+88,fmt(t.k)+' kcal',44,'#1c1b22',700)+txt(64,y+116,'target '+fmt(target())+' · '+(target()-t.k>=0?fmt(target()-t.k)+' left':fmt(t.k-target())+' over'),18,'#8a8794');
+  const mac=[['Protein',t.p,G.protein,'#22b573'],['Fat',t.f,G.fat,'#f59e0b'],['Sugar',t.s,G.sugar,'#c084fc']];
+  mac.forEach((m,i)=>{ const x=64+i*230; s+=txt(x,y+150,m[0],14,'#8a8794')+txt(x+150,y+150,n0(m[1])+' / '+m[2]+' g',14,'#1c1b22',600,'end')+`<rect x="${x}" y="${y+160}" width="150" height="9" rx="5" fill="#eeeaf2"/><rect x="${x}" y="${y+160}" width="${Math.min(150,m[2]?m[1]/m[2]*150:0)}" height="9" rx="5" fill="${m[3]}"/>`; });
+  s+=txt(736,y+88,'Carbs '+n0(t.c)+' g',18,'#8a8794',400,'end')+txt(736,y+116,'Activity '+n0(t.a)+' / '+G.active+' min',18,'#8a8794',400,'end');
+  y+=210;
+  // week / month
+  s+=card(240);
+  s+=txt(64,y+36,'WEEK AND MONTH',14,'#8a8794',600);
+  [['This week',wk],['This month',mo]].forEach((p,i)=>{
+    const yy=y+80+i*84, q=p[1];
+    s+=txt(64,yy,p[0],22,'#1c1b22',700);
+    if(!q.days){ s+=txt(64,yy+28,'no calories logged yet',18,'#8a8794'); return; }
+    s+=txt(64,yy+28,fmt(q.eaten)+' kcal eaten over '+q.days+(q.days>1?' days':' day')+' (avg '+fmt(q.avgK)+'/day)',18,'#1c1b22');
+    s+=txt(736,yy+28,(q.deficit>=0?'Deficit ':'Surplus ')+fmt(Math.abs(q.deficit))+' kcal ≈ '+Math.abs(q.kg).toFixed(2)+' kg',18,q.deficit>=0?'#22b573':'#e5484d',600,'end');
+  });
+  y+=260;
+  // weight
+  s+=card(150);
+  s+=txt(64,y+36,'WEIGHT',14,'#8a8794',600);
+  if(cur===null){ s+=txt(64,y+90,'no weigh-ins yet',22,'#8a8794'); }
+  else{
+    const span=G.wStart-G.wGoal, prog=span?Math.min(1,Math.max(0,(G.wStart-cur)/span)):0;
+    s+=txt(64,y+92,cur.toFixed(1)+' kg',44,'#1c1b22',700)+txt(736,y+80,(cur>G.wGoal?(cur-G.wGoal).toFixed(1)+' kg to goal ('+G.wGoal+' kg)':'goal reached'),18,'#8a8794',400,'end');
+    s+=`<rect x="64" y="${y+112}" width="672" height="12" rx="6" fill="#eeeaf2"/><rect x="64" y="${y+112}" width="${(672*prog).toFixed(0)}" height="12" rx="6" fill="#3b82f6"/>`;
+  }
+  y+=170;
+  // chart
+  s+=card(260);
+  s+=txt(64,y+36,'CALORIES · LAST 14 DAYS',14,'#8a8794',600);
+  s+=`<g transform="translate(64,${y+50})"><svg x="0" y="0" width="672" height="190" viewBox="0 0 672 190">${chartInner(lastDays(14),672,190,C,14)}</svg></g>`;
+  y+=280;
+  s+=txt(400,y+10,'Approximate values from self-logged data, not medical advice.',13,'#8a8794',400,'middle');
+  const H=y+40;
+  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${s.replace('height="1000"','height="'+H+'"')}</svg>`,W,H};
+}
+let repURL='';
+$('openReport').onclick=()=>{
+  const r=buildReportSVG(), img=new Image();
+  img.onload=()=>{
+    const c=document.createElement('canvas'); c.width=r.W*2; c.height=r.H*2;
+    const x=c.getContext('2d'); x.scale(2,2); x.drawImage(img,0,0);
+    try{ repURL=c.toDataURL('image/png'); }catch(e){ repURL='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg); }
+    $('repImg').src=repURL; $('repDlg').showModal();
+  };
+  img.onerror=()=>{ repURL='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg); $('repImg').src=repURL; $('repDlg').showModal(); };
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg);
+};
+$('repClose').onclick=()=>$('repDlg').close();
+$('repDl').onclick=()=>{ const a=document.createElement('a'); a.href=repURL; a.download='rhythm-report-'+todayKey()+(repURL.indexOf('image/png')>0?'.png':'.svg'); a.click(); };
 
-        <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Trainings</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2024</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master of Arts in CCI — Media and Communications, Malmö University (MAU)</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master course in Documentary Film, Linköping University (LIU)</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master course in Docu-Performance, Academy of Music and Drama, Gothenburg University (GU)</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Master of Science in Criminology, Malmö University (MAU)</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Work</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2023–</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Audiovisual Producer and Editor at <em>Allianz</em>, Munich. Studio and on-location filming.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Video Producer-Editor at <em>Wedio</em>, Aarhus, Denmark.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022–23</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Freelance Video Editor at <em>Flexiana</em>, Barcelona, Spain.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Co-founder of <em>BUS FILM LAB</em>, Busovača, Bosnia-Herzegovina.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Writer, Director and Producer of <em>Biciklo</em>.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Artistic Director of <em>BIH ART FORUM</em> at the Historical Museum of Bosnia and Herzegovina.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2020</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Producer of <em>Ulica Snova</em> (Dream Street).</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Producer of <em>The Dancer</em> in collaboration with Malmö Theatre Academy.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Producer of <em>The Boy</em>.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2018</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Writing and producing at <em>Bridge — Association for Culture and Arts</em>, Sarajevo.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2017</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Writer and Producer of <em>Silk-man</em> at Artisten, Academy for Music and Drama, GU.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2016</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Founder and Producer at <em>filmb</em>.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Photography and Human Rights Intern, Colombian Civic Organisation, University of South Colombia.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2014</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Theatre Director and Actor in <em>TYLLFLIKT</em>, WestPride and the Swedish Human Rights Federation.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Theatre Director and Actor in <em>RASKRŠĆE</em>, Evangelic Union of Bosnia and Herzegovina.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Theatre Director and Actor in <em>La Casa de Bernarda Alba</em> by Lorca, Centro de Estudios Hispanicos.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal" style="margin-top:32px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Recognitions & Grants</div>
-          <div style="display:flex;flex-direction:column;gap:16px;">
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2022</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Swedish University Union Grant — €3,000 for postgraduate studies at MAU.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:flex-start;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;margin-top:3px;">2021</span>
-              <div>
-                <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px;"><em>Biciklo</em> — International recognition:</div>
-                <div style="display:flex;flex-direction:column;gap:6px;padding-left:12px;border-left:0.5px solid var(--slate);">
-                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🎬 Official Selection — Cannes Film Awards</span>
-                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🎬 Official Selection — Madrid Indie Film Festival</span>
-                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🎬 Official Selection — Brèves Images Court Métrage, Marseille</span>
-                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">🏆 Audience Award — KinoEst Fest, Italy</span>
-                  <span style="font-size:12px;color:var(--text-muted);line-height:1.6;">⭐ Special Mention — Fecorno, Norte de Santander, Colombia</span>
-                </div>
-              </div>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2021</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Bosnian Film Fund Grant — €45,000 for <em>Childhood Story</em>.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2019</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><em>Ulica Snova</em> — Best Short Film, Bosnian Art Forum.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2015–16</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Swedish Development Agency SIDA Grant — €10,000 for building cinemas in Colombian slums.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2013</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">European Commission Grant — €5,000 for environmental protection in South-East Europe.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2012</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Bosnian Diaspora Fund in Norway Grant — Two years of covered educational expenses.</span>
-            </div>
-            <div class="timeline-row" style="display:flex;gap:16px;align-items:baseline;">
-              <span style="font-size:10px;letter-spacing:1px;color:var(--accent);flex-shrink:0;">2011</span>
-              <span style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Ministry of Culture and Education of Sarajevo Kanton Grant — €1,000 for contributions to minority rights.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal" style="margin-top:48px;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:700;">Master Theses — Scriptures</div>
-          <div style="width:32px;height:0.5px;background:var(--slate-mid);margin-bottom:20px;"></div>
-          <div class="theses-scroll" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;padding-top:8px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent;-webkit-overflow-scrolling:touch;">
-
-            <div class="work-card" onclick="window.open('https://mau.diva-portal.org/smash/record.jsf?utm_medium=iframely&pid=diva2%3A1888254&utm_source=canva&dswid=-6999', '_blank');" style="cursor:pointer;">
-              <div class="work-thumb" style="background:linear-gradient(135deg, #0d1f3d 0%, #1a2f5a 50%, #0f1a35 100%);">
-                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center;">
-                  <div style="font-size:clamp(36px, 8vw, 48px);">🎓</div>
-                  <div class="card-title-md" style="color:#66d9ff;line-height:1.2;">Artist's Way of Making</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="work-card" onclick="window.open('https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1715007&dswid=-2790', '_blank');" style="cursor:pointer;">
-              <div class="work-thumb" style="background:linear-gradient(135deg, #0d1f3d 0%, #1a2f5a 50%, #0f1a35 100%);">
-                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center;">
-                  <div style="font-size:clamp(36px, 8vw, 48px);">🎓</div>
-                  <div class="card-title-md" style="color:#66d9ff;line-height:1.2;">Bosnian Identity After the War</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="work-card" onclick="window.open('https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1486640&dswid=-323', '_blank');" style="cursor:pointer;">
-              <div class="work-thumb" style="background:linear-gradient(135deg, #0d1f3d 0%, #1a2f5a 50%, #0f1a35 100%);">
-                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center;">
-                  <div style="font-size:clamp(36px, 8vw, 48px);">🎓</div>
-                  <div class="card-title-md" style="color:#66d9ff;line-height:1.2;">Who Do You Think You Are?</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-      <div class="about-right reveal">
-        <div class="about-photo-placeholder">
-          <img src="Bahre_pic.png" alt="Bahre Srebrenica" />
-        </div>
-      </div>
-    </div>
-
-    <div id="contact" class="contact-inner" style="text-align:center;padding:60px 48px 80px;margin:0 auto;">
-      <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:0;">
-        <h2 class="contact-heading reveal" style="margin-bottom:0;">Contact</h2>
-        <div id="contact-btn" onclick="document.getElementById('contact-btn').style.display='none';document.getElementById('contact-reveal').style.display='inline-flex';" class="btn-glass btn-glass-primary reveal" style="display:inline-flex;cursor:pointer;">
-          Get in touch
-        </div>
-        <a id="contact-reveal" href="https://wa.me/4915252614371" target="_blank" rel="noopener" class="btn-glass reveal" style="display:none;">+49 152 526 14371</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-name" style="color:var(--text-muted);">© 2026 Bahre Srebrenica</div>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/bahre-srebrenica" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://mubi.com/es/cast/bahre-srebrenica" target="_blank" rel="noopener">MUBI</a>
-      <a href="https://www.imdb.com/name/nm11903727/" target="_blank" rel="noopener">IMDb</a>
-    </div>
-  </footer>
-
-  <script>
-    /* ===== NAV TOGGLE — runs first, isolated from any other script ===== */
-    (function initNav() {
-      var btn = document.getElementById('navToggle');
-      var overlay = document.getElementById('menuOverlay');
-      if (!btn || !overlay) return;
-
-      function toggle(e) {
-        if (e) { e.preventDefault(); e.stopPropagation(); }
-        var isOpen = overlay.classList.contains('open');
-        if (isOpen) {
-          overlay.classList.remove('open');
-          btn.textContent = '+';
-          document.body.style.overflow = '';
-        } else {
-          overlay.classList.add('open');
-          btn.textContent = '×';
-          document.body.style.overflow = 'hidden';
-        }
-      }
-      btn.addEventListener('click', toggle);
-      btn.addEventListener('touchstart', toggle, { passive: false });
-
-      window.toggleMenu = toggle;
-      window.closeMenu = function() {
-        overlay.classList.remove('open');
-        btn.textContent = '+';
-        document.body.style.overflow = '';
-      };
-    })();
-
-    /* ===== COMMERCIAL LOCK ===== */
-    function openCommercial() {
-      document.getElementById('commercial-modal').style.display = 'flex';
-      document.getElementById('commercial-code').value = '';
-      document.getElementById('commercial-error').style.display = 'none';
-      setTimeout(function() { document.getElementById('commercial-code').focus(); }, 100);
+/* ---------- quick log: typed, dictated or pasted ---------- */
+const WORDNUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,fifteen:15,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90,hundred:100};
+function digits(s){ return s.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten|fifteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred)\b/g,w=>WORDNUM[w]); }
+const NUM='(\\d+(?:[.,]\\d+)?)';
+function grab(seg,words,allowG){
+  const g=allowG?'\\s*(?:g|gr|grams?)?':'';
+  let m=seg.match(new RegExp(NUM+g+'\\s*(?:of\\s+)?(?:'+words+')\\b'));
+  if(!m) m=seg.match(new RegExp('\\b(?:'+words+')\\s*[:=]?\\s*'+NUM));
+  return m?parseFloat(m[1].replace(',','.')):null;
+}
+function applyLog(txt){
+  const done=[],miss=[],meals=[]; let pending='', lastMeal=null;
+  digits(txt.toLowerCase()).split(/[,;\n]+|\band\b/).map(s=>s.trim()).filter(Boolean).forEach(seg=>{
+    if(/\b(start|started|begin|began)\b.*\bfast/.test(seg)){
+      if(S.fastStart) miss.push(seg+' (a fast is already running)'); else { S.fastStart=Date.now(); done.push('fast started'); }
+      return;
     }
-    function checkCommercialCode() {
-      var code = document.getElementById('commercial-code').value.trim();
-      if (code === '0207B') {
-        document.getElementById('commercial-modal').style.display = 'none';
-        var cards = document.querySelectorAll('#commercial .work-card');
-        var urls = ['https://vimeo.com/895596736', 'https://vimeo.com/895593138', 'https://vimeo.com/1192722654', 'https://vimeo.com/1192722655'];
-        var titles = ['Commercial Reel I', 'Commercial Reel II', 'Commercial Reel III', 'Commercial Reel IV'];
-        cards.forEach(function(card, i) {
-          var iframe = card.querySelector('iframe');
-          if (iframe) iframe.style.filter = '';
-          var lock = card.querySelector('[style*="position:absolute;inset:0;display:flex"]');
-          if (lock) lock.style.display = 'none';
-          card.onclick = (function(idx) {
-            return function() { openModal('Commercial', titles[idx], 'Commercial', '', urls[idx]); };
-          })(i);
-        });
-      } else {
-        document.getElementById('commercial-error').style.display = 'block';
-        document.getElementById('commercial-code').value = '';
-      }
+    if(/\b(end|ended|break|broke|stop|stopped)\b.*\bfast/.test(seg)){
+      if(!S.fastStart) miss.push(seg+' (no fast running)');
+      else { S.fasts.push({s:S.fastStart,e:Date.now(),g:S.goal.fastH}); S.fastStart=null; done.push('fast ended'); }
+      return;
     }
-
-    /* ===== FILM MODAL ===== */
-    function openModal(tag, title, meta, desc, link) {
-      document.getElementById('modal-tag').textContent = tag;
-      document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-meta').textContent = meta;
-      document.getElementById('modal-desc').innerHTML = desc.replace(/\n/g, '<br>');
-      var linkEl = document.getElementById('modal-link');
-      if (link) {
-        var vimeoId = link.match(/vimeo\.com\/(\d+)/);
-        if (vimeoId) {
-          linkEl.innerHTML = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:16px;"><iframe src="https://player.vimeo.com/video/' + vimeoId[1] + '?autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>';
-        } else {
-          linkEl.innerHTML = '<a href="' + link + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#7aa8c4;color:#0a0f16;padding:11px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:600;">▶ Watch</a>';
-        }
-      } else {
-        linkEl.innerHTML = '<span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#456070;">In Development</span>';
-      }
-      var modal = document.getElementById('film-modal');
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+    if(!/\d/.test(seg)){ pending=(pending+' '+seg).trim(); return; }   // a name that belongs to the next item
+    const name=(pending+' '+seg.split(/\d/)[0]).trim(); pending='';
+    const wm=seg.match(new RegExp(NUM+'\\s*kg\\b'))||seg.match(new RegExp('\\bweigh(?:t|ed)?\\s*(?:is|was|:)?\\s*'+NUM));
+    if(wm){
+      lastMeal=null;
+      const v=parseFloat(wm[1].replace(',','.'));
+      if(logWeight(v)) done.push(v+' kg weight'); else miss.push(seg);
+      return;
     }
-    function closeModal() {
-      document.getElementById('modal-link').innerHTML = '';
-      document.getElementById('film-modal').style.display = 'none';
-      document.body.style.overflow = '';
+    const e={t:Date.now(),n:name.replace(/\b(kcal|cals?|calories?|protein|fats?|sugars?|carbs?|grams?|g)\b/g,'').trim(),
+      k:grab(seg,'kcal|cals?|calories?|calorie',false),p:grab(seg,'protein|prot',true),f:grab(seg,'fats?',true),c:grab(seg,'carbs?|carbohydrates?',true),s:grab(seg,'sugars?',true)};
+    if(e.k||e.p||e.f||e.c||e.s){
+      const keys=['k','p','f','c','s'];
+      keys.forEach(x=>e[x]=e[x]?Math.round(e[x]):0);
+      // a nameless piece like "12 protein" right after a meal belongs to that meal, unless that field is already filled
+      if(!e.n&&lastMeal&&keys.every(x=>!e[x]||!lastMeal[x])){ keys.forEach(x=>{ if(e[x]) lastMeal[x]=e[x]; }); }
+      else { meals.push(e); lastMeal=e; }
+      return;
     }
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+    lastMeal=null;
+    const m=seg.match(new RegExp(NUM)); let v=parseFloat(m[1].replace(',','.'));
+    const hours=/\d\s*(h|hr|hrs|hour|hours)\b/.test(seg);
+    if(hours||/min|walk|run|jog|jump|rope|workout|gym|kettlebell|swim|bike|cycl|exercise|activity|training|yoga|hike/.test(seg)){
+      if(hours&&!/min/.test(seg)) v*=60;
+      dayLog(todayKey()).a.push({t:Date.now(),v:Math.round(v)}); done.push(Math.round(v)+' min activity');
+    }else miss.push(seg);
+  });
+  if(pending) miss.push(pending);
+  meals.forEach(e=>{
+    dayLog(todayKey()).m.push(e);
+    done.push((e.n?e.n+' ':'')+[e.k&&e.k+' kcal',e.p&&e.p+'g protein',e.f&&e.f+'g fat',e.c&&e.c+'g carbs',e.s&&e.s+'g sugar'].filter(Boolean).join(' '));
+  });
+  save(); renderAll();
+  $('qlMsg').textContent=(done.length?'Logged: '+done.join(' · ')+'. ':'')+(miss.length?'Not understood: '+miss.join(' | '):'');
+  if(!miss.length) $('qlText').value='';
+}
+$('qlGo').onclick=()=>{ const t=$('qlText').value.trim(); if(t) applyLog(t); };
+$('qlText').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); $('qlGo').click(); } });
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(SR){
+  const rec=new SR(); rec.lang=navigator.language||'en-US'; rec.interimResults=false; let on=false;
+  $('qlMic').onclick=()=>{ if(on){ rec.stop(); return; } try{ rec.start(); }catch(e){} };
+  rec.onstart=()=>{ on=true; $('qlMic').classList.add('rec'); };
+  rec.onend=()=>{ on=false; $('qlMic').classList.remove('rec'); };
+  rec.onresult=e=>{ const t=Array.from(e.results).map(r=>r[0].transcript).join(' '); $('qlText').value=($('qlText').value+' '+t).trim(); };
+  rec.onerror=ev=>{ $('qlMsg').textContent='Mic not available here ('+ev.error+'). Use the dictation key on your keyboard instead.'; };
+}else $('qlMic').hidden=true;
 
-    /* ===== CUSTOM CURSOR (desktop only) ===== */
-    var isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-    if (!isTouch) {
-      var cursor = document.getElementById('cursor');
-      var ring = document.getElementById('cursorRing');
-      var mx = 0, my = 0, rx = 0, ry = 0;
-      document.addEventListener('mousemove', function(e) {
-        mx = e.clientX; my = e.clientY;
-        cursor.style.left = mx + 'px';
-        cursor.style.top = my + 'px';
-      });
-      function animRing() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-        requestAnimationFrame(animRing);
-      }
-      animRing();
-    }
-
-    /* ===== REVEAL ANIMATIONS ===== */
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e, i) {
-        if (e.isIntersecting) {
-          setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-
-    var popObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e, i) {
-        if (e.isIntersecting) {
-          setTimeout(function() { e.target.classList.add('popped'); }, i * 100);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.work-card').forEach(function(el) { popObserver.observe(el); });
-  </script>
+/* ---------- boot ---------- */
+function renderAll(){ renderFast(); renderFood(); renderAct(); renderWeight(); renderTrends(); renderWeek(); renderHist(); }
+renderAll();
+setInterval(renderFast,1000);
+let lastDay=todayKey();
+setInterval(()=>{ if(todayKey()!==lastDay){ lastDay=todayKey(); renderAll(); } },30000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderAll(); });
+if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+})();
+</script>
 </body>
 </html>
