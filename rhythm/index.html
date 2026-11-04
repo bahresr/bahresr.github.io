@@ -6,8 +6,6 @@
 <title>Rhythm</title>
 <meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Rhythm">
 <link rel="manifest" href="manifest.json">
@@ -27,6 +25,15 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-syst
 body{padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 28px);max-width:520px;margin:0 auto}
 h1{font-size:20px;margin:0 0 6px;letter-spacing:.02em}
 .bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--yellow) 0 25%,var(--green) 25% 50%,var(--blue) 50% 75%,var(--purple) 75% 100%);margin-bottom:14px}
+.apps{display:flex;gap:8px;margin:-4px 0 14px;flex-wrap:wrap}
+.apps a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.apps a.on{color:#fff;background:var(--purple);border-color:var(--purple)}
+.hij{display:block;text-decoration:none;color:var(--ink);border-radius:16px;padding:11px 14px;margin:0 0 12px;font-size:13px;line-height:1.4;background:var(--card)}
+.hij b{display:block;font-size:14px}
+.hij span{color:var(--mute)}
+.hij.fast{background:var(--purple);color:#fff}
+.hij.fast span{color:rgba(255,255,255,.8)}
+.hij.soon{border:1.5px solid var(--purple);background:none}
 .card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:12px}
 .ring-wrap{position:relative;width:min(300px,78vw);margin:4px auto 14px;aspect-ratio:1}
 .ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
@@ -69,6 +76,8 @@ dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--l
 <body>
 <h1>Rhythm · 16h fast</h1>
 <div class="bar"></div>
+<nav class="apps"><a href="/circles">Circles</a><a href="/rhythm/" class="on">Rhythm</a><a href="/moon/">Moon</a></nav>
+<a class="hij" id="hij" href="/moon/"></a>
 
 <div class="card">
   <div class="ring-wrap">
@@ -99,6 +108,7 @@ dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--l
 <div class="card">
   <div class="label">Recent fasts</div>
   <div class="hist" id="hist"></div>
+  <div class="note" style="margin-top:10px">Each completed 16h fast also shows up in the Circles done list (the ✓ button).</div>
 </div>
 
 <dialog id="startDlg">
@@ -155,10 +165,21 @@ const toInput=t=>new Date(t-new Date(t).getTimezoneOffset()*60000).toISOString()
 // the fast stops by itself at 16h, even if the app was closed: the end time is recorded as start + 16h
 function autoStop(){
   if(S.fastStart && Date.now()-S.fastStart>=GOAL_MS){
-    S.fasts.push({s:S.fastStart,e:S.fastStart+GOAL_MS,g:GOAL,auto:true});
-    S.fastStart=null; save(); return true;
+    const s=S.fastStart, e=s+GOAL_MS;
+    S.fasts.push({s,e,g:GOAL,auto:true});
+    S.fastStart=null; save(); pushDone(s,e); return true;
   }
   return false;
+}
+// a completed fast also goes into the Circles done list (same site, same saved data)
+function pushDone(s,e){
+  try{
+    const arr=JSON.parse(localStorage.getItem('circles_done')||'[]'), id='fast-'+s;
+    if(!arr.some(d=>d.id===id)){
+      arr.unshift({id,name:'16h fast',completedAt:new Date(e).toLocaleDateString('en-CA'),source:'rhythm'});
+      localStorage.setItem('circles_done',JSON.stringify(arr));
+    }
+  }catch(err){}
 }
 
 function renderHours(){
@@ -213,7 +234,26 @@ function renderHist(){
     return `<div><span>${d}</span><span class="${ok?'ok':''}">${hrs.toFixed(1)}h ${ok?'✓':''}</span></div>`;
   }).join(''):'<div><span style="color:var(--mute)">No completed fasts yet</span></div>';
 }
-function renderAll(){ lastCur=-1; render(); renderHist(); }
+/* ---- fasting days: the 13th, 14th and 15th of each lunar month, same calendar and adjustment as the Moon page ---- */
+let cal=null; try{ cal=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric',month:'numeric',year:'numeric'}); }catch(e){}
+function adjDays(){ try{ const s=JSON.parse(localStorage.getItem('moon.v1')); return s&&typeof s.adj==='number'?s.adj:0; }catch(e){ return 0; } }
+function lunarDay(plus){
+  const n=new Date(), d=new Date(n.getFullYear(),n.getMonth(),n.getDate()+plus+adjDays(),12); let day=0;
+  cal.formatToParts(d).forEach(x=>{ if(x.type==='day') day=parseInt(x.value,10); });
+  return day;
+}
+const dShort=plus=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate()+plus,12).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});};
+function renderFastingDays(){
+  const el=$('hij'); if(!cal){ el.hidden=true; return; }
+  const d=lunarDay(0);
+  if(d>=13&&d<=15){ el.className='hij fast'; el.innerHTML='<b>Fasting day today</b><span>Day '+(d-12)+' of 3</span>'; return; }
+  if(d===12){ el.className='hij soon'; el.innerHTML='<b>Fasting days begin tomorrow</b><span>'+dShort(1)+' – '+dShort(3)+'</span>'; return; }
+  for(let i=1;i<=60;i++){
+    if(lunarDay(i)===13){ el.className='hij soon'; el.innerHTML='<b>Next fasting days in '+i+' day'+(i>1?'s':'')+'</b><span>'+dShort(i)+' – '+dShort(i+2)+'</span>'; return; }
+  }
+  el.hidden=true;
+}
+function renderAll(){ lastCur=-1; render(); renderHist(); renderFastingDays(); }
 
 $('fastBtn').onclick=()=>{
   if(S.fastStart){
