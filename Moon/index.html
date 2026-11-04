@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Moon</title>
+<meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Moon">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1c1b22; --mute:#8a8794; --line:#e8e4ec; --track:#e4dfeb;
+  --purple:#8b5cf6; --yellow:#f5b700; --green:#22b573; --blue:#3b82f6; --moon:#f3e3a0;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#121214;--card:#1c1c20;--ink:#f2f0f6;--mute:#8f8c99;--line:#2b2b31;--track:#2d2d35;color-scheme:dark}
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 28px);max-width:520px;margin:0 auto}
+h1{font-size:20px;margin:0 0 6px;letter-spacing:.02em}
+.bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--yellow) 0 25%,var(--green) 25% 50%,var(--blue) 50% 75%,var(--purple) 75% 100%);margin-bottom:14px}
+.apps{display:flex;gap:8px;margin:-4px 0 14px;flex-wrap:wrap}
+.apps a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.apps a.on{color:#1c1b22;background:var(--yellow);border-color:var(--yellow)}
+.card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:12px}
+.ring-wrap{position:relative;width:min(300px,78vw);margin:4px auto 10px;aspect-ratio:1}
+.ring-wrap>svg.ring{width:100%;height:100%;transform:rotate(-90deg);position:absolute;inset:0}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.center svg{width:46%;height:auto}
+.day{font-size:34px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums}
+.day small{font-size:14px;font-weight:500;color:var(--mute)}
+.phase{text-align:center;font-size:15px;font-weight:600;margin-top:2px}
+.facts{text-align:center;font-size:13px;color:var(--mute);margin-top:4px}
+.status{margin:12px 0 0;border-radius:16px;padding:11px 14px;font-size:13px;line-height:1.4;text-align:center;background:var(--track)}
+.status b{display:block;font-size:14px}
+.status.fast{background:var(--purple);color:#fff}
+.status.soon{border:1.5px solid var(--purple);background:none}
+.label{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.row:first-of-type{border-top:0}
+.row span:last-child{color:var(--mute);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.dotk{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.nav b{font-size:15px}
+.nav button{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;width:38px;height:34px;font-size:16px;cursor:pointer}
+.tag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:middle}
+.tag.today{background:var(--yellow);color:#1c1b22}
+.tag.fastd{background:var(--purple);color:#fff}
+.sec{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:12px 0 4px}
+.txt{font-size:14px;line-height:1.5;margin:0 0 6px}
+.teach{border-left:3px solid var(--purple);padding-left:11px;margin:8px 0}
+.adj{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:12px;color:var(--mute)}
+.adj button{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:7px 12px;font-size:13px;cursor:pointer}
+.adj button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.note{font-size:11px;color:var(--mute);line-height:1.5}
+</style>
+</head>
+<body>
+<h1>Moon</h1>
+<div class="bar"></div>
+<nav class="apps"><a href="/circles">Circles</a><a href="/rhythm/">Rhythm</a><a href="/moon/" class="on">Moon</a></nav>
+
+<div class="card">
+  <div class="ring-wrap">
+    <svg class="ring" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="88" fill="none" stroke="var(--track)" stroke-width="10"/>
+      <circle id="arc" cx="100" cy="100" r="88" fill="none" stroke="var(--yellow)" stroke-width="10" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="552.92"/>
+      <circle id="white" cx="100" cy="100" r="88" fill="none" stroke="var(--purple)" stroke-width="10" stroke-dasharray="0 552.92" stroke-dashoffset="0"/>
+    </svg>
+    <div class="center">
+      <svg viewBox="-80 -80 160 160" id="moonSvg"></svg>
+      <div class="day" id="day">Day –</div>
+    </div>
+  </div>
+  <div class="phase" id="phase"></div>
+  <div class="facts" id="facts"></div>
+  <div class="status" id="status"></div>
+</div>
+
+<div class="card">
+  <div class="nav">
+    <button id="prev" aria-label="Previous day">‹</button>
+    <b id="dayTitle"></b>
+    <button id="next" aria-label="Next day">›</button>
+  </div>
+  <div id="dayBody"></div>
+  <div class="note" style="margin-top:12px">The teachings do not say the moon changes your mood or health. They give timings, such as when a month starts, which days to fast and which days suit cupping, and they describe the moon as a sign, not a cause. Studies on the moon's effect on sleep and mood are mixed, and any effect found is small. If you are unwell, take medication or have a medical condition, check with a doctor before fasting.</div>
+</div>
+
+<div class="card">
+  <div class="label">Next phases</div>
+  <div id="phases"></div>
+</div>
+
+<div class="card">
+  <div class="label">Upcoming new moons</div>
+  <div id="news"></div>
+  <div class="label" style="margin-top:14px">Upcoming full moons</div>
+  <div id="fulls"></div>
+  <div class="adj" id="adj"></div>
+  <div class="note" style="margin-top:12px">The day count follows the Islamic calendar from your browser. If your community starts the month by moon sighting, it can differ by a day, so use the adjustment above. The new and full moon times are calculated in your browser, accurate to within a few minutes, in your local timezone. Each day begins at sunset, and this page shows the date for the daytime.</div>
+</div>
+
+<script>
+(function(){
+const KEY='moon.v1';
+const PHASES=['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent'];
+const D2R=Math.PI/180, SYN=29.530588861, C=552.92;
+
+const SKY=[
+ 'A very thin crescent may appear low in the west just after sunset, if the sky is clear. It is often not yet visible.',
+ 'A slim crescent low in the west after sunset. It sets within a couple of hours.',
+ 'The crescent grows and sits a little higher after sunset. You may see a faint glow on the dark part, which is light reflected from Earth.',
+ 'A thicker crescent in the evening sky, setting about three hours after the sun.',
+ 'The crescent is getting thick. It is up through the early evening and sets before midnight.',
+ 'The moon is well up at sunset and sets in the late evening.',
+ 'About half lit, high in the south at sunset. It sets around midnight.',
+ 'Half lit or a little more. It stays up past midnight.',
+ 'More than half lit and getting rounder. It rises in the afternoon and is up for much of the night.',
+ 'A gibbous moon. It can be seen in the afternoon sky in the east and is bright in the evening.',
+ 'Nearly three quarters lit. It rises in the afternoon and sets in the early hours.',
+ 'Almost full. It rises in the late afternoon and lights most of the night.',
+ 'Nearly full. It rises close to sunset and shines for most of the night.',
+ 'Full or almost full. It rises around sunset, is highest near midnight and sets around sunrise. A lunar eclipse can only happen at a full moon.',
+ 'Full moon or just past it. It rises soon after sunset and lights the whole night.',
+ 'Just past full. It rises a little after sunset.',
+ 'Waning gibbous, rising an hour or two after sunset.',
+ 'It rises later each night, now two to three hours after sunset.',
+ 'Still more than half lit, rising in the late evening.',
+ 'Rising around ten or eleven at night, and still bright in the morning sky.',
+ 'Close to half lit. It rises near midnight and is high in the south at dawn.',
+ 'Half lit and in the morning sky. It is high in the south at sunrise.',
+ 'Less than half lit, a waning crescent on the way. It rises in the small hours.',
+ 'A waning crescent rising a few hours before dawn.',
+ 'A thinner crescent, rising in the early hours before dawn.',
+ 'A thin crescent low in the east before sunrise.',
+ 'A very thin crescent, only visible briefly before sunrise.',
+ 'A hair-thin crescent very close to the sun, hard to see.',
+ 'Barely visible or invisible. This is the evening to look for the new crescent after sunset. A solar eclipse can only happen at a new moon.',
+ 'The moon is near the sun and cannot be seen. If the crescent was not seen last evening, the month completes at 30 days.'
+];
+const TEACH={
+ 1:['When the new crescent is first seen, the Messenger taught asking God to let the month begin with safety, faith and peace.'],
+ 13:['The Messenger recommended fasting the 13th, 14th and 15th of every lunar month.',
+     'He taught that three days of fasting each month is like fasting all the time, because good deeds are multiplied tenfold.',
+     'Eat a meal before dawn, because the Messenger said there is blessing in it. Break the fast at sunset, with dates or water.'],
+ 14:['Second fasting day. The Messenger taught that fasting is a shield, so keep your speech calm today. If someone argues with you, say that you are fasting.',
+     'The sun and moon are signs of God. They do not eclipse because of anyone\u2019s birth or death. If an eclipse happens, pray, remember God and give charity.'],
+ 15:['Last fasting day of the three. The Messenger taught that whoever helps another person break their fast earns the same reward as the one who fasted. Share your evening meal with someone.'],
+ 17:['A traditional teaching names the 17th, 19th and 21st as good days for cupping. It is a traditional practice and not medical advice.'],
+ 19:['A traditional teaching names the 17th, 19th and 21st as good days for cupping. It is a traditional practice and not medical advice.'],
+ 21:['A traditional teaching names the 17th, 19th and 21st as good days for cupping. It is a traditional practice and not medical advice.'],
+ 29:['The Messenger taught that a month is 29 or 30 days, and to look for the new crescent on the evening of the 29th. If clouds hide it, complete 30 days.',
+     'The sun and moon are signs of God. They do not eclipse because of anyone\u2019s birth or death. If an eclipse happens, pray, remember God and give charity.'],
+ 30:['If the crescent was not seen yesterday evening, this is the 30th day and the month ends today.']
+};
+
+/* ---- settings: day adjustment, shared with Rhythm ---- */
+function loadS(){ try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s&&typeof s.adj==='number') return s; }catch(e){} return {adj:0}; }
+let S=loadS();
+function saveS(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} }
+
+/* ---- the Islamic calendar from the browser ---- */
+const cal=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric',month:'numeric',year:'numeric'});
+function noon(base,plus){ return new Date(base.getFullYear(),base.getMonth(),base.getDate()+plus,12); }
+function lunarDate(base,plus){
+  const p={}; cal.formatToParts(noon(base,(plus||0)+S.adj)).forEach(x=>{ if(x.type==='day'||x.type==='month'||x.type==='year') p[x.type]=parseInt(x.value,10); });
+  return p;
+}
+const fmtShort=d=>d.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+
+/* ---- moon phase (Meeus), for the picture and new/full moon times ---- */
+function phaseJDE(k){
+  const T=k/1236.85,T2=T*T,T3=T2*T,T4=T3*T;
+  const jde=2451550.09766+29.530588861*k+0.00015437*T2-0.000000150*T3+0.00000000073*T4;
+  const E=1-0.002516*T-0.0000074*T2;
+  const M=(2.5534+29.10535670*k-0.0000014*T2-0.00000011*T3)*D2R;
+  const Mp=(201.5643+385.81693528*k+0.0107582*T2+0.00001238*T3-0.000000058*T4)*D2R;
+  const F=(160.7108+390.67050284*k-0.0016118*T2-0.00000227*T3+0.000000011*T4)*D2R;
+  const Om=(124.7746-1.56375588*k+0.0020672*T2+0.00000215*T3)*D2R;
+  const full=Math.abs(k%1)>0.25, s=Math.sin;
+  const a=full?[-0.40614,0.17302,0.01614,0.01043,0.00734,-0.00515,0.00209]:[-0.40720,0.17241,0.01608,0.01039,0.00739,-0.00514,0.00208];
+  const c=a[0]*s(Mp)+a[1]*E*s(M)+a[2]*s(2*Mp)+a[3]*s(2*F)+a[4]*E*s(Mp-M)+a[5]*E*s(Mp+M)+a[6]*E*E*s(2*M)
+    -0.00111*s(Mp-2*F)-0.00057*s(Mp+2*F)+0.00056*E*s(2*Mp+M)-0.00042*s(3*Mp)+0.00042*E*s(M+2*F)+0.00038*E*s(M-2*F)-0.00024*E*s(2*Mp-M)-0.00017*s(Om)-0.00007*s(Mp+2*M);
+  return jde+c;
+}
+const phaseMs=k=>(phaseJDE(k)-2440587.5)*864e5-69000;
+function lastNewK(now){
+  let k=Math.floor(((now/864e5+2440587.5)-2451550.09766)/SYN);
+  while(phaseMs(k+1)<=now) k++;
+  while(phaseMs(k)>now) k--;
+  return k;
+}
+function moonSVG(p){
+  const r=70, kk=Math.cos(2*Math.PI*p), rx=(Math.abs(kk)*r).toFixed(2), waxing=p<0.5, sweep=kk>0?0:1;
+  const lit=`M 0 ${-r} A ${r} ${r} 0 0 1 0 ${r} A ${rx} ${r} 0 0 ${sweep} 0 ${-r} Z`;
+  return `<circle r="${r}" fill="var(--track)"/><path d="${lit}" fill="var(--moon)" transform="${waxing?'':'scale(-1,1)'}"/><circle r="${r}" fill="none" stroke="var(--line)" stroke-width="1.5"/>`;
+}
+const fmtDT=ms=>{const d=new Date(ms);return d.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})+' · '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});};
+function inText(ms,now){
+  const h=(ms-now)/3600e3;
+  if(h<1) return 'in '+Math.max(1,Math.round(h*60))+' min';
+  if(h<48) return 'in '+Math.round(h)+' h';
+  return 'in '+Math.round(h/24)+' days';
+}
+
+let today=1, len=30, shown=1;
+
+function renderDay(){
+  const n=shown, isFast=n>=13&&n<=15;
+  document.getElementById('dayTitle').innerHTML='Day '+n+(n===today?'<span class="tag today">today</span>':'')+(isFast?'<span class="tag fastd">fasting</span>':'');
+  let h='<div class="sec" style="margin-top:0">In the sky</div><p class="txt">'+SKY[n-1]+'</p>';
+  const t=TEACH[n];
+  if(t){ h+='<div class="sec">Teaching</div>'+t.map(x=>'<div class="teach txt">'+x+'</div>').join(''); }
+  document.getElementById('dayBody').innerHTML=h;
+  document.getElementById('prev').style.visibility=n>1?'visible':'hidden';
+  document.getElementById('next').style.visibility=n<len?'visible':'hidden';
+}
+
+function render(){
+  const now=new Date(), t=now.getTime(), tl=lunarDate(now,0), d=tl.day;
+  len=29; if(lunarDate(now,-(d-1)+29).month===tl.month) len=30;
+  const firstShow=(today!==d)||!shown; today=d;
+  if(firstShow||shown>len) shown=Math.min(d,len);
+
+  document.getElementById('day').innerHTML='Day '+d+' <small>of '+len+'</small>';
+  document.getElementById('arc').setAttribute('stroke-dashoffset',(C*(1-d/len)).toFixed(2));
+  const seg=C*3/len, w=document.getElementById('white');
+  w.setAttribute('stroke-dasharray',seg.toFixed(2)+' '+(C-seg).toFixed(2));
+  w.setAttribute('stroke-dashoffset',(-C*12/len).toFixed(2));
+
+  const k0=lastNewK(t), pn=phaseMs(k0), nn=phaseMs(k0+1), p=(t-pn)/(nn-pn), age=(t-pn)/864e5;
+  document.getElementById('moonSvg').innerHTML=moonSVG(p);
+  document.getElementById('phase').textContent=PHASES[Math.floor(p*8+0.5)%8];
+  const lit=Math.round((1-Math.cos(2*Math.PI*p))/2*100);
+  document.getElementById('facts').textContent='about '+lit+'% lit · '+age.toFixed(1)+' days since new moon';
+
+  /* fasting days: the 13th, 14th and 15th */
+  const sets=[];
+  for(let i=-2;i<=70 && sets.length<2;i++){
+    if(lunarDate(now,i).day===13){ const s=noon(now,i), e=noon(now,i+2); if(e>=noon(now,0)) sets.push({s,e,off:i}); }
+  }
+  const st=document.getElementById('status');
+  if(d>=13&&d<=15){ st.className='status fast'; st.innerHTML='<b>Fasting day today</b>Day '+(d-12)+' of 3'; }
+  else if(d===12){ st.className='status soon'; st.innerHTML='<b>Fasting days begin tomorrow</b>'+fmtShort(noon(now,1))+' – '+fmtShort(noon(now,3)); }
+  else if(sets.length){ const nx=sets[0], dd=Math.max(1,nx.off); st.className='status soon'; st.innerHTML='<b>Next fasting days in '+dd+' day'+(dd>1?'s':'')+'</b>'+fmtShort(nx.s)+' – '+fmtShort(nx.e); }
+
+  /* next phases */
+  const evs=[];
+  for(let i=-1;i<=5;i++) evs.push({ms:phaseMs(k0+i),t:'New moon',c:'var(--purple)'},{ms:phaseMs(k0+i+0.5),t:'Full moon',c:'var(--yellow)'});
+  const up=evs.filter(e=>e.ms>t).sort((a,b)=>a.ms-b.ms);
+  let ph='';
+  if(sets.length) ph+='<div class="row"><span><i class="dotk" style="background:var(--green)"></i>Fasting days</span><span>'+fmtShort(sets[0].s)+' – '+fmtShort(sets[0].e)+'</span></div>';
+  ph+=up.slice(0,2).map(e=>'<div class="row"><span><i class="dotk" style="background:'+e.c+'"></i>'+e.t+'</span><span>'+fmtDT(e.ms)+'<br>'+inText(e.ms,t)+'</span></div>').join('');
+  document.getElementById('phases').innerHTML=ph;
+  const list=name=>up.filter(e=>e.t===name).slice(0,3).map(e=>'<div class="row"><span><i class="dotk" style="background:'+e.c+'"></i>'+fmtDT(e.ms).split(' · ')[0]+'</span><span>'+fmtDT(e.ms).split(' · ')[1]+' · '+inText(e.ms,t)+'</span></div>').join('');
+  document.getElementById('news').innerHTML=list('New moon');
+  document.getElementById('fulls').innerHTML=list('Full moon');
+
+  document.getElementById('adj').innerHTML='<span>Adjust date</span>'+[-1,0,1].map(v=>'<button data-adj="'+v+'" class="'+(S.adj===v?'on':'')+'">'+(v>0?'+1':v)+'</button>').join('');
+  renderDay();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-adj]');
+  if(b){ S.adj=parseInt(b.dataset.adj,10); saveS(); shown=0; render(); return; }
+  if(e.target.closest('#prev')&&shown>1){ shown--; renderDay(); }
+  if(e.target.closest('#next')&&shown<len){ shown++; renderDay(); }
+});
+render();
+setInterval(render,60000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) render(); });
+})();
+</script>
+</body>
+</html>
