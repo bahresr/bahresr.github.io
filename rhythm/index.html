@@ -23,67 +23,104 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 body{padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 28px);max-width:520px;margin:0 auto}
-h1{font-size:20px;margin:0 0 6px;letter-spacing:.02em}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+h1{font-size:20px;margin:0;letter-spacing:.02em}
+.gear{background:none;border:0;color:var(--ink);font-size:21px;padding:6px 9px;cursor:pointer}
 .bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--yellow) 0 25%,var(--green) 25% 50%,var(--blue) 50% 75%,var(--purple) 75% 100%);margin-bottom:14px}
 .apps{display:flex;gap:8px;margin:-4px 0 14px;flex-wrap:wrap}
 .apps a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
 .apps a.on{color:#fff;background:var(--purple);border-color:var(--purple)}
-.hij{display:block;text-decoration:none;color:var(--ink);border-radius:16px;padding:11px 14px;margin:0 0 12px;font-size:13px;line-height:1.4;background:var(--card)}
+.hij{display:block;border-radius:16px;padding:11px 14px;margin:0 0 12px;font-size:13px;line-height:1.4;background:var(--card)}
 .hij b{display:block;font-size:14px}
 .hij span{color:var(--mute)}
 .hij.fast{background:var(--purple);color:#fff}
 .hij.fast span{color:rgba(255,255,255,.8)}
 .hij.soon{border:1.5px solid var(--purple);background:none}
+.outbox{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:16px;padding:11px 14px;margin:0 0 12px;font-size:13px;background:var(--card);border:1.5px solid var(--yellow)}
+.outbox b{display:block;font-size:14px}
+.outbox button{border:0;border-radius:12px;padding:9px 14px;font-size:13px;font-weight:600;background:var(--yellow);color:#1c1b22;cursor:pointer;flex:none}
 .card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:12px}
 .ring-wrap{position:relative;width:min(300px,78vw);margin:4px auto 14px;aspect-ratio:1}
-.ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16%}
-.timer{font-size:38px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--purple)}
+.ring-wrap svg{width:100%;height:100%}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 21%}
+.timer{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--purple)}
 .timer.idle{color:var(--ink)}
 .stage{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;font-weight:600}
 .sub{font-size:12px;color:var(--mute);margin-top:6px}
-.times{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:12px}
-.times b{display:block;color:var(--ink);font-size:14px;margin-top:2px}
+.now{border-radius:14px;background:var(--track);padding:12px 14px;margin:0 0 12px;font-size:14px;line-height:1.45;text-align:center}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:12px;color:var(--mute);margin-bottom:12px;text-align:center}
+.times b{display:block;color:var(--ink);font-size:13px;margin-top:2px;font-variant-numeric:tabular-nums}
+.times i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
 .btn{width:100%;border:0;border-radius:16px;padding:15px;font-size:16px;font-weight:600;cursor:pointer;background:var(--purple);color:#fff}
 .btn.ghost{background:var(--track);color:var(--ink)}
+.btn.warn{background:none;color:#e5484d;border:1px solid var(--line)}
 .link{background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;cursor:pointer;padding:8px 0 0;display:block;margin:0 auto}
-.label{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.label{font-size:12px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.calhead b{font-size:15px}
+.calhead button{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;width:38px;height:34px;font-size:16px;cursor:pointer}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal .wd{font-size:10px;letter-spacing:.06em;color:var(--mute);text-align:center;padding-bottom:2px}
+.cal .d{aspect-ratio:1;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;font-weight:600;background:var(--track);position:relative}
+.cal .d.pad{background:none}
+.cal .d.fastd{background:var(--purple);color:#fff}
+.cal .d.today{background:var(--yellow);color:#1c1b22}
+.cal .d.today.fastd{box-shadow:inset 0 0 0 3px var(--yellow);background:var(--purple);color:#fff}
+.cal .d.did::after{content:"";position:absolute;bottom:5px;width:5px;height:5px;border-radius:50%;background:var(--green)}
+.cal .d.fastd.did::after{background:#fff}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:11px;color:var(--mute)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:4px;margin-right:6px;vertical-align:-1px}
 .hr{display:flex;gap:12px;padding:12px 8px;border-radius:14px}
 .hr+.hr{margin-top:2px}
 .dot{flex:none;width:12px;height:12px;border-radius:50%;margin-top:4px}
 .ht{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}
 .ht span{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
 .hr p{margin:4px 0 0;font-size:13.5px;line-height:1.45;color:var(--mute)}
-.hr.done .dot{opacity:.9}
-.hr.done p{color:var(--mute)}
 .hr.now{background:var(--track)}
 .hr.now p{color:var(--ink)}
 .hr.future{opacity:.55}
 .hist{font-size:13px}
-.hist div{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line)}
-.hist div:first-child{border-top:0}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);color:var(--ink);padding:10px 0;font:inherit;cursor:pointer}
+.hrow:first-child{border-top:0}
+.hrow small{display:block;color:var(--mute);font-size:12px;margin-top:2px;font-variant-numeric:tabular-nums}
 .ok{color:var(--green)}
 .note{font-size:11px;color:var(--mute);line-height:1.5}
-dialog{border:0;border-radius:20px;background:var(--card);color:var(--ink);padding:20px;width:min(360px,90vw)}
+dialog{border:0;border-radius:20px;background:var(--card);color:var(--ink);padding:20px;width:min(380px,92vw);max-height:88vh;overflow:auto}
 dialog::backdrop{background:rgba(0,0,0,.45)}
-dialog h2{margin:0 0 12px;font-size:17px}
+dialog h2{margin:0 0 10px;font-size:17px}
 dialog label{display:block;font-size:12px;color:var(--mute);margin:12px 0 4px}
-dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
-.dlg-actions{display:flex;gap:8px;margin-top:16px}
+dialog input[type=text],dialog input[type=email],dialog input[type=number],dialog input[type=datetime-local]{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
+.dlg-actions{display:flex;gap:8px;margin-top:14px}
 .dlg-actions .btn{padding:12px;font-size:15px}
+pre.mail{white-space:pre-wrap;word-break:break-word;font:12.5px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);border-radius:12px;padding:12px;margin:8px 0 0;max-height:46vh;overflow:auto}
+.adj{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mute)}
+.adj button{border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:7px 12px;font-size:13px;cursor:pointer}
+.adj button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 </style>
 </head>
 <body>
-<h1>Rhythm · 16h fast</h1>
+<header>
+  <h1>Rhythm · 16h fast</h1>
+  <button class="gear" id="openSettings" aria-label="Settings">⚙︎</button>
+</header>
 <div class="bar"></div>
-<nav class="apps"><a href="/circles">Circles</a><a href="/rhythm/" class="on">Rhythm</a><a href="/moon/">Moon</a></nav>
-<a class="hij" id="hij" href="/moon/"></a>
+<div class="hij" id="hij"></div>
+<div class="outbox" id="outbox" hidden></div>
 
+<!-- FAST -->
 <div class="card">
   <div class="ring-wrap">
     <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="88" fill="none" stroke="var(--track)" stroke-width="14"/>
-      <circle id="arc" cx="100" cy="100" r="88" fill="none" stroke="var(--purple)" stroke-width="14" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="552.92"/>
+      <circle cx="100" cy="100" r="91" fill="none" stroke="var(--track)" stroke-width="11"/>
+      <path id="arc" d="" fill="none" stroke="var(--purple)" stroke-width="11" stroke-linecap="round"/>
+      <circle cx="100" cy="100" r="73" fill="none" stroke="var(--track)" stroke-width="7"/>
+      <path id="win" d="" fill="none" stroke="var(--purple)" stroke-opacity=".45" stroke-width="7" stroke-linecap="round"/>
+      <g id="ticks" style="fill:var(--mute)" font-size="6.5" text-anchor="middle" font-family="-apple-system,Helvetica,Arial,sans-serif">
+        <text x="100" y="42">00</text><text x="161" y="102.3">06</text><text x="100" y="163">12</text><text x="39" y="102.3">18</text>
+      </g>
+      <circle id="mStart" r="5" fill="var(--purple)" stroke="var(--card)" stroke-width="1.5" visibility="hidden"/>
+      <circle id="mEnd" r="5" fill="var(--green)" stroke="var(--card)" stroke-width="1.5" visibility="hidden"/>
+      <circle id="mNow" r="4.5" fill="var(--yellow)" stroke="var(--card)" stroke-width="1.5"/>
     </svg>
     <div class="ring-center">
       <div class="timer" id="timer">00:00:00</div>
@@ -91,34 +128,96 @@ dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--l
       <div class="sub" id="sub"></div>
     </div>
   </div>
+  <div class="now" id="nowTxt"></div>
   <div class="times">
-    <div>Started<b id="tStart">–</b></div>
-    <div style="text-align:right">Ends automatically<b id="tEnd">–</b></div>
+    <div><i style="background:var(--purple)"></i>Start<b id="tStart">–</b></div>
+    <div><i style="background:var(--yellow)"></i>Now<b id="tNow">–</b></div>
+    <div><i style="background:var(--green)"></i>End<b id="tEnd">–</b></div>
   </div>
   <button class="btn" id="fastBtn">Start 16h fast</button>
-  <button class="link" id="editStart" hidden>Edit start time</button>
+  <button class="link" id="editStart" hidden>Edit start and end time</button>
 </div>
 
+<!-- CALENDAR -->
 <div class="card">
-  <div class="label">Hour by hour</div>
-  <div id="hours"></div>
-  <div class="note" style="margin-top:10px">General approximations. Timing varies from person to person and depends on your last meal and activity. This is not medical advice. If you have a medical condition, take medication, are pregnant, or have a history of disordered eating, check with a doctor before fasting. Stop if you feel unwell.</div>
+  <div class="calhead">
+    <button id="calPrev" aria-label="Previous month">‹</button>
+    <b id="calTitle"></b>
+    <button id="calNext" aria-label="Next month">›</button>
+  </div>
+  <div class="cal" id="cal"></div>
+  <div class="legend">
+    <span><i style="background:var(--purple)"></i>fasting days</span>
+    <span><i style="background:var(--yellow)"></i>today</span>
+    <span><i style="background:var(--green);border-radius:50%"></i>fast completed</span>
+  </div>
 </div>
 
+<!-- HISTORY -->
 <div class="card">
-  <div class="label">Recent fasts</div>
+  <div class="label">Your fasts · tap one to edit</div>
   <div class="hist" id="hist"></div>
-  <div class="note" style="margin-top:10px">Each completed 16h fast also shows up in the Circles done list (the ✓ button).</div>
+  <button class="link" id="histMore" hidden>Show all</button>
+  <button class="link" id="addPast">Add a past fast</button>
 </div>
 
+<div class="note" style="margin:4px 4px 0">General approximations. Timing varies from person to person and depends on your last meal and activity. This is not medical advice. If you have a medical condition, take medication, are pregnant, or have a history of disordered eating, check with a doctor before fasting. Stop if you feel unwell.</div>
+
+<!-- DIALOGS -->
 <dialog id="startDlg">
-  <h2>Fast started at</h2>
-  <label for="startInput">Date and time</label>
+  <h2>Edit start and end</h2>
+  <label for="startInput">Start</label>
   <input type="datetime-local" id="startInput">
+  <label for="endInput">End</label>
+  <input type="datetime-local" id="endInput">
+  <div class="note" style="margin-top:8px">The fast stops by itself at the end time. Change only the start and the end moves with it, keeping the same length.</div>
   <div class="dlg-actions">
     <button class="btn ghost" id="startCancel">Cancel</button>
     <button class="btn" id="startOk">Save</button>
   </div>
+</dialog>
+
+<dialog id="editDlg">
+  <h2 id="editTitle">Edit fast</h2>
+  <label for="editS">Start</label>
+  <input type="datetime-local" id="editS">
+  <label for="editE">End</label>
+  <input type="datetime-local" id="editE">
+  <div class="dlg-actions">
+    <button class="btn warn" id="editDel">Delete</button>
+    <button class="btn ghost" id="editMail">Email summary</button>
+  </div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="editCancel">Cancel</button>
+    <button class="btn" id="editOk">Save</button>
+  </div>
+</dialog>
+
+<dialog id="mailDlg">
+  <h2 id="mailTitle">Email</h2>
+  <div class="note" id="mailTo"></div>
+  <pre class="mail" id="mailBody"></pre>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="mailSkip">Skip</button>
+    <button class="btn ghost" id="mailCopy">Copy</button>
+    <button class="btn" id="mailGo">Email</button>
+  </div>
+  <div class="note" style="margin-top:10px">This opens a ready-made message in your email app. You press send there, and it is then stored in your mailbox.</div>
+</dialog>
+
+<dialog id="setDlg">
+  <h2>Settings</h2>
+  <label for="sEmail">Email address for the summaries</label>
+  <input type="email" id="sEmail" inputmode="email" placeholder="you@example.com">
+  <label for="sKcal">Calories your body uses per day (optional estimate)</label>
+  <input type="number" id="sKcal" inputmode="numeric" placeholder="e.g. 2500">
+  <label>Fasting-day date adjustment</label>
+  <div class="adj" id="adj"></div>
+  <div class="dlg-actions">
+    <button class="btn ghost" id="setCancel">Close</button>
+    <button class="btn" id="setOk">Save</button>
+  </div>
+  <div class="note" style="margin-top:12px">Use a personal email address, since these summaries contain health-related information. Your settings and fasts are stored only in this browser, on this device. The adjustment shifts the fasting days by a day if your community starts the lunar month by moon sighting.</div>
 </dialog>
 
 <script>
@@ -126,31 +225,43 @@ dialog input{width:100%;padding:11px;border-radius:12px;border:1px solid var(--l
 const KEY='rhythm.v1', GOAL=16, GOAL_MS=GOAL*3600e3;
 const COLORS=['var(--yellow)','var(--green)','var(--blue)','var(--purple)'];
 const PHASES=['Digesting','Settling','Switching fuel','Fat burning'];
-const HOURS=[
- 'Your body is still digesting and absorbing your last meal. Blood sugar and insulin are elevated.',
- 'Digestion continues. With insulin high, the body mostly burns the glucose coming from the meal.',
- 'Absorption is winding down and blood sugar starts to drift back toward its baseline.',
- 'Insulin begins to fall. The body starts shifting from food energy toward stored energy.',
- 'Blood sugar is near baseline. The liver releases stored glucose (glycogen) to keep it steady.',
- 'With insulin lower, stored body fat becomes easier to access. Hunger often shows up around your usual meal times.',
- 'The liver is the main glucose source, drawing on its glycogen. Hunger comes in waves and usually passes.',
- 'Liver glycogen is gradually dropping. The body leans a little more on fatty acids for energy.',
- 'Fat breakdown picks up while insulin stays low. A mild energy dip or hunger wave is common.',
- 'Fatty acids are an increasingly important fuel. Water or unsweetened tea or coffee can help with hunger.',
- 'The liver starts turning some fatty acids into ketones, an alternative fuel for brain and muscles.',
- 'Fat burning is now clearly ahead of sugar burning. Ketone levels are still low but rising.',
- 'Insulin is near its low point for the day. Many people notice hunger fading and steadier focus.',
- 'Ketones keep rising gradually. Growth hormone tends to increase during fasting, which is thought to help preserve muscle.',
- 'Energy now comes mostly from fat. If you feel light-headed or weak, drink water, or stop the fast.',
- 'Goal reached. When you eat, a balanced meal tends to sit better than a very large or very sugary one.'
+const PHASE_TXT=[
+ 'Hours 1 to 4: digesting your last meal. Blood sugar and insulin are elevated.',
+ 'Hours 5 to 8: blood sugar near baseline, the liver releasing stored glucose.',
+ 'Hours 9 to 12: fat breakdown picks up and the liver starts making ketones.',
+ 'Hours 13 to 16: ketones rising, with body fat as the main fuel.'
 ];
+const NOW=[
+ 'You are still digesting. Blood sugar and insulin are high while your cells take up energy from your last meal.',
+ 'Insulin stays high and your cells are burning mostly the sugar from your last meal.',
+ 'Absorption is slowing and your blood sugar is drifting back toward its baseline.',
+ 'Insulin is starting to fall, so your cells begin shifting from food energy to stored energy.',
+ 'Blood sugar is near baseline and your liver is releasing stored sugar to keep it steady.',
+ 'Insulin is lower now, which makes stored body fat easier for your cells to use.',
+ 'Your liver is the main sugar source, drawing down its stored glycogen.',
+ 'Liver sugar stores are dropping and your cells lean more on fat for energy.',
+ 'Fat breakdown is picking up while insulin stays low. A dip in energy is normal.',
+ 'Fatty acids are becoming a main fuel for your cells.',
+ 'Your liver starts turning some fat into ketones, a backup fuel for brain and muscles.',
+ 'Fat burning is now ahead of sugar burning, and ketones are slowly rising.',
+ 'Insulin is near its daily low, and many people feel hunger fade.',
+ 'Ketones keep rising and growth hormone tends to increase, which may help protect muscle.',
+ 'Your cells run mostly on fat now. Drink water, and stop if you feel light-headed.',
+ 'Goal reached: blood sugar is steady and fat is your main fuel.'
+];
+const NOW_OVER='Past 16 hours: ketones keep rising and fat remains your main fuel.';
+const NOW_IDLE='Eating window: when you eat, insulin rises and your cells take up sugar for energy.';
 
+/* ---------- saved data (keeps anything saved by earlier versions) ---------- */
 function load(){
   try{
     const s=JSON.parse(localStorage.getItem(KEY));
-    if(s&&typeof s==='object'){ if(!Array.isArray(s.fasts)) s.fasts=[]; if(!('fastStart' in s)) s.fastStart=null; return s; }
+    if(s&&typeof s==='object'){
+      if(!Array.isArray(s.fasts)) s.fasts=[]; if(!('fastStart' in s)) s.fastStart=null; if(!Array.isArray(s.outbox)) s.outbox=[];
+      return s;
+    }
   }catch(e){}
-  return {fastStart:null,fasts:[]};
+  return {fastStart:null,fasts:[],outbox:[]};
 }
 let S=load();
 function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} }
@@ -158,120 +269,246 @@ function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} }
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
 const hm=t=>{const d=new Date(t);return pad(d.getHours())+':'+pad(d.getMinutes());};
+const dk=t=>{const d=new Date(t);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
 const fmtHMS=ms=>{const s=Math.max(0,Math.floor(ms/1000));return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);};
-const fmtDT=t=>{const d=new Date(t);return d.toLocaleDateString(undefined,{weekday:'short'})+', '+hm(t);};
+const dayName=t=>new Date(t).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+const fmtDT=t=>new Date(t).toLocaleDateString(undefined,{weekday:'short'})+', '+hm(t);
+const fullDT=t=>dayName(t)+', '+hm(t);
 const toInput=t=>new Date(t-new Date(t).getTimezoneOffset()*60000).toISOString().slice(0,16);
 
-// the fast stops by itself at 16h, even if the app was closed: the end time is recorded as start + 16h
+/* ---------- fasting days: 13th, 14th, 15th of the lunar month ---------- */
+let cal=null; try{ cal=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric',month:'numeric',year:'numeric'}); }catch(e){}
+function readAdj(){ try{ const s=JSON.parse(localStorage.getItem('moon.v1')); return s&&typeof s.adj==='number'?s.adj:0; }catch(e){ return 0; } }
+function writeAdj(v){ let s={}; try{ s=JSON.parse(localStorage.getItem('moon.v1'))||{}; }catch(e){} s.adj=v; try{ localStorage.setItem('moon.v1',JSON.stringify(s)); }catch(e){} }
+function lunarOn(date){
+  if(!cal) return 0;
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate()+readAdj(),12); let day=0;
+  cal.formatToParts(d).forEach(x=>{ if(x.type==='day') day=parseInt(x.value,10); });
+  return day;
+}
+const plusDay=n=>{const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate()+n,12);};
+const isFastingDay=date=>{const d=lunarOn(date);return d>=13&&d<=15;};
+
+function renderFastingBanner(){
+  const el=$('hij'); if(!cal){ el.hidden=true; return; }
+  const d=lunarOn(plusDay(0));
+  if(d>=13&&d<=15){ el.className='hij fast'; el.innerHTML='<b>Fasting day today</b><span>Day '+(d-12)+' of 3</span>'; return; }
+  if(d===12){ el.className='hij soon'; el.innerHTML='<b>Fasting days begin tomorrow</b><span>'+dayName(plusDay(1))+' – '+dayName(plusDay(3))+'</span>'; return; }
+  for(let i=1;i<=60;i++){
+    if(lunarOn(plusDay(i))===13){ el.className='hij soon'; el.innerHTML='<b>Next fasting days in '+i+' day'+(i>1?'s':'')+'</b><span>'+dayName(plusDay(i))+' – '+dayName(plusDay(i+2))+'</span>'; return; }
+  }
+  el.hidden=true;
+}
+
+/* ---------- calendar under the circle ---------- */
+let cm=(()=>{const n=new Date();return {y:n.getFullYear(),m:n.getMonth()};})();
+function renderCal(){
+  const first=new Date(cm.y,cm.m,1,12), dow=(first.getDay()+6)%7, days=new Date(cm.y,cm.m+1,0).getDate();
+  $('calTitle').textContent=first.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  const did=new Set(S.fasts.filter(f=>(f.e-f.s)/3600e3>=(f.g||GOAL)-0.01).map(f=>dk(f.e)));
+  const today=dk(Date.now());
+  let h=['MON','TUE','WED','THU','FRI','SAT','SUN'].map(n=>'<div class="wd">'+n+'</div>').join('');
+  for(let i=0;i<dow;i++) h+='<div class="d pad"></div>';
+  for(let d=1;d<=days;d++){
+    const date=new Date(cm.y,cm.m,d,12), k=dk(date), cls=['d'];
+    if(isFastingDay(date)) cls.push('fastd'); if(k===today) cls.push('today'); if(did.has(k)) cls.push('did');
+    h+='<div class="'+cls.join(' ')+'">'+d+'</div>';
+  }
+  $('cal').innerHTML=h;
+}
+$('calPrev').onclick=()=>{ cm.m--; if(cm.m<0){cm.m=11;cm.y--;} renderCal(); };
+$('calNext').onclick=()=>{ cm.m++; if(cm.m>11){cm.m=0;cm.y++;} renderCal(); };
+
+/* ---------- the fast ---------- */
+const goalH=()=>S.fastGoalH>0?S.fastGoalH:GOAL;
+const goalMs=()=>goalH()*3600e3;
+const fmtH=n=>String(Math.round(n*10)/10);
 function autoStop(){
-  if(S.fastStart && Date.now()-S.fastStart>=GOAL_MS){
-    const s=S.fastStart, e=s+GOAL_MS;
-    S.fasts.push({s,e,g:GOAL,auto:true});
-    S.fastStart=null; save(); pushDone(s,e); return true;
+  if(S.fastStart && Date.now()-S.fastStart>=goalMs()){
+    const s=S.fastStart, g=goalH(), e=s+g*3600e3;
+    S.fasts.push({s,e,g,auto:true});
+    S.fastStart=null; S.fastGoalH=GOAL;
+    S.outbox.push({type:'end',s,e,g,auto:true});
+    save(); pushDone(s,e,g); return true;
   }
   return false;
 }
-// a completed fast also goes into the Circles done list (same site, same saved data)
-function pushDone(s,e){
+function pushDone(s,e,g){
   try{
     const arr=JSON.parse(localStorage.getItem('circles_done')||'[]'), id='fast-'+s;
     if(!arr.some(d=>d.id===id)){
-      arr.unshift({id,name:'16h fast',completedAt:new Date(e).toLocaleDateString('en-CA'),source:'rhythm'});
+      arr.unshift({id,name:fmtH(g)+'h fast',completedAt:new Date(e).toLocaleDateString('en-CA'),source:'rhythm'});
       localStorage.setItem('circles_done',JSON.stringify(arr));
     }
   }catch(err){}
 }
 
-function renderHours(){
-  const el=S.fastStart?Date.now()-S.fastStart:null;
-  const cur=el===null?0:Math.min(GOAL,Math.floor(el/3600e3)+1);
-  let h='';
-  for(let i=1;i<=GOAL;i++){
-    const state=el===null?'idle':(i<cur?'done':(i===cur?'now':'future'));
-    const col=COLORS[Math.floor((i-1)/4)];
-    const when=S.fastStart?('from '+hm(S.fastStart+(i-1)*3600e3)):'';
-    const mark=state==='done'?'✓ ':'';
-    h+=`<div class="hr ${state}"><span class="dot" style="background:${col}"></span><div><div class="ht"><b>Hour ${i}</b><span>${mark}${when}</span></div><p>${HOURS[i-1]}</p></div></div>`;
-  }
-  $('hours').innerHTML=h;
+/* the two rings: outer = progress through the fast, inner = a 24-hour clock with your start and end marked */
+const TAU=Math.PI*2;
+const pt=(a,r)=>[100+r*Math.sin(a),100-r*Math.cos(a)];
+function arcD(r,a0,span){
+  if(span<=0.002) return '';
+  const p1=pt(a0,r), f=v=>v.toFixed(2);
+  if(span>=TAU-0.002){ const p2=pt(a0+Math.PI,r); return 'M'+f(p1[0])+','+f(p1[1])+' A'+r+','+r+' 0 1 1 '+f(p2[0])+','+f(p2[1])+' A'+r+','+r+' 0 1 1 '+f(p1[0])+','+f(p1[1]); }
+  const p2=pt(a0+span,r);
+  return 'M'+f(p1[0])+','+f(p1[1])+' A'+r+','+r+' 0 '+(span>Math.PI?1:0)+' 1 '+f(p2[0])+','+f(p2[1]);
 }
-
-let lastCur=-1;
+const clockAngle=t=>{const d=new Date(t);return ((d.getHours()*60+d.getMinutes()+d.getSeconds()/60)/1440)*TAU;};
+function setMarker(id,a){
+  const m=$(id); if(a===null){ m.setAttribute('visibility','hidden'); return; }
+  const p=pt(a,73); m.setAttribute('cx',p[0].toFixed(2)); m.setAttribute('cy',p[1].toFixed(2)); m.setAttribute('visibility','visible');
+}
 function render(){
   autoStop();
-  const arc=$('arc');
+  const now=Date.now(), arc=$('arc'), win=$('win');
+  setMarker('mNow',clockAngle(now)); $('tNow').textContent=hm(now);
   if(S.fastStart){
-    const el=Date.now()-S.fastStart, cur=Math.min(GOAL,Math.floor(el/3600e3)+1);
+    const gm=goalMs(), el=now-S.fastStart, cur=Math.max(1,Math.floor(el/3600e3)+1), ph=Math.min(3,Math.floor((Math.min(cur,16)-1)/4));
     $('timer').textContent=fmtHMS(el); $('timer').className='timer';
-    const ph=Math.floor((cur-1)/4);
     $('stage').textContent=PHASES[ph]; $('stage').style.color=COLORS[ph];
-    const left=GOAL_MS-el;
-    $('sub').textContent='hour '+cur+' of '+GOAL+' · '+fmtHMS(left).slice(0,5)+' to go';
-    arc.setAttribute('stroke-dashoffset',(552.92*(1-el/GOAL_MS)).toFixed(2));
-    arc.style.stroke=COLORS[ph];
-    $('tStart').textContent=fmtDT(S.fastStart);
-    $('tEnd').textContent=fmtDT(S.fastStart+GOAL_MS);
+    $('sub').textContent='hour '+cur+' · '+fmtHMS(gm-el).slice(0,5)+' to go';
+    arc.setAttribute('d',arcD(91,0,TAU*Math.min(1,el/gm))); arc.style.stroke=COLORS[ph];
+    win.setAttribute('d',arcD(73,clockAngle(S.fastStart),Math.min(TAU,gm/864e5*TAU)));
+    setMarker('mStart',clockAngle(S.fastStart)); setMarker('mEnd',clockAngle(S.fastStart+gm));
+    $('tStart').textContent=fmtDT(S.fastStart); $('tEnd').textContent=fmtDT(S.fastStart+gm);
+    $('nowTxt').textContent=cur>16?NOW_OVER:NOW[cur-1];
     $('fastBtn').textContent='End fast early'; $('fastBtn').className='btn ghost';
     $('editStart').hidden=false;
-    if(cur!==lastCur){ lastCur=cur; renderHours(); }
   }else{
-    const last=S.fasts[S.fasts.length-1];
-    $('timer').textContent=last?fmtHMS(Date.now()-last.e):'00:00:00'; $('timer').className='timer idle';
-    $('stage').textContent=last&&last.auto?'16h fast complete ✓':'Eating window'; $('stage').style.color=last&&last.auto?'var(--green)':'var(--mute)';
+    const last=S.fasts[S.fasts.length-1], fin=last&&last.auto;
+    $('timer').textContent=last?fmtHMS(now-last.e):'00:00:00'; $('timer').className='timer idle';
+    $('stage').textContent=fin?'Fast complete ✓':'Eating window'; $('stage').style.color=fin?'var(--green)':'var(--mute)';
     $('sub').textContent=last?'since your last fast ended':'no fast running';
-    arc.setAttribute('stroke-dashoffset','552.92'); arc.style.stroke='var(--purple)';
+    arc.setAttribute('d',''); win.setAttribute('d',''); setMarker('mStart',null); setMarker('mEnd',null);
     $('tStart').textContent='–'; $('tEnd').textContent='–';
+    $('nowTxt').textContent=NOW_IDLE;
     $('fastBtn').textContent='Start 16h fast'; $('fastBtn').className='btn';
     $('editStart').hidden=true;
-    if(lastCur!==0){ lastCur=0; renderHours(); }
   }
 }
+
+/* ---------- your fasts: list and edit ---------- */
+let showAll=false;
 function renderHist(){
-  const list=S.fasts.slice(-7).reverse();
-  $('hist').innerHTML=list.length?list.map(f=>{
-    const hrs=(f.e-f.s)/3600e3, ok=hrs>=GOAL-0.01;
-    const d=new Date(f.s).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
-    return `<div><span>${d}</span><span class="${ok?'ok':''}">${hrs.toFixed(1)}h ${ok?'✓':''}</span></div>`;
-  }).join(''):'<div><span style="color:var(--mute)">No completed fasts yet</span></div>';
+  const idx=S.fasts.map((f,i)=>i).reverse(), list=showAll?idx:idx.slice(0,10);
+  $('hist').innerHTML=list.length?list.map(i=>{
+    const f=S.fasts[i], hrs=(f.e-f.s)/3600e3, ok=hrs>=(f.g||GOAL)-0.01;
+    return '<button class="hrow" data-i="'+i+'"><span>'+dayName(f.s)+'<small>'+hm(f.s)+' → '+hm(f.e)+(dk(f.e)!==dk(f.s)?' ('+dayName(f.e)+')':'')+'</small></span><span class="'+(ok?'ok':'')+'">'+hrs.toFixed(1)+'h '+(ok?'✓':'')+'</span></button>';
+  }).join(''):'<div class="note">No completed fasts yet</div>';
+  $('histMore').hidden=idx.length<=10; $('histMore').textContent=showAll?'Show fewer':'Show all ('+idx.length+')';
 }
-/* ---- fasting days: the 13th, 14th and 15th of each lunar month, same calendar and adjustment as the Moon page ---- */
-let cal=null; try{ cal=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric',month:'numeric',year:'numeric'}); }catch(e){}
-function adjDays(){ try{ const s=JSON.parse(localStorage.getItem('moon.v1')); return s&&typeof s.adj==='number'?s.adj:0; }catch(e){ return 0; } }
-function lunarDay(plus){
-  const n=new Date(), d=new Date(n.getFullYear(),n.getMonth(),n.getDate()+plus+adjDays(),12); let day=0;
-  cal.formatToParts(d).forEach(x=>{ if(x.type==='day') day=parseInt(x.value,10); });
-  return day;
+$('histMore').onclick=()=>{ showAll=!showAll; renderHist(); };
+let editI=-1;
+function openEditFast(i){
+  editI=i; const f=i>=0?S.fasts[i]:null;
+  $('editTitle').textContent=f?'Edit fast':'Add a past fast';
+  $('editS').value=toInput(f?f.s:Date.now()-17*3600e3); $('editE').value=toInput(f?f.e:Date.now()-3600e3);
+  $('editDel').hidden=!f; $('editMail').hidden=!f; $('editDlg').showModal();
 }
-const dShort=plus=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate()+plus,12).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});};
-function renderFastingDays(){
-  const el=$('hij'); if(!cal){ el.hidden=true; return; }
-  const d=lunarDay(0);
-  if(d>=13&&d<=15){ el.className='hij fast'; el.innerHTML='<b>Fasting day today</b><span>Day '+(d-12)+' of 3</span>'; return; }
-  if(d===12){ el.className='hij soon'; el.innerHTML='<b>Fasting days begin tomorrow</b><span>'+dShort(1)+' – '+dShort(3)+'</span>'; return; }
-  for(let i=1;i<=60;i++){
-    if(lunarDay(i)===13){ el.className='hij soon'; el.innerHTML='<b>Next fasting days in '+i+' day'+(i>1?'s':'')+'</b><span>'+dShort(i)+' – '+dShort(i+2)+'</span>'; return; }
-  }
-  el.hidden=true;
-}
-function renderAll(){ lastCur=-1; render(); renderHist(); renderFastingDays(); }
+document.addEventListener('click',e=>{ const r=e.target.closest('.hrow'); if(r) openEditFast(parseInt(r.dataset.i,10)); });
+$('addPast').onclick=()=>openEditFast(-1);
+$('editCancel').onclick=()=>$('editDlg').close();
+$('editOk').onclick=()=>{
+  const s=new Date($('editS').value).getTime(), e=new Date($('editE').value).getTime();
+  if(isNaN(s)||isNaN(e)||e<=s||e>Date.now()+60000){ alert('Check the times: the end must be after the start and not in the future.'); return; }
+  if(editI>=0){ const f=S.fasts[editI]; if(f){ f.s=s; f.e=e; delete f.auto; } }
+  else S.fasts.push({s,e,g:GOAL});
+  S.fasts.sort((a,b)=>a.s-b.s); save(); renderAll(); $('editDlg').close();
+};
+$('editDel').onclick=()=>{ if(confirm('Delete this fast from your list?')){ S.fasts.splice(editI,1); save(); renderAll(); $('editDlg').close(); } };
+$('editMail').onclick=()=>{ const f=S.fasts[editI]; $('editDlg').close(); if(f) openMail({type:'end',s:f.s,e:f.e,g:f.g||GOAL,manual:true}); };
 
 $('fastBtn').onclick=()=>{
   if(S.fastStart){
     if(!confirm('End the fast early?')) return;
-    S.fasts.push({s:S.fastStart,e:Date.now(),g:GOAL}); S.fastStart=null;
-  }else S.fastStart=Date.now();
-  save(); renderAll();
+    const s=S.fastStart, e=Date.now(), g=goalH();
+    S.fasts.push({s,e,g}); S.fastStart=null; S.fastGoalH=GOAL;
+    const item={type:'end',s,e,g}; S.outbox.push(item); save(); renderAll(); openMail(item);
+  }else{
+    const item={type:'start',s:Date.now(),g:GOAL}; S.fastStart=item.s; S.fastGoalH=GOAL; S.outbox.push(item); save(); renderAll(); openMail(item);
+  }
 };
-$('editStart').onclick=()=>{ $('startInput').value=toInput(S.fastStart); $('startDlg').showModal(); };
+let touchedEnd=false;
+$('editStart').onclick=()=>{ $('startInput').value=toInput(S.fastStart); $('endInput').value=toInput(S.fastStart+goalMs()); touchedEnd=false; $('startDlg').showModal(); };
+$('endInput').addEventListener('input',()=>{ touchedEnd=true; });
 $('startCancel').onclick=()=>$('startDlg').close();
 $('startOk').onclick=()=>{
-  const t=new Date($('startInput').value).getTime();
-  if(!isNaN(t)&&t<=Date.now()){ S.fastStart=t; save(); renderAll(); }
-  $('startDlg').close();
+  const s=new Date($('startInput').value).getTime(); let e=new Date($('endInput').value).getTime();
+  if(!touchedEnd) e=s+goalMs();
+  const dur=(e-s)/3600e3;
+  if(isNaN(s)||isNaN(e)||s>Date.now()||dur<1||dur>72){ alert('Check the times: the start cannot be in the future, and a fast can be between 1 and 72 hours long.'); return; }
+  S.fastStart=s; S.fastGoalH=dur; save(); renderAll(); $('startDlg').close();
 };
 
+/* ---------- emails: a ready-made message you send from your own mail app ---------- */
+function buildMail(it){
+  if(it.type==='start'){
+    return {subject:'Fast started · '+dayName(it.s)+' '+hm(it.s),
+      body:'FAST STARTED\n\nStart: '+fullDT(it.s)+'\nPlanned end: '+fullDT(it.s+(it.g||GOAL)*3600e3)+' ('+fmtH(it.g||GOAL)+'h)\n'};
+  }
+  const hrs=(it.e-it.s)/3600e3, g=it.g||GOAL, reached=hrs>=g-0.01;
+  const nPh=Math.max(1,Math.min(4,Math.ceil(Math.min(hrs,GOAL)/4)));
+  let b=(reached?'FAST COMPLETE':'FAST ENDED EARLY')+'\n\nStart: '+fullDT(it.s)+'\nEnd: '+fullDT(it.e)+'\nDuration: '+hrs.toFixed(1)+' h'+(reached?' (goal of '+fmtH(g)+' h reached)':' (goal was '+fmtH(g)+' h)')+'\n';
+  b+='\nWHAT WAS GOING ON IN YOUR BODY (general)\n'+PHASE_TXT.slice(0,nPh).join('\n')+'\n';
+  b+='\nENERGY\n';
+  const kcal=parseFloat(S.kcal);
+  if(kcal>0){
+    const used=Math.round(kcal*hrs/24/10)*10;
+    b+='Estimated energy your body used during the fast: about '+used+' kcal, based on your estimate of '+Math.round(kcal)+' kcal per day. Fasting does not burn extra calories. Your body uses about the same energy as usual and draws it from stored glycogen and body fat instead of food.\n';
+  }else{
+    b+='Add the calories your body uses per day in Settings to see an energy estimate. Fasting does not burn extra calories: the body uses about the same energy as usual and draws it from stored glycogen and body fat instead of food.\n';
+  }
+  b+='\nCELL CLEAN-UP\nFasting is thought to increase the body\u2019s natural cell clean-up (autophagy), but in humans it has not been reliably measured and its timing at '+GOAL+' hours is not established. Treat it as something that may have started, not as a measurement.\n';
+  b+='\nApproximate and self-logged, not medical advice.';
+  return {subject:(reached?'Fast complete · ':'Fast ended early · ')+hrs.toFixed(1)+'h · '+dayName(it.e),body:b};
+}
+let curMail=null;
+function openMail(it){
+  curMail=it; const m=buildMail(it);
+  $('mailTitle').textContent=it.type==='start'?'Email: fast started':'Email: fast summary';
+  $('mailTo').textContent=S.email?('To: '+S.email):'No email address yet. Add one in Settings, or choose the recipient in your mail app.';
+  $('mailBody').textContent=m.subject+'\n\n'+m.body;
+  $('mailDlg').showModal();
+}
+function dropOutbox(it){
+  const i=S.outbox.findIndex(x=>x.type===it.type&&x.s===it.s&&x.e===it.e); if(i>-1){ S.outbox.splice(i,1); save(); }
+  renderOutbox();
+}
+$('mailGo').onclick=()=>{
+  const it=curMail, m=buildMail(it);
+  const url='mailto:'+encodeURIComponent(S.email||'')+'?subject='+encodeURIComponent(m.subject)+'&body='+encodeURIComponent(m.body.replace(/\n/g,'\r\n'));
+  dropOutbox(it); $('mailDlg').close(); window.location.href=url;
+};
+$('mailCopy').onclick=()=>{
+  const m=buildMail(curMail), t=m.subject+'\n\n'+m.body, b=$('mailCopy');
+  const done=()=>{ const o=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=o,1500); };
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(done).catch(()=>{});
+};
+$('mailSkip').onclick=()=>{ dropOutbox(curMail); $('mailDlg').close(); };
+function renderOutbox(){
+  const el=$('outbox'), n=S.outbox.length;
+  if(!n){ el.hidden=true; return; }
+  const it=S.outbox[n-1];
+  el.hidden=false;
+  el.innerHTML='<span><b>'+(it.type==='start'?'Start email ready':'Summary email ready')+(n>1?' (+'+(n-1)+' more)':'')+'</b>'+(it.type==='start'?fullDT(it.s):hm(it.s)+' → '+hm(it.e))+'</span><button id="outGo">Review</button>';
+  $('outGo').onclick=()=>openMail(S.outbox[S.outbox.length-1]);
+}
+
+/* ---------- settings ---------- */
+function drawAdj(v){ $('adj').innerHTML='<span>Shift by</span>'+[-1,0,1].map(x=>'<button data-adj="'+x+'" class="'+(v===x?'on':'')+'">'+(x>0?'+1':x)+'</button>').join(''); }
+let adjDraft=0;
+$('openSettings').onclick=()=>{ $('sEmail').value=S.email||''; $('sKcal').value=S.kcal||''; adjDraft=readAdj(); drawAdj(adjDraft); $('setDlg').showModal(); };
+$('adj').addEventListener('click',e=>{ const b=e.target.closest('[data-adj]'); if(b){ adjDraft=parseInt(b.dataset.adj,10); drawAdj(adjDraft); } });
+$('setCancel').onclick=()=>$('setDlg').close();
+$('setOk').onclick=()=>{
+  S.email=$('sEmail').value.trim(); const k=parseFloat($('sKcal').value); S.kcal=k>0?k:'';
+  writeAdj(adjDraft); save(); renderAll(); $('setDlg').close();
+};
+
+/* ---------- boot ---------- */
+function renderAll(){ render(); renderHist(); renderCal(); renderFastingBanner(); renderOutbox(); }
 renderAll();
-setInterval(()=>{ const was=S.fasts.length; render(); if(S.fasts.length!==was) renderHist(); },1000);
+setInterval(()=>{ const was=S.fasts.length; render(); if(S.fasts.length!==was){ renderHist(); renderCal(); renderOutbox(); } },1000);
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden) renderAll(); });
 if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 })();
